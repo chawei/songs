@@ -1,0 +1,27 @@
+<% title "Lyrics", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <%= link_to 'Add a new lyric', new_lyric_path %>
+  </div>
+
+  <div class="index">
+    <%- @lyrics.each do |lyric| -%>
+    <div class="song_item clear_fix">
+      <div class="detail">
+        <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
+        <spanc class="performer">by <%= lyric.performer %></span>
+      </div>
+      <%- if current_user and current_user.own_lyric?(lyric) -%>
+      <div class="actions">
+        <%= link_to 'Edit', edit_lyric_path(lyric) %> |
+        <%= link_to 'Delete', lyric, :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+      <%- end -%>
+    </div>
+    <%- end -%>
+  </div>
+</div>

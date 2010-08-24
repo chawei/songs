@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  lyric_id: 1
+  title: MyString
+  content: MyText
+  created_by: 1
+  updated_by: 1
+
+two:
+  lyric_id: 1
+  title: MyString
+  content: MyText
+  created_by: 1
+  updated_by: 1

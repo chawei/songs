@@ -1,0 +1,24 @@
+<%= form_for(@note, :html => { :class => 'section_form js_hidden' }) do |f| %>
+  <% if @note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :lyric_id %>
+  <div class="field">
+    <div class="input nice_edit_outer"><%= f.text_area :content, :id => 'note_textarea' %></div>
+  </div>
+  <div class="actions">
+    <div class="submit">
+      <%= f.submit %> 
+      <%= link_to 'cancel', lyric_path(@lyric), :class => 'cancel_btn' %>
+    </div>
+  </div>
+<% end %>

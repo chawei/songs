@@ -1,0 +1,48 @@
+<div class="nav_links">
+  <%- if current_user and current_user.own_lyric?(@lyric) -%>
+  <%= link_to 'Edit', edit_lyric_path(@lyric) %> |
+  <%- end -%>
+  <%= link_to 'Back', lyrics_path %>
+</div>
+
+<div class="left_col">
+  <div class="lyric_container">
+    <div class="header">
+      <h2 class="title"><%= @lyric.title %></h2>
+      <div class="song_detail">
+        <div class="row">
+          <div class="label">performed by</div>
+          <div class="data"><%= @lyric.performer %></div>
+        </div>
+        <div class="row">
+          <div class="label">written by</div>
+          <div class="data"><%= @lyric.writer %></div>
+        </div>
+        <div class="row">
+          <div class="label">album</div>
+          <div class="data"><%= @lyric.album_name %></div>
+        </div>
+        <div class="row">
+          <div class="label">year</div>
+          <div class="data"><%= @lyric.year %></div>
+        </div>
+        <%- if @lyric.created_by -%>
+        <div class="row">
+          <div class="label">created by</div>
+          <div class="data"><%= link_to @lyric.created_by.username, user_path(@lyric.created_by) %></div>
+        </div>
+        <%- end -%>
+        <%- if @lyric.updated_by -%>
+        <div class="row">
+          <div class="label">updated by</div>
+          <div class="data"><%= link_to @lyric.updated_by.username, user_path(@lyric.updated_by) %></div>
+        </div>
+        <%- end -%>
+      </div>
+    </div>
+
+    <div class="lyric">
+      <pre><%= @lyric.content %></pre>
+    </div>
+  </div>
+</div>

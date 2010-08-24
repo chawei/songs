@@ -1,0 +1,169 @@
+h2#headline {
+  margin: 0 0 15px 0;
+}
+
+.nav_links {
+  margin: 0 0 20px 0;
+}
+
+textarea.lyric {
+  width: 400px;
+  height: 400px;
+}
+
+form.section_form .actions {
+  margin-top: 5px;
+}
+form.section_form {
+  margin: 0 0 20px 0;
+  padding: 10px 20px;
+  background-color: #29ABE2;
+}
+form.section_form .label {
+  margin: 0 0 3px 0;
+  color: #fff;
+}
+form.section_form .input .text {
+  width: 250px;
+}
+form.section_form .input textarea {
+  width: 255px;
+}
+
+form.section_form a.cancel_btn {
+  color: #fff;
+}
+
+/* Structure
+--------------- */
+.left_col {
+  float: left;
+  display: inline-block;
+}
+
+.right_col {
+  float: right;
+  display: inline-block;
+}
+ .section {
+   margin: 0 0 20px 0;
+   padding: 10px;
+   border: 1px solid #ccc;
+   width: 300px;
+ }
+  .section h3 {
+    height: 20px;
+    line-height: 20px;
+    border-bottom: 1px solid #eee;
+    margin: 0 0 10px 0;
+  }
+  .section h3 .title {
+    float: left;
+    display: inline-block;
+    line-height: 20px;
+  }
+  .section h3 a {
+    float: right;
+    display: inline-block;
+    line-height: 20px;
+    font-size: 13px;
+    font-weight: normal;
+  }
+  .section .item {
+    margin: 5px 0 0 0;
+  }
+  .story_title {
+    margin: 0 0 2px 0;
+  }
+  .story_content {
+    color: #666;
+  }
+
+.index_header {
+  margin: 0 0 20px 0;
+}
+/* Lyric
+--------------- */
+.index .song_item {
+  width: 500px;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+  .song_item .detail {
+    float: left;
+    display: inline;
+  }
+    .song_item .detail a.title {
+      font-size: 15px;
+      margin: 0 5px 0 0;
+    }
+    .song_item .detail .performer {
+      font-size: 13px;
+      color: #666;
+    }
+    
+  .song_item .actions {
+    float: right;
+    display: inline;
+  }
+.lyric_container {
+  position: relative;
+}
+
+.lyric_container h2.title {
+  margin: 0 0 10px 0;
+}
+
+.lyric_container .edit_btn {
+  font-weight: normal;
+  font-size: 13px;
+  margin: 0 0 0 10px;
+}
+
+.song_detail {
+  margin: 0 0 20px 0;
+}
+  .song_detail .row:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    margin: 0 0 2px 0;
+  }
+  /* IE7 Hack */
+  .song_detail .row {
+    clear: both;
+    *display: inline-block;
+  }
+
+  .song_detail .label, .song_detail .data {
+    float: left;
+    display: inline;
+  }
+
+  .song_detail .label {
+    width: 90px;
+    color: #999;
+  }
+  .song_detail .data {
+    width: 130px;
+  }
+
+.nice_edit_outer div {
+  overflow: hidden !important;
+}
+
+.nicEdit-main {
+  background-color: #fff;
+  margin: 0 !important;
+  padding: 5px !important;
+  min-height: 50px !important;
+  width: 250px !important;
+}
+
+
+#lyric_show_container .js_hidden {
+  display: none;
+}

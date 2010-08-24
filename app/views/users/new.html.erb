@@ -1,0 +1,8 @@
+<h1>Register</h1>
+
+<% form_for @user, :url => account_path, :html => { :class => 'hline_form' } do |f| %>
+  <%= render :partial => "form", :object => f %>
+  <div class="actions">
+    <div class="submit"><%= f.submit "Register" %></div>
+  </div>
+<% end %>

@@ -1,0 +1,32 @@
+
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="field clear_fix">
+  <div class="label"><%= form.label :username %></div>
+  <div class="input"><%= form.text_field :username, :class => 'text' %></div>
+</div>
+
+<div class="field clear_fix">
+  <div class="label"><%= form.label :email %></div>
+  <div class="input"><%= form.text_field :email, :class => 'text' %></div>
+</div>
+
+<div class="field clear_fix">
+  <div class="label"><%= form.label :password %></div>
+  <div class="input"><%= form.password_field :password, :class => 'text' %></div>
+</div>
+
+<div class="field clear_fix">
+  <div class="label"><%= form.label :password_confirmation %></div>
+  <div class="input"><%= form.password_field :password_confirmation, :class => 'text' %></div>
+</div>

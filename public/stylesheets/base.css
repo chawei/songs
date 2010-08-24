@@ -1,0 +1,354 @@
+/* General
+ *
+ *
+ */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  font-family: Helvetica, sans-serif;
+  color: #333;
+}
+
+a {
+  color: #29ABE2;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+input {
+  font-size: 13px;
+  
+}
+
+select {
+  
+}
+
+textarea {
+  
+}
+
+p {
+  /*margin: 0 0 10px 0;*/
+}
+/* Header
+ *
+ *
+ */
+ 
+#header_wrap {
+  text-align: center;
+  margin: 10px 0 0;
+  
+}
+  #header {
+    text-align: left;
+    margin: 10px auto 30px;
+    position: relative;
+    width: 800px;
+    height: 20px;
+  }
+    #logo {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      font-size: 30px;
+    }
+      #logo a {
+      }
+    #login_box {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      font-size: 14px;
+    }
+      #greeting {
+        float: left;
+        padding: 0 15px 0 0;
+        border-right: 1px solid #333;
+      }
+      #actions {
+        float: left;
+        padding: 0 0 0 15px;
+      }
+      #login_box .signup {
+        margin: 0 20px 0 0;
+      }
+
+#navigation_wrap {
+  text-align: center;
+  margin: 10px 0 0;
+  background-color: #333;
+}
+  #navigation {
+    text-align: left;
+    margin: 0 auto 20px;
+    padding: 0 0 0px 0;
+    width: 800px;
+    height: 30px;
+    line-height: 30px;
+  }
+    #navigation ul {
+      list-style: none;
+      position: relative;
+      margin: 0;
+    }
+      #navigation ul li {
+        list-style: none;
+        display: block;
+        float: left;
+      }
+        #navigation li.last a {
+          margin: 0;
+        }
+        #navigation li a {
+          padding: 0px 10px;
+          margin: 0 0px 0 0;
+          font-size: 18px;
+          display: block;
+          font-family: Georgia, serif;
+          text-decoration: none;
+          background-color: #f2f2f2;
+          color: #29ABE2;
+        }
+          #navigation li a.selected {
+            color: #fff;
+            background-color: #29ABE2;
+          }
+        #navigation li a:hover {
+          color: #fff;
+          background-color: #29ABE2;
+        }
+        #navigation li:hover ul{
+          display: block;
+        }
+        #navigation li ul {
+          display: none;
+          list-style: none;
+          position: absolute;
+          top: 15px;
+          left: 0;
+          color: #fff;
+          background-color: #333;
+          margin: 0;
+          padding: 10px 0 10px 10px;
+          width: 100%;
+        }
+          #navigation li ul li {
+            list-style: none;
+            display: inline;
+            margin: 0 10px 0 0;
+          }
+          #navigation li ul li a {
+            color: #ddd;
+          }
+          #navigation li ul li a:hover {
+            color: #fff;
+          }
+    
+#main_wrap {
+  text-align: center;
+  margin: 10px 0 0;
+  padding: 0 0 50px 0;
+  /*overflow: hidden;*/
+}
+  #main_wrap div#main {
+    text-align: left;
+    margin: 0 auto;
+    width: 800px;
+  }
+    #main_wrap #main #sidebar {
+      text-align: left;
+      margin: 0 10px 0 0;
+      padding: 0 8px 0 0;
+      float: left;
+      width: 130px;
+      height: auto !important;
+      height: 300px;
+    }
+    #main_wrap #main #main_view {
+      text-align: left;
+      margin: 0;
+      padding: 0 0 0 20px;
+      float: left;
+      width: 630px;
+      border-left: 1px solid #ccc;
+      min-height: 400px;
+      height: auto !important;
+      height: 400px;
+    }
+    #product_main_view {
+      text-align: left;
+      margin: 0;
+      float: left;
+      width: 100%;
+    }
+
+
+#footer_wrap {
+  
+}
+
+/* ----- Misc ----- */
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+.clear_fix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* IE7 Hack */
+.clear_fix {
+  clear: both;
+  *display: inline-block;
+}
+
+.hidden {
+  display: none;
+}
+
+
+/* Errors
+------------------- */
+#errorExplanation, #error_explanation {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2, #error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p, #error_explanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+#errorExplanation ul, #error_explanation ul {
+  margin: 2px 24px;
+}
+
+#errorExplanation ul li, #error_explanation ul li {
+  font-size: 12px;
+  list-style: disc;
+}
+
+/* Flash Messages
+------------------- */
+
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+/* Form
+------------------- */
+form.hline_form .label, form.hline_form .input {
+  width: 150px;
+  float: left;
+  display: inline;
+}
+
+form.hline_form input.text {
+  width: 200px;
+}
+
+input, textarea {
+  outline: none; /* Remove Safari/Chrome textinput/textarea glow */
+}
+input.text {
+  border: 1px solid #aaa;
+  padding: 1px 3px;
+  width: 150px;
+}
+input.text:hover {
+  border: 1px solid #ccc;
+}
+input.text:focus {
+  border: 1px solid #29ABE2;
+}
+
+textarea {
+  font-size: 13px;
+  border: 1px solid #aaa;
+  padding: 1px 3px;
+}
+textarea:hover {
+  border: 1px solid #ccc;
+}
+textarea:focus {
+  border: 1px solid #29ABE2;
+}
+
+.field:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  margin: 0 0 10px 0;
+}
+/* IE7 Hack */
+.field {
+  clear: both;
+  *display: inline-block;
+}
+
+form .actions {
+  margin: 30px 0 0;
+}

@@ -1,0 +1,24 @@
+<div class="section">
+  <h3 class="clear_fix">
+    <span class="title">background stories</span> 
+    <%= link_to "add a new story", new_lyric_background_story_path(@lyric), :class => 'add_btn' %>
+  </h3>
+
+  <%= render 'background_stories/form' if @background_story %>
+  
+  <div class="items">
+    <%- for story in @lyric.background_stories -%>
+    <div class="item">
+      <p class="story_title"><%= story.title %> 
+        <%- if current_user and current_user.own_story?(story) -%>
+        <span class="action"><%= link_to 'edit', edit_lyric_background_story_path(@lyric, story) %></span> |
+        <span class="action"><%= link_to 'delete', lyric_background_story_path(@lyric, story), 
+                                                   :confirm => "Are you sure?",
+                                                   :method => :delete %></span>
+        <%- end -%>
+      </p>
+      <div class="story_content"><%= story.content %></div>
+    </div>
+    <%- end -%>
+  </div>
+</div>
