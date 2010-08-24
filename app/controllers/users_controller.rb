@@ -16,7 +16,11 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    unless params[:id].blank?
+      @user = User.find(params[:id])
+    else
+      @user = @current_user
+    end
   end
 
   def edit
