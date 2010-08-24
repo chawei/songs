@@ -15,12 +15,16 @@ class UsersController < ApplicationController
     end
   end
   
-  def show
-    unless params[:id].blank?
-      @user = User.find(params[:id])
+  def account
+    if @user = current_user
+      render :action => :show
     else
-      @user = @current_user
+      redirect_back_or_default root_url
     end
+  end
+  
+  def show
+    @user = User.find(params[:id])
   end
 
   def edit

@@ -10,9 +10,9 @@ Songs::Application.routes.draw do
   match '/login', :to => 'user_sessions#new'
   match '/logout', :to => 'user_sessions#destroy'
   match '/signup', :to => 'users#new'
+  match '/account', :to => "users#account"
 
   resource :user_sessions
-  resource :account, :controller => "users"
   resources :users
   resources :lyrics do
     resources :background_stories
