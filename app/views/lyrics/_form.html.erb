@@ -24,10 +24,6 @@
     <div class="input"><%= f.text_field :writer, :class => 'text' %></div>
   </div>
   <div class="field">
-    <div class="label"><%= f.label :content %></div>
-    <div class="input"><%= f.text_area :content, :class => 'lyric' %></div>
-  </div>
-  <div class="field">
     <div class="label"><%= f.label :album_name %></div>
     <div class="input"><%= f.text_field :album_name, :class => 'text' %></div>
   </div>
@@ -35,6 +31,15 @@
     <div class="label"><%= f.label :year %></div>
     <div class="input"><%= f.text_field :year, :class => 'text' %></div>
   </div>
+  <div class="field">
+    <div class="label"><%= f.label :content %></div>
+    <div class="input"><%= f.text_area :content, :class => 'lyric' %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :video_url, 'Video URL' %></div>
+    <div class="input"><%= f.text_field :video_url, :class => 'text' %></div>
+  </div>
+
   <div class="actions">
     <div class="submit"><%= f.submit %></div>
   </div>

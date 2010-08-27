@@ -1,3 +1,11 @@
+.index .section {
+  width: 600px;
+  
+}
+  .index .section h2 {
+    margin: 0 0 10px 0;
+  }
+
 h2#headline {
   margin: 0 0 15px 0;
 }
@@ -45,7 +53,7 @@ form.section_form a.cancel_btn {
   float: right;
   display: inline-block;
 }
- .section {
+ .right_col .section {
    margin: 0 0 20px 0;
    padding: 10px;
    border: 1px solid #ccc;

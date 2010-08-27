@@ -18,7 +18,7 @@
                                                    :method => :delete %></span>
         <%- end -%>
       </p>
-      <div class="story_content"><%= note.content %></div>
+      <div class="story_content"><%= simple_format auto_link(note.content) %></div>
     </div>
     <%- end -%>
     <%- end -%>

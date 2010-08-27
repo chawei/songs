@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @lyrics = Lyric.all
+    @recent_lyrics = Lyric.recent_updated.limited(5)
   end
 
 end
