@@ -1,14 +1,8 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-function replaceURLWithHTMLLinks(text) {
-  var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
-  return text.replace(exp,"<a href='$1'>$1</a>"); 
-}
-
 $(function() {
   $('#container').removeClass('no_js').addClass('js');
   
-  replaceURLWithHTMLLinks();
   //$('#lyric_show_container form').hide();
   
   $('#lyric_show_container .section .add_btn').click(function() {
