@@ -1,0 +1,49 @@
+#_app_overlay, #_app_overlay span, #_app_overlay input, #_app_overlay input[type="text"] { /*reset*/  
+  border:none; padding:0; margin:0; background-color:transparent !important; 
+  font-family: arial, sans-serif; font-size: 13px; color: #fff; text-align: left;
+  font-variant:normal; text-transform:none;
+}
+
+#_app_overlay a { color:#333; outline:none !important; text-decoration:none; }
+/*#_app_overlay a:hover { text-decoration:underline; }*/
+#_app_overlay { position: fixed; right:0; top: 0px; width: 380px; height: 100%; padding: 0; z-index: 2147483647; overflow: none; opacity: .98; }
+#_app_overlay > div { margin:0; }
+
+#_app_overlay #_app_content { height:100%; position:relative; }
+#_app_overlay #_app_iframe { 
+  width:100%; height:100%; 
+  /*
+  border:none !important; 
+  background-color:transparent !important; 
+  */
+  background-color: #fff; 
+  border-left: 1px solid #999;
+  z-index:3; 
+  visibility:visible;
+  position:relative;
+  left:0;
+}
+
+#_app_overlay #_app_close { position: absolute; font-size:20px; color:none; background:transparent !important; filter: alpha(opacity=50); opacity:0.5; right:12px; top:6px; width:23px !important; height:29px !important; display:block; z-index:5; overflow:hidden;  }
+/*#_app_overlay a { width:23px; height:29px; display:block; overflow:hidden; text-indent:-1000em;   }*/
+
+body {
+  margin: 0;
+  color: #333;
+}
+
+#container { 
+  padding: 20px; 
+  font-size: 12px; 
+  font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; 
+  height: 100%;
+}
+
+.song_info {
+  margin: 5px 0 10px 0;
+}
+  .song_info .title {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 10px 0 0;
+  }

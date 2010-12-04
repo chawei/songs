@@ -1,7 +1,7 @@
-<div class="section">
+<div id="note_section" class="section">
   <h3 class="clear_fix">
     <span class="title">notes</span>
-    <%= link_to "add a new note", new_lyric_note_path(@lyric), :class => 'add_btn' %>
+    <%= link_to "add a new note", new_lyric_note_path(@lyric), :class => 'add_btn' if current_user %>
   </h3>
 
   <%= render 'notes/form' if @note %>
@@ -9,16 +9,20 @@
   <div class="items">
     <%- if current_user -%>
     <%- current_user.lyric_notes(@lyric).each do |note| -%>
-    <div class="item">
+    <div id="note-item_<%= note.id %>" class="item">
       <p class="story_title">
         <%- if current_user and current_user.own_note?(note) -%>
         <span class="action"><%= link_to 'edit', edit_lyric_note_path(@lyric, note) %></span> |
         <span class="action"><%= link_to 'delete', lyric_note_path(@lyric, note), 
                                                    :confirm => "Are you sure?",
-                                                   :method => :delete %></span>
+                                                   :method => :delete,
+                                                   :class => 'delete_btn',
+                                                   :remote => true %></span>
         <%- end -%>
       </p>
-      <div class="story_content"><%= simple_format auto_link(note.content) %></div>
+      <div class="story_content">
+        <%= simple_format auto_link(note.content, :href_options => { :target => '_blank' }) %>
+      </div>
     </div>
     <%- end -%>
     <%- end -%>

@@ -209,8 +209,25 @@ p {
 
 
 #footer_wrap {
-  
+  text-align: center;
+  margin: 10px 0 0;
+
 }
+  #footer {
+    text-align: left;
+    margin: 10px auto 30px;
+    position: relative;
+    width: 800px;
+    height: 20px;
+  }
+  
+  a#bookmarklet {
+    background-color: #29abe2;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    cursor: move;
+  }
 
 /* ----- Misc ----- */
 .left {

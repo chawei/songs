@@ -1,0 +1,29 @@
+<div id="main">
+  <% if @is_supported %>
+    <% if @song %>
+      <div class="song_info">
+        <span class="title"><%= @song.title %></span> by <span class="performer"><%= @song.performer %></span>
+      </div>
+  
+      <div class="lyric">
+        <% if @song.content.blank? %>
+          Sorry, no matched lyric
+        <% else %>
+          <%= simple_format @song.content  %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    Sorry, our app is not supported in this site.
+  <% end %>
+  
+  <div id="login_section">
+  <% unless current_user %>
+    <h3>Sign in with</h3>
+    <%= link_to image_tag("auth/google_64.png"), "/auth/open_id?openid_url=https://www.google.com/accounts/o8/id" %>
+    <% ["twitter","facebook", "linked_in"].each do |provider| %>
+      <%= link_to image_tag("auth/#{provider}_64.png"), "/auth/#{provider}" %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

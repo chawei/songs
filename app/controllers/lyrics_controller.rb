@@ -4,7 +4,7 @@ class LyricsController < ApplicationController
   # GET /lyrics
   # GET /lyrics.xml
   def index
-    @lyrics = Lyric.all
+    @lyrics = Lyric.order('lyrics.created_at DESC').paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

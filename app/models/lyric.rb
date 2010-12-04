@@ -5,18 +5,18 @@ class Lyric < ActiveRecord::Base
   has_many :background_stories, :dependent => :destroy
   has_many :notes, :dependent => :destroy
   
-  validates_presence_of :title, :performer, :content
+  validates_presence_of :title, :performer
   
   has_friendly_id :performer_and_title, :use_slug => true
   
-  named_scope :recent_updated, lambda { { :conditions => ["created_at > ?", 2.weeks.ago] } }
-  named_scope :limited, lambda { |num| { :limit => num } }
+  scope :recent_updated, lambda { { :conditions => ["created_at > ?", 2.weeks.ago] } }
+  scope :limited, lambda { |num| { :limit => num } }
   
   def performer_and_title
     "#{performer}-#{title}"
   end
   
   def youtube_id
-    return video_url.match(/\?v=(.*)/)[1]
+    video_url.blank? ? nil : video_url.match(/\?v=(.*)/)[1]
   end
 end

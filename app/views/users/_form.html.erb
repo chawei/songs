@@ -30,3 +30,5 @@
   <div class="label"><%= form.label :password_confirmation %></div>
   <div class="input"><%= form.password_field :password_confirmation, :class => 'text' %></div>
 </div>
+
+<%= render :partial => "omniauth_connect" if current_user != nil && current_user.id == @user.id %>

@@ -1,0 +1,139 @@
+(function(){
+  function _app_dsc(obj) { 
+  	var names = ""; 
+  	for (var name in obj) names += name + " \n"; return names; 
+  }; 
+
+  function _app_dmp(obj) { 
+  	var names = ""; 
+  	for (var name in obj) { 
+  	  try { 
+  	    names += name + ":" + ( (obj[name] == null) ? "nil" : obj[name].toString() ) + " \n"; 
+  	  } catch (e) { 
+  	    names += name + ":ER \n"; 
+  	  } 
+  	} 
+    return names; 
+  };
+
+  var AppSidebar = (typeof(AppSidebar) == 'undefined') ? {} : AppSidebar;
+  AppSidebar.vh = "javascript:void(null);";
+
+  /*
+  #if $long_url != ''
+  */
+  AppSidebar.url = "";
+  AppSidebar.share_title = "";
+  AppSidebar.query = "";
+  /*
+  #end if
+  */
+
+  AppSidebar.setAttribute = function(e, k, v) {
+    if (k == "class") {
+      e.setAttribute("className", v); // set both "class" and "className"
+    }
+    return e.setAttribute(k, v);
+  };
+
+  AppSidebar.createElement = function(e, attrs) {
+    var el = document.createElement(e);
+    for (var k in attrs) {
+      if (k == "text") {
+        el.appendChild(document.createTextNode(attrs[k]));
+      } else {
+        AppSidebar.setAttribute(el, k, attrs[k]);
+      }
+    }
+    return el;
+  };
+
+  AppSidebar.remove = function(e) {
+    e.parentNode.removeChild(e);
+  };
+
+  AppSidebar.listen = function(elem, evnt, func) {
+    if (elem.addEventListener) // W3C DOM
+      elem.addEventListener(evnt,func,false);
+    else if (elem.attachEvent) { // IE DOM
+      var r = elem.attachEvent("on"+evnt, func);
+      return r;
+    }
+  };
+
+  AppSidebar.loadScript = function(_src) {
+  var e = document.createElement('script');
+    e.setAttribute('language','javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',_src); document.body.appendChild(e);
+  };
+
+  AppSidebar.close = function() {
+    var overlay = document.getElementById('_app_overlay');
+    if (overlay != undefined) {
+      AppSidebar.remove(overlay);
+    }
+    if (AppSidebar.timeout_handle != undefined) {
+      clearTimeout(AppSidebar.timeout_handle);
+    }
+  };
+
+  AppSidebar.getSelection = function() {
+    var selection;
+    if (window.getSelection) {
+      selection = window.getSelection();
+    } else if (document.getSelection) {
+      selection = document.getSelection();
+    } else if (document.selection) {
+      selection = document.selection.createRange().text;
+    }
+    if (!selection) {
+      selection = '';
+    }
+    return selection;
+  };
+
+  AppSidebar.drawOverlay = function() {
+    AppSidebar.url = (typeof AppSidebar.url == 'undefined') ? document.URL : AppSidebar.url; // allow this to be parameterized
+    AppSidebar.query = (document.getElementById('eow-title') == null) ? '' : document.getElementById('eow-title').title;
+    AppSidebar.close();
+    var overlay = AppSidebar.createElement('div');
+    overlay.id = '_app_overlay';
+    var content = AppSidebar.createElement('div', {"id": "_app_content"});
+    // var header = AppSidebar.createElement('div', {"id":"_app_header"});
+    // content.appendChild(header);
+    var closeBtn = AppSidebar.createElement('a', {"text": "x", "id": "_app_close", "href":AppSidebar.vh, "title": "Close sidebar"});
+    AppSidebar.listen(closeBtn, 'click', AppSidebar.close);
+    content.appendChild(closeBtn);
+    var selection = AppSidebar.getSelection();
+    var pars = [
+      //["u", AppSidebar.url],
+      ["q", AppSidebar.query],
+      ["u", document.URL],
+      ["s", AppSidebar.share_title],
+      ["h", document.location.host]
+    ];
+  
+    if (AppSidebar.url == document.URL || selection != '') {
+      pars.push(["s", ((selection == '') ? document.title : selection)]); // only do this if there's a selection or we're using the bookmarklet on a landing page
+    } else if( AppSidebar.share_title != '' ) {
+      pars.push(["s", AppSidebar.share_title]);
+    }
+    for (var i=0; i < pars.length; i++) {
+      pars[i] = pars[i][0]+"="+encodeURIComponent(pars[i][1]);
+    };
+    /*
+    IE appears to be case sensitive to iframes. use caution. Known issues: frameBorder, allowTransparency
+    */
+    
+    var src = "http://<%= HOST %>/show_lyric?" + pars.join("&");
+    var iframe = AppSidebar.createElement('iframe', {"id": "_app_iframe", "src": src, "allowTransparency": "true", "frameBorder" : 0 });
+    //iframe.style.display="none"
+    content.appendChild(iframe);
+    overlay.appendChild(content);
+    // animate it?
+    document.body.appendChild(overlay);
+  };
+
+  AppSidebar.drawOverlay();
+})();

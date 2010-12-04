@@ -50,6 +50,7 @@ class NotesController < ApplicationController
     respond_to do |format|
       if @note.save
         format.html { redirect_to(@note.lyric, :notice => 'Note was successfully created.') }
+        format.js   { render :layout => false }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
         format.html { render :action => "new" }
@@ -78,11 +79,13 @@ class NotesController < ApplicationController
   # DELETE /notes/1.xml
   def destroy
     @note = Note.find(params[:id])
+    @note_id = @note.id
     @lyric = @note.lyric
     @note.destroy
 
     respond_to do |format|
       format.html { redirect_to(@lyric) }
+      format.js   { render :layout => false }
       format.xml  { head :ok }
     end
   end

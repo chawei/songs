@@ -90,6 +90,7 @@ form.section_form a.cancel_btn {
 .index_header {
   margin: 0 0 20px 0;
 }
+
 /* Lyric
 --------------- */
 .index .song_item {
@@ -117,6 +118,13 @@ form.section_form a.cancel_btn {
   }
 .lyric_container {
   position: relative;
+  width: 450px;
+  padding-right: 20px;
+}
+
+.lyric_container .lyric p {
+  margin: 0 0 10px 0;
+  line-height: 1.3em;
 }
 
 .lyric_container h2.title {
@@ -175,3 +183,21 @@ form.section_form a.cancel_btn {
 #lyric_show_container .js_hidden {
   display: none;
 }
+
+/* Pagination
+--------------- */
+.pagination {
+  margin: 20px 0 0;
+}
+  .pagination em {
+    font-style: normal;
+  }
+  .pagination .disabled {
+    color: #999;
+  }
+  .pagination .previous_page {
+    margin-right: 10px;
+  }
+  .pagination .next_page {
+    margin-left: 10px;
+  }

@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<!-- MIME TYPE Guidlines and references: http://hixie.ch/advocacy/xhtml --> 
+<head> 
+	<title> bit.ly Sidebar | a simple URL shortener </title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="keywords" content="bit.ly, awesome, url shortener" /> 
+  <meta name="description" content="bit.ly, a simple url shortener" /> 
+ 
+  <link rel="stylesheet" href="basic_sidebar.css" type="text/css" charset="utf-8" /> 
+  <link rel="icon" type="image/png" href="/s/v120/graphics/favicon.png" /> 
+ 
+  <base target="_top" /> 
+ 
+  <script type="text/javascript"> 
+  // chartbeat
+  var _sf_startpt=(new Date()).getTime()
+  </script> 
+ 
+</head> 
+<body> 
+ 
+  <div id="sidebar_container"> 
+  <div id="sidebar_container_inner"> 
+  <div id="sidebar_header"> 
+  <a title="Close bit.ly sidebar" href="javascript:void(null);" id="_b_close"><img src="/static/images/close_button.gif" alt="Close bit.ly sidebar" /></a> 
+ 
+  <div id="logo"><a href="/"><img src="/static/images/bitly_sidebar_logo.png" width="49" heigt="26" border="0" alt="" /></a></div> 
+ 
+ 
+  <div id="loginContainer"> 
+  <!-- ı is option shift b --> 
+ 
+  Hi <a href="/a/account">chawei</a> 
+  </div> 
+ 
+  </div> 
+  <div id="sidebarOuterBento"> 
+  <div style="display:none;" class="sidebar_container" id="sidebarInnerBento"> 
+  <b class="topLeft"></b> 
+  <b class="topRight"></b> 
+  <b class="bottomRight"></b> 
+  <b class="bottomLeft"></b> 
+  <b class="bottomBevel"></b> 
+  <div id="sidebar_bento_box" class="replaceWithBentoBoxInsidePlugin"></div> 
+  </div> 
+  </div> 
+  <div id="additionalShareItems"> 
+  Send to:
+  <ul> 
+  <li><a id="shareOnGmail" href="#">Gmail</a></li> 
+  <li><a id="shareViaGmail" href="#">Email</a></li> 
+  </ul> 
+  </div> 
+  <div id="sidebar_metrics" style="display:none;"></div> 
+  <div id="sidebar_conversations"> 
+  <div class="tweetsBox"> 
+  </div> 
+  </div> 
+  <div style="display:none;"> 
+  <form action="" method="get"> 
+  <input type="hidden" name="_xsrf" value="24e5cd045e514a4f9652be7520cc8337"/> 
+  </form> 
+  </div> 
+  </div><!-- end #sidebar_container_inner --> 
+  </div> 
+ 
+ 
+ 
+<!--[if IE]><script language="javascript" type="text/javascript" src="/s/v120/js/ie-hacks/excanvas.min.js"></script><![endif]--> 
+<script type="text/javascript" src="/s/v120/js/bitly_compressed.js"></script> 
+ 
+ 
+ 
+<script type="text/javascript"> 
+//<!--
+if(!window.console) window.console={};
+if(!window.console.log) window.console.log = function(){};
+var pageTracker;
+// turn caching off for all AJAX - fix IE issue with stale data
+$.ajaxSetup({
+cache : false,
+traditional : true,
+timeout : 12000
+});
+$(function() {
+var $bod = $(document.body).errorMessenger().eventTracker();
+$bod.bind('addTwitterViaOAuth', function(e, data) {
+var completion_redirect = document.location.pathname,
+url = '/a/add_twitter_account';
+if(data && data.share_text) {
+completion_redirect += '?s=' + encodeURIComponent( data.share_text );
+}
+url += '?rd=' + encodeURIComponent(completion_redirect);
+top.location.href = url;
+}).bind('addFacebookViaConnect', function(e,data) {
+var completion_redirect = document.location.pathname,
+url = '/a/add_facebook_account';
+if(data && data.share_text) {
+completion_redirect += '?s=' + encodeURIComponent( data.share_text );
+}
+url += '?rd=' + encodeURIComponent(completion_redirect);
+top.location.href = url;
+});
+ 
+/* only trigger for production */
+var protcl = document.location.protocol
+_google_analitcies_url = (("https:" == protcl ) ? "https://ssl." : "http://www.") + "google-analytics.com/ga.js",
+_sf_async_config={uid: 30, sections: 'section1,section2', pingServer: 'dev.ping.chartbeat.net', domain: 'bit.ly' },
+_charbeat_url = (("https:" == protcl) ? "https://s3.amazonaws.com/" : "http://") + "static.chartbeat.com/js/chartbeat.js";
+window._sf_endpt=(new Date()).getTime();
+getJS(_google_analitcies_url, function(){try {
+pageTracker = _gat._getTracker("UA-1223636-11");
+pageTracker._trackPageview();
+} catch(err) {}
+});
+getJS(_charbeat_url, function() {
+// chart beat loaded
+});
+ 
+// document.ready?
+})
+//-->
+</script> 
+ 
+ 
+<script type="text/javascript"> 
+// jQuery
+$(function($) {
+var $mainSideBarContainer = $('#sidebarInnerBento'),
+auto_clear_share = null,
+auto_warn_share = null;
+if(auto_clear_share !== 0 ) { auto_clear_share = 1; }
+if(auto_warn_share !== 0 ) { auto_warn_share = 1; }
+var bentoBoxSettings = {
+shareTitle : "",
+shareButtonAnimationEnabled : false,
+'auto_clear_share' : auto_clear_share,
+'auto_warn_share' : auto_warn_share,
+debug : false,
+auto_shorten : 1
+};
+var bentoBoxOptionsSettings = {
+auto_shorten : 1,
+'auto_clear_share' : auto_clear_share,
+'auto_warn_share' : auto_warn_share,
+basicShortener : 0,
+accounts : [{"account_login": "chawei", "account_type": "twitter", "login": "chawei", "primary": false}, {"account_login": "pluslat", "account_type": "twitter", "login": "chawei", "primary": true}]
+};
+$mainSideBarContainer.bentoBox( "",
+"", bentoBoxSettings )
+.bentoBoxOptions( bentoBoxOptionsSettings)
+.linkCapsule('.shortenedBitlyListListBox', {
+debug : false,
+txt : { infopromo : 'Stats:' },
+maxPromoLength : 49
+}).shareMessages()
+$('#sidebar_metrics').sidebarClicks();
+// $('#sidebar_conversations').backtypeSingleUrlSearch( "", "" );
+$('#sidebar_conversations').backTweet( "", "", 3 )
+ 
+/*
+THIS IS GROSS AND WRONG:: porting old JS script into this app
+... BAD
+*/
+if (!BitlyShare) var BitlyShare = {
+shareTitle : "" || "",
+long_url : "" || "",
+short_url : "" || ""
+};
+BitlyShare.newWindow = function(url, width, height) {
+var a = function() {
+if(!window.open(url,'t','scrollbars=yes,toolbar=1,resizable=1,status=1,width='+width+',height='+height))document.location.href=url;
+};
+if( /Firefox/.test(navigator.userAgent)) {
+setTimeout(a,0);
+} else {
+a();
+}
+};
+BitlyShare.gmailMain = function() {
+var subject = BitlyShare.shareTitle;
+var body = $('#bentoBoxMainShareBoxTextArea').val();
+if (!body) {body = '' + BitlyShare.shareTitle;};
+body += " - More info: " + "" + "+";
+return BitlyShare.gmail(subject, body);
+};
+BitlyShare.gmail = function(subject, body) {
+var u = "https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=&su=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body) + "&zx=BITLY&shva=1&disablechatbrowsercheck=1&ui=1";
+BitlyShare.newWindow(u, '680', '510');
+//BT.track("share", "gmail");
+$(document.body).trigger('track', { 'sidebar' : 'Sending: an email via Gmail on sidebar' + "chawei" } )
+return false;
+};
+/* end GROSSNESS - SO GROSS - BAD - EVIL - STOP!!!! Launch crunch laziness! */
+$('#shareOnGmail').live('click', function(e) {
+e.preventDefault();
+BitlyShare.gmailMain();
+});
+$('#shareViaGmail').live('click', function(e) {
+var $this = $(this), body = $('#bentoBoxMainShareBoxTextArea').val(), subject = BitlyShare.shareTitle;
+if(BitlyShare.long_url !== "" ) {
+body += "\nSource: " + BitlyShare.long_url;
+}
+body += "\nSee who is talking about this page: " + BitlyShare.short_url + "+";
+body += "\nBrought to you via http://bit.ly";
+var href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+$this.attr('href', href);
+})
+}); // end doc ready loader
+</script> 
+ 
+</body> 
+</html>

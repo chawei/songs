@@ -1,0 +1,15 @@
+<div id="note-item_<%= @note.id %>" class="item">
+  <p class="story_title">
+    <%- if current_user and current_user.own_note?(note) -%>
+    <span class="action"><%= link_to 'edit', edit_lyric_note_path(@note.lyric, @note) %></span> |
+    <span class="action"><%= link_to 'delete', lyric_note_path(@note.lyric, @note), 
+                                               :confirm => "Are you sure?",
+                                               :method => :delete,
+                                               :class => 'delete_btn',
+                                               :remote => true %></span>
+    <%- end -%>
+  </p>
+  <div class="story_content">
+    <%= simple_format auto_link(@note.content, :href_options => { :target => '_blank' }) %>
+  </div>
+</div>

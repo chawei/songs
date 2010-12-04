@@ -1,4 +1,5 @@
 Songs::Application.routes.draw do
+  resources :authorizations
   resources :notes
 
   resources :background_stories
@@ -7,12 +8,19 @@ Songs::Application.routes.draw do
 
   root :to => "home#index"
   
+  match '/show_lyric', :to => "sidebar#show_lyric"
+  match '/sidebar/load.:format', :to => "sidebar#load"
+  match '/sidebar/sidebar.:format', :to => "sidebar#sidebar"
+  
   match '/login', :to => 'user_sessions#new'
   match '/logout', :to => 'user_sessions#destroy'
   match '/signup', :to => 'users#new'
   match '/account', :to => "users#account"
+  
+  match "/auth/:provider/callback", :to => "authorizations#create"
+  match "/auth/failure", :to => "authorizations#failure"
 
-  resource :user_sessions
+  resource :user_session
   resources :users
   resources :lyrics do
     resources :background_stories
