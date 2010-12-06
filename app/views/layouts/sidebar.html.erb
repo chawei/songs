@@ -7,7 +7,8 @@
   <meta name="keywords" content="" /> 
   <meta name="description" content="" /> 
  
-  <link rel="stylesheet" href="/sidebar/sidebar.css" type="text/css" charset="utf-8" /> 
+  <%= stylesheet_link_tag 'base', "form", "application" %>
+  <link rel="stylesheet" href="/sidebar/basic_sidebar.css" type="text/css" charset="utf-8" /> 
   <link rel="icon" type="image/png" href="/favicon.ico" /> 
  
   <base target="_top" /> 
@@ -26,11 +27,17 @@
   // chartbeat
   var _sf_startpt=(new Date()).getTime()
   </script>
+  
+  <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+  <%= javascript_include_tag 'rails', 'application' %>
  
 </head> 
 <body>
   <div id="container">
     <%= yield %> 
   </div>
+  
+  <%= yield(:foot) %>
 </body>
 </html>

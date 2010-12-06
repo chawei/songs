@@ -18,18 +18,3 @@
     </div>
   </div>
 </div>
-
-<%- content_for :foot do -%>
-<script type="text/javascript" src="/javascripts/nicEdit-latest.js"></script> 
-<script type="text/javascript">
-  //<![CDATA[
-  bkLib.onDomLoaded(function() {
-    var bgStoryEditor = new nicEditor({buttonList : ['bold','italic','underline','strikeThrough','image']})
-    bgStoryEditor.addInstance('bg_story_textarea');
-    
-    var noteEditor = new nicEditor({buttonList : ['bold','italic','underline','strikeThrough','image']})
-    noteEditor.addInstance('note_textarea');
-  });
-  //]]>
-</script>
-<%- end -%>

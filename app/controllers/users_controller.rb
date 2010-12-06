@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   
   def account
     if @user = current_user
+      @lyrics = @user.created_lyrics.order('lyrics.created_at DESC').paginate(:per_page => 10, :page => params[:page])
       render :action => :show
     else
       redirect_back_or_default root_url

@@ -26,6 +26,8 @@ class LyricsFinder
         if song.nil?
           song = Lyric.create(:performer => artist, :writer => artist, :title => title, :content => lyric, 
                               :cover_url => cover_url, :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+        else
+          song.update_videos(options[:video_url])
         end
         return song
       else
@@ -42,17 +44,18 @@ class LyricsFinder
   def self.direct_chartlyrics_search(options)
     begin
       output = nil
-    
-      res = self.get("http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=#{URI.escape(options[:artist])}&song=#{URI.escape(options[:title])}")
+      query_artist = options[:artist]
+      
+      res = self.get("http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=#{URI.escape(query_artist)}&song=#{URI.escape(options[:title])}")
       if res["GetLyricResult"].length > 0
-        res     = res
         artist    = res["GetLyricResult"]["LyricArtist"]
         title     = res["GetLyricResult"]["LyricSong"]
         lyric     = res["GetLyricResult"]["Lyric"]
         cover_url = res["GetLyricResult"]["LyricCovertArtUrl"]
-      
-        if artist.downcase == options[:artist].downcase and !options[:title].downcase.match(/#{title.downcase}/).nil?
-          output = {:artist => artist, :title => title, :lyric => lyric, :cover_url => cover_url}
+        
+        output = {:artist => artist, :title => title, :lyric => lyric, :cover_url => cover_url}
+        if options[:need_verify] 
+          output = nil unless artist.downcase == query_artist.downcase && !options[:title].downcase.match(/#{title.downcase}/).nil?
         end
       end
     

@@ -5,7 +5,7 @@
   </div>
 
   <div class="index">
-    <%- @user.created_lyrics.each do |lyric| -%>
+    <%- @lyrics.each do |lyric| -%>
     <div class="song_item clear_fix">
       <div class="detail">
         <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
@@ -19,5 +19,7 @@
       <%- end -%>
     </div>
     <%- end -%>
+    
+    <%= will_paginate @lyrics %>
   </div>
 </div>

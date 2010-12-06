@@ -1,5 +1,5 @@
 <%- if @lyric and @lyric.youtube_id -%>
 <div class="section">
-  <object width="300" height="250"><param name="movie" value="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="250"></embed></object>
+  <object width="300" height="250"><param name="movie" value="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="250" /></object>
 </div>
 <%- end -%>

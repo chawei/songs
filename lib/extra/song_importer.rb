@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'httparty'
 
 class SongImporter
@@ -9,12 +10,17 @@ class SongImporter
   def self.import_song(options)
     return if options[:query].blank?
     
-    query = options[:query].gsub(/(\(.*\))|(\[.*\])/, '')
+    query = normalize_query(options[:query])
+    q_lang = LanguageDetector.get_lang(query)
+    puts "===== LanguageDetector ====="
+    puts "Language: #{q_lang}"
+    need_verify = !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
+    
     video_url = options[:video_url]
     
     res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
-    tracks = res['lfm']['results']['trackmatches']['track']
-    if tracks.length > 0
+    if trackmatches = res['lfm']['results']['trackmatches']
+      tracks = trackmatches['track']
       track = (tracks.is_a?(Hash) ? tracks : tracks[0])
       artist = track["artist"]
       title  = track["name"]
@@ -22,21 +28,28 @@ class SongImporter
       puts "===== Last.fm ====="
       puts "Artist: #{artist}"
       puts "Title : #{title}"
-      
+        
       if lyric = Lyric.find_by_performer_and_title(artist, title)
+        lyric.update_videos(options[:video_url])
         puts "*** Found Data in DB"
         return lyric
       elsif lyric = LyricsFinder.get_lyric(:artist => artist, :title => title, :video_url => video_url, 
-                                           :current_user_id => options[:current_user_id])
+                                           :current_user_id => options[:current_user_id], :need_verify => need_verify)
         puts "*** Found Data by LyricsFinder"
         return lyric
       else
         # save as request
-        return "no lyric"
+        return nil
       end
     end
     
-    return "fail"
+    return nil
+  end
+  
+  def self.normalize_query(query)
+    query = query.gsub(/(\(.*\))|(\[.*\])|([mM][vV])|(完整版)|/, '')
+    query = query.gsub(/[-_\/\\]/, ' ')
+    return query
   end
 
 end

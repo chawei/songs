@@ -1,0 +1,7 @@
+
+if ($('#story-item_<%= @background_story.id %> form.section_form').length == 0) {  
+  $('#story-item_<%= @background_story.id %>').prepend("<%= escape_javascript(render(:partial => 'background_stories/form', :locals => { :background_story => @background_story })) %>");
+}
+$('#story-item_<%= @background_story.id %> form').slideDown();
+$('#story-item_<%= @background_story.id %> .title').hide();
+$('#story-item_<%= @background_story.id %> .content').hide();

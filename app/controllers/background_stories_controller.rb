@@ -38,13 +38,15 @@ class BackgroundStoriesController < ApplicationController
   # GET /background_stories/1/edit
   def edit
     @background_story = BackgroundStory.find(params[:id])
-    render :action => :new
+    respond_to do |format|
+      format.html { render :action => :new }
+      format.js   { render :layout => false }
+    end
   end
 
   # POST /background_stories
   # POST /background_stories.xml
   def create
-    
     @background_story = BackgroundStory.new(params[:background_story])
     @background_story.created_by = current_user
     @background_story.updated_by = current_user
@@ -52,6 +54,7 @@ class BackgroundStoriesController < ApplicationController
     respond_to do |format|
       if @background_story.save
         format.html { redirect_to(@background_story.lyric, :notice => 'Background story was successfully created.') }
+        format.js   { render :layout => false }
         format.xml  { render :xml => @background_story, :status => :created, :location => @background_story }
       else
         format.html { render :action => "new" }
@@ -69,6 +72,7 @@ class BackgroundStoriesController < ApplicationController
     respond_to do |format|
       if @background_story.update_attributes(params[:background_story])
         format.html { redirect_to(@background_story.lyric, :notice => 'Background story was successfully updated.') }
+        format.js   { render :layout => false }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -81,11 +85,13 @@ class BackgroundStoriesController < ApplicationController
   # DELETE /background_stories/1.xml
   def destroy
     @background_story = BackgroundStory.find(params[:id])
+    @background_story_id = @background_story.id
     @lyric = @background_story.lyric
     @background_story.destroy
 
     respond_to do |format|
       format.html { redirect_to(@lyric) }
+      format.js   { render :layout => false }
       format.xml  { head :ok }
     end
   end

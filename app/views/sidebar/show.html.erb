@@ -1,0 +1,81 @@
+<div id="main">
+  <div id="tabs">
+  	<ul>
+  		<li><a href="#tabs-lyric">lyric</a></li>
+  		<li><a href="#tabs-stories">stories</a></li>
+  		<li><a href="#tabs-about">about</a></li>
+  		<!--
+  		<li><a href="#tabs-3">more videos</a></li>
+  		<li><a href="#tabs-3">thoughts</a></li>
+  		<li><a href="#tabs-3">comments</a></li>
+  		-->
+  	</ul>
+  	
+  	<div class="tab_container">
+	  <% if @is_supported %>
+      <% if @lyric %>
+    	<div id="tabs-lyric" class="tab_content">
+        <div class="song_info">
+          <div class="title"><%= @lyric.title %></div>
+          <div class="performer"><%= @lyric.performer %></div>
+        </div>
+
+        <div class="lyric">
+          <% if @lyric.content.blank? %>
+            Sorry, no matched lyric
+          <% else %>
+            <%= simple_format @lyric.content  %>
+          <% end %>
+        </div>
+    	</div>
+    	<div id="tabs-stories" class="tab_content">
+    	  <%= render :partial => 'background_stories/section' %>
+    	</div>
+    	<div id="tabs-about" class="tab_content">
+    	  <% res = LastFm.get_artist_info(@lyric.performer) %>
+    	  <% @summary = res["lfm"]["artist"]["bio"]["summary"] %>
+    	  <% @image = res["lfm"]["artist"]["image"][1] %>
+    	  <% @similar_artists = res["lfm"]["artist"]["similar"]["artist"] %>
+    	  
+    	  <div class="section">
+    	    <h3>Bio</h3>
+    		  <div class="artist_image"><%= image_tag @image %></div>
+    		  <div class="artist_summary"><%= simple_format @summary %></div>
+    		</div>
+    		
+    		<div class="section">
+    		  <h3>Similar Artists</h3>
+      		<% @similar_artists.each do |similar_artist| %>
+      		<div class="similar_artist clear_fix">
+      		  <div class="image"><%= image_tag similar_artist['image'][0] %></div> 
+      		  <div class="name"><%= link_to similar_artist['name'], "http://www.youtube.com/results?search_query=#{URI.escape(similar_artist['name'])}" %></div>
+      		</div>
+      		<% end %>
+      	</div>
+    	</div>
+    	<% else %>
+    	<div class="tab_content">
+        Sorry, we can't find any matches.
+      </div>
+      <% end %>
+  	<% else %>
+  	<div class="tab_content">
+      Sorry, our app is not supported in this site.
+    </div>
+    <% end %>
+    </div>
+    <div class="clear"></div>
+  </div>
+  
+  <div id="login_section">
+  <% unless current_user %>
+    <%= render :partial => 'shared/signin' %>
+  <% end %>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+  	$("#tabs").tabs();
+  });
+</script>

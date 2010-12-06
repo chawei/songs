@@ -17,6 +17,13 @@ class Lyric < ActiveRecord::Base
   end
   
   def youtube_id
-    video_url.blank? ? nil : video_url.match(/\?v=(.*)/)[1]
+    video_url.blank? ? nil : video_url.match(/\?v=([\w-]*)/)[1]
+  end
+  
+  def update_videos(new_video_url)
+    if video_url.blank?
+      self.video_url = new_video_url
+      self.save
+    end
   end
 end

@@ -126,7 +126,7 @@
     IE appears to be case sensitive to iframes. use caution. Known issues: frameBorder, allowTransparency
     */
     
-    var src = "http://<%= HOST %>/show_lyric?" + pars.join("&");
+    var src = "http://<%= HOST %>/sidebar/show?" + pars.join("&");
     var iframe = AppSidebar.createElement('iframe', {"id": "_app_iframe", "src": src, "allowTransparency": "true", "frameBorder" : 0 });
     //iframe.style.display="none"
     content.appendChild(iframe);

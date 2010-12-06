@@ -8,7 +8,7 @@ Songs::Application.routes.draw do
 
   root :to => "home#index"
   
-  match '/show_lyric', :to => "sidebar#show_lyric"
+  match '/sidebar/show', :to => "sidebar#show"
   match '/sidebar/load.:format', :to => "sidebar#load"
   match '/sidebar/sidebar.:format', :to => "sidebar#sidebar"
   

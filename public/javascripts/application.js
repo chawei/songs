@@ -6,7 +6,7 @@ $(function() {
   //$('#lyric_show_container form').hide();
   
   $('#lyric_show_container .section .add_btn').click(function() {
-    var form = $(this).parents('.section').find('form');
+    var form = $(this).parents('.section').find('#add_new_form_container form');
     if (form.hasClass('expanded')) {
       form.removeClass('expanded').slideUp();
     } else {
@@ -15,8 +15,23 @@ $(function() {
     return false;
   });
   
-  $('#lyric_show_container .section .cancel_btn').click(function() {
+  $('.tab_content .add_btn').click(function() {
+    var form = $(this).parents('.tab_content').find('#add_new_form_container form');
+    if (form.hasClass('expanded')) {
+      form.removeClass('expanded').slideUp();
+    } else {
+      form.addClass('expanded').slideDown();
+    }
+    return false;
+  });
+  
+  $('#lyric_show_container .section .cancel_btn, .tab_content .cancel_btn').live('click', function() {
     $(this).parents('form').removeClass('expanded').slideUp();
+    var item = $(this).parents('.item');
+    if(item.length > 0) {
+      item.find('.title').show();
+      item.find('.content').show();
+    }
     return false;
   });
 

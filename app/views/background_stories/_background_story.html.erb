@@ -1,0 +1,24 @@
+<div id="story-item_<%= background_story.id %>" class="item">
+  <div class="title"><%= background_story.title %></div>
+  <div class="content">
+    <%= text_format(auto_link(background_story.content, :html => { :target => '_blank' })) %>
+  </div>
+  
+  <div class="bottom_bar">
+    <div class="author">
+      <%= author = background_story.created_by and link_to author.username, account_path(author) %>
+    </div>
+    <%- if current_user and current_user.own_story?(background_story) -%>
+    <div class="actions">
+      <span class="action"><%= link_to 'edit', edit_lyric_background_story_path(background_story.lyric.id, background_story),
+                                               :remote => true %></span>
+      <span class="action"><%= button_to 'delete', lyric_background_story_path(background_story.lyric, background_story), 
+                                                 :confirm => "Are you sure?",
+                                                 :method => :delete,
+                                                 :class => 'delete_btn',
+                                                 :remote => true %></span>
+    </div>
+    <%- end -%>
+    <div class="clear"></div>
+  </div>
+</div>
