@@ -68,6 +68,7 @@ class LyricsController < ApplicationController
     respond_to do |format|
       if @lyric.update_attributes(params[:lyric])
         format.html { redirect_to(@lyric, :notice => 'Lyric was successfully updated.') }
+        format.js   { render :layout => false }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

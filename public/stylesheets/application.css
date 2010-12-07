@@ -6,7 +6,7 @@
     margin: 0 0 10px 0;
   }
 
-h2#headline {
+h2#headline, h2.headline {
   margin: 0 0 15px 0;
 }
 
@@ -217,3 +217,8 @@ form.section_form a.cancel_btn {
   .pagination .next_page {
     margin-left: 10px;
   }
+  
+/* Sign In */
+#social_signin_container {
+  margin: 30px 0 0;
+}

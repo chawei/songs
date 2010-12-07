@@ -18,7 +18,7 @@
       
       <div id="header_wrap">
         <div id="header">
-          <div id="logo"><%= link_to "behind".html_safe, root_path %></div>
+          <div id="logo"><%= link_to "dive".html_safe, root_path %></div>
           <div id="login_box">
             <%- if current_user -%>
             <div id="greeting">
@@ -57,7 +57,11 @@
       
       <div id="footer_wrap">
         <div id="footer">
-          <a id="bookmarklet" href="javascript:var e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://<%= HOST %>/sidebar/load.js');document.body.appendChild(e);void(0);">show lyric</a>
+          <div id="bookmarklet_container">
+            <span class="explanation">start using our app by dragging this button</span>
+            <a id="bookmarklet" href="javascript:var e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://<%= HOST %>/sidebar/load.js');document.body.appendChild(e);void(0);">show lyric</a>
+            <span class="explanation">to your toolbar</span>
+          </div>
         </div>
       </div>
     </div>

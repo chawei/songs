@@ -82,6 +82,21 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 	padding: 20px;
 }
 
+/* Lyric */
+#tabs-lyric textarea {
+  width: 300px;
+  min-height: 450px;
+  height: 80%;
+}
+
+#tabs-lyric .edit_lyric_btn {
+  margin: 0 0 10px 0;
+}
+
+.tab_container form .actions {
+  margin-top: 20px;
+}
+
 /* Notes */
 .note {
   border-bottom: 1px solid #e6e6e6;

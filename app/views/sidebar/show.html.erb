@@ -20,13 +20,37 @@
           <div class="performer"><%= @lyric.performer %></div>
         </div>
 
-        <div class="lyric">
+        <div id="lyric">
           <% if @lyric.content.blank? %>
-            Sorry, no matched lyric
+            <p>Sorry, there is no matched lyric.<br>Wanna be the first to submit the lyric? 
+              <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@lyric.title)}+#{URI.escape(@lyric.performer)}&ie=UTF-8&oe=UTF-8" %></p>
           <% else %>
             <%= simple_format @lyric.content  %>
           <% end %>
         </div>
+        
+        <% if @lyric.content.blank? || current_user.own_lyric?(@lyric) %>
+          <%= link_to "edit", "#", :class => 'edit_lyric_btn click_to_edit' %>
+          <%= form_for(@lyric, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
+            <% if @lyric.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@lyric.errors.count, "error") %> prohibited this lyric from being saved:</h2>
+
+                <ul>
+                <% @lyric.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <%= f.text_area :content %>
+
+            <div class="actions">
+              <div class="submit"><%= f.submit %></div>
+            </div>
+          <% end %>
+        <% end %>
     	</div>
     	<div id="tabs-stories" class="tab_content">
     	  <%= render :partial => 'background_stories/section' %>

@@ -34,6 +34,21 @@ $(function() {
     }
     return false;
   });
+  
+  $('.edit_lyric_btn').live('click', function() {
+    if($(this).hasClass('click_to_edit')) {
+      $(this).removeClass('click_to_edit').addClass('click_to_hide');
+      $('#lyric').hide();
+      $('#lyric_form').removeClass('js_hidden').hide().fadeIn();
+      $(this).text('cancel');
+    } else if ($(this).hasClass('click_to_hide')) {
+      $(this).removeClass('click_to_hide').addClass('click_to_edit');
+      $('#lyric').fadeIn();
+      $('#lyric_form').addClass('js_hidden').hide();
+      $(this).text('edit');
+    }
+    return false;
+  });
 
 });
 
