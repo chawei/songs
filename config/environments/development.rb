@@ -20,5 +20,5 @@ Songs::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
   
-  HOST = "song.isbuilt.com:3001"
+  HOST = "dev.behind.detourlab.com:3001"
 end
