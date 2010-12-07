@@ -27,7 +27,7 @@ gem 'httparty'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test, :cucumber do
-  gem 'ruby-debug19'
+  #gem 'ruby-debug19'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber'
