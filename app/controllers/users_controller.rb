@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @lyrics = @user.created_lyrics.order('lyrics.created_at DESC').paginate(:per_page => 10, :page => params[:page])
   end
 
   def edit

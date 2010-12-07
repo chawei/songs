@@ -30,8 +30,10 @@ group :development, :test, :cucumber do
   gem 'ruby-debug19'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'cucumber-rails'
   gem 'cucumber'
+  gem 'cucumber-rails'
+  gem 'autotest'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'spork'
   gem 'launchy'    # So you can do Then show me the page

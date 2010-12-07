@@ -32,26 +32,7 @@
     	  <%= render :partial => 'background_stories/section' %>
     	</div>
     	<div id="tabs-about" class="tab_content">
-    	  <% res = LastFm.get_artist_info(@lyric.performer) %>
-    	  <% @summary = res["lfm"]["artist"]["bio"]["summary"] %>
-    	  <% @image = res["lfm"]["artist"]["image"][1] %>
-    	  <% @similar_artists = res["lfm"]["artist"]["similar"]["artist"] %>
-    	  
-    	  <div class="section">
-    	    <h3>Bio</h3>
-    		  <div class="artist_image"><%= image_tag @image %></div>
-    		  <div class="artist_summary"><%= simple_format @summary %></div>
-    		</div>
-    		
-    		<div class="section">
-    		  <h3>Similar Artists</h3>
-      		<% @similar_artists.each do |similar_artist| %>
-      		<div class="similar_artist clear_fix">
-      		  <div class="image"><%= image_tag similar_artist['image'][0] %></div> 
-      		  <div class="name"><%= link_to similar_artist['name'], "http://www.youtube.com/results?search_query=#{URI.escape(similar_artist['name'])}" %></div>
-      		</div>
-      		<% end %>
-      	</div>
+    	  <%= render :partial => 'about' %>
     	</div>
     	<% else %>
     	<div class="tab_content">

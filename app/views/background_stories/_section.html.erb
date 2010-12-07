@@ -9,8 +9,13 @@
   </div>
   
   <div class="items">
-    <%- for background_story in @lyric.background_stories.order('created_at DESC') -%>
-    <%= render background_story %>
-    <%- end -%>
+    <% @lyric.background_stories.delete(@background_story) %>
+    <% if @lyric.background_stories.size == 0 %>
+      <div class="notification">Do you know any story about this song?<br>Write it down and share!</div>
+    <% else %>
+      <%- for background_story in @lyric.background_stories.order('created_at DESC') -%>
+      <%= render background_story %>
+      <%- end -%>
+    <% end %>
   </div>
 </div>

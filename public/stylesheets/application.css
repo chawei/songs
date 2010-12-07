@@ -197,7 +197,9 @@ form.section_form a.cancel_btn {
 .js_hidden {
   display: none;
 }
-
+.notification {
+  color: #666;
+}
 /* Pagination
 --------------- */
 .pagination {
