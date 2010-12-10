@@ -24,7 +24,7 @@ class Video < ActiveRecord::Base
       begin
         uri = URI(self.url)
         if uri.host =~ /youtube/
-          uid = self.url.match(/\?v=([\w_-]*)/)[1]
+          uid = self.url.match(/[\?|\&]v=([\w_-]*)/)[1]
           source = 'youtube'
         end
         self.uid = uid
