@@ -4,6 +4,7 @@ class Lyric < ActiveRecord::Base
   
   has_many :background_stories, :dependent => :destroy
   has_many :notes, :dependent => :destroy
+  has_many :videos, :dependent => :destroy
   
   validates_presence_of :title, :performer
   
@@ -17,13 +18,17 @@ class Lyric < ActiveRecord::Base
   end
   
   def youtube_id
-    video_url.blank? ? nil : video_url.match(/\?v=([\w-]*)/)[1]
+    video_url.blank? ? nil : video_url.match(/\?v=([\w_-]*)/)[1]
   end
   
-  def update_videos(new_video_url)
-    if video_url.blank?
-      self.video_url = new_video_url
-      self.save
+  def video_url=(url)
+    self.update_videos(url)
+  end
+  
+  def update_videos(new_video_url, viewer_id = nil)
+    video = Video.new(:url => new_video_url, :created_by_id => viewer_id)
+    if video.save
+      self.videos << video
     end
   end
 end

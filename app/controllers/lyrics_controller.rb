@@ -37,8 +37,11 @@ class LyricsController < ApplicationController
   end
 
   # GET /lyrics/1/edit
-  def edit
+  def edit 
     @lyric = Lyric.find(params[:id])
+    unless current_user && (current_user.own_lyric?(@lyric) || current_user.admin?)
+      redirect_to(@lyric, :notice => "Sorry, you don't have the access to edit this page.")
+    end
   end
 
   # POST /lyrics

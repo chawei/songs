@@ -9,6 +9,10 @@ class SongImporter
   
   def self.import_song(options)
     return if options[:query].blank?
+    video_url = options[:video_url]
+    if lyric = Video.get_lyric(video_url)
+      return lyric
+    end
     
     query = normalize_query(options[:query])
     q_lang = LanguageDetector.get_lang(query)
@@ -16,7 +20,6 @@ class SongImporter
     puts "Language: #{q_lang}"
     need_verify = !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
     
-    video_url = options[:video_url]
     
     res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
     if trackmatches = res['lfm']['results']['trackmatches']
@@ -30,7 +33,7 @@ class SongImporter
       puts "Title : #{title}"
         
       if lyric = Lyric.find_by_performer_and_title(artist, title)
-        lyric.update_videos(options[:video_url])
+        lyric.update_videos(options[:video_url], options[:current_user_id])
         puts "*** Found Data in DB"
         return lyric
       elsif lyric = LyricsFinder.get_lyric(:artist => artist, :title => title, :video_url => video_url, 

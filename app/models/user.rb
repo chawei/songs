@@ -32,6 +32,9 @@ class User < ActiveRecord::Base
   
   has_many :created_notes, :class_name => "Note", :foreign_key => "created_by_id"
   
+  def normalize_friendly_id(text)
+    text
+  end
   
   def own_story?(story)
     created_stories.include? story

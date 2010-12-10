@@ -12,7 +12,7 @@ class AuthorizationsController < ApplicationController
       flash[:notice] = "Welcome back #{omniauth['provider']} user"
       UserSession.create(@auth.user, true) #User is present. Login the user with his social account
     else
-      user = User.find_by_username(omniauth['user_info']['nickname'])
+      user = User.find_by_username(omniauth['user_info']['nickname']) || User.find_by_email(omniauth['extra']['user_hash']['email'])
       @new_auth = Authorization.create_from_hash(omniauth, user) #Create a new user
       flash[:notice] = "Welcome #{omniauth['provider']} user. Your account has been created."
       UserSession.create(@new_auth.user, true) #Log the authorizing user in.

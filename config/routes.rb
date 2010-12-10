@@ -21,7 +21,7 @@ Songs::Application.routes.draw do
   match "/auth/failure", :to => "authorizations#failure"
 
   resource :user_session
-  resources :users
+  resources :users, :constraints => { :id => /.*/ }
   resources :lyrics do
     resources :background_stories
     resources :notes

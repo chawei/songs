@@ -1,5 +1,13 @@
-<%- if @lyric and @lyric.youtube_id -%>
-<div class="section">
-  <object width="300" height="250"><param name="movie" value="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&" /><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><embed src="http://www.youtube.com/v/<%= @lyric.youtube_id %>&hl=en_US&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="300" height="250" /></object>
-</div>
+<%- if @lyric and @lyric.videos -%>
+  <% @lyric.videos.each do |video| %>
+    <% if video.source == 'youtube' %>
+    <div class="section">
+      <object style="width: 300px; height: 250px">
+      <param name="movie" value="http://www.youtube.com/v/<%= video.uid %>?version=3">
+      <param name="allowFullScreen" value="true">
+      <param name="allowScriptAccess" value="always">
+      <embed src="http://www.youtube.com/v/<%= video.uid %>?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="300" height="250"></object>
+    </div>
+    <%- end -%>
+  <%- end -%>
 <%- end -%>

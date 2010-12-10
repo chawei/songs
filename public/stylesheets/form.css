@@ -61,7 +61,7 @@ form.button_to {
 .button_to div {
   display: inline;
 }
-.delete_btn {
+.delete_btn, a.rounded_btn {
   width: inherit;
   height: inherit;
   -moz-border-radius-bottomleft: 4px;
@@ -81,4 +81,9 @@ form.button_to {
   padding: 4px 6px;
   text-decoration: none;
   white-space: nowrap;
+}
+
+a.rounded_btn:hover {
+  background: #209Bd2;
+  text-decoration: none;
 }
