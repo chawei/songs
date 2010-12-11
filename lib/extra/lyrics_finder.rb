@@ -7,8 +7,13 @@ class LyricsFinder
   DEVELOPER_KEY = "6bb71335d98954463-temporary.API.access"
   
   def self.get_lyric(options)
+    result, raw_result, song = nil, nil, nil
+    unless song = Lyric.find_by_performer_name_and_title(options[:artist], options[:title])
+      song = Lyric.create(:performer_name => options[:artist], :writer_name => options[:artist], :title => options[:title], 
+                          :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+    end
+    song.update_videos(options[:video_url])
     
-    result, raw_result = nil, nil
     begin
       if raw_result = direct_chartlyrics_search(options)
         result = raw_result
@@ -24,22 +29,15 @@ class LyricsFinder
         
         song = Lyric.find_by_performer_and_title(artist, title)
         if song.nil?
-          song = Lyric.create(:performer => artist, :writer => artist, :title => title, :content => lyric, 
-                              :cover_url => cover_url, :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+          song.content = lyric
+          song.cover_url = cover_url
           song.save
-        else
-          song.update_videos(options[:video_url])
         end
-        return song
-      else
-        song = Lyric.create(:performer => options[:artist], :writer => options[:artist], :title => options[:title],
-                            :video_url => options[:video_url], :created_by_id => options[:current_user_id])
-        song.save
-        return song
       end
     rescue
-      return "error - please try later."
+      puts "error - please try later."
     end
+    return song
     #self.get("http://api.lyricsfly.com/api/api.php?i=#{DEVELOPER_KEY}&a=#{options[:artist]}&t=#{options[:title]}")
   end
   
