@@ -10,4 +10,11 @@ class SidebarController < ApplicationController
     render :layout => 'sidebar'
   end
   
+  def switch_video
+    @video = Video.find(params[:id])
+    respond_to do |format|
+      format.js  { render :layout => false }
+    end
+  end
+  
 end

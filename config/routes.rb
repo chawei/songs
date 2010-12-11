@@ -11,6 +11,7 @@ Songs::Application.routes.draw do
   root :to => "home#index"
   
   match '/sidebar/show', :to => "sidebar#show"
+  match '/sidebar/switch_video', :to => "sidebar#switch_video"
   match '/sidebar/load.:format', :to => "sidebar#load"
   match '/sidebar/sidebar.:format', :to => "sidebar#sidebar"
   

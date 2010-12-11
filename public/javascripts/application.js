@@ -49,6 +49,11 @@ $(function() {
     }
     return false;
   });
+  
+  $('.video_item').click(function() {
+    $('.video_item').removeClass('selected_video_item');
+    $(this).addClass('selected_video_item');
+  });
 
 });
 

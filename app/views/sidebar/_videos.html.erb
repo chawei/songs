@@ -1,23 +1,16 @@
 <%- if @lyric and @lyric.videos -%>
   <div class="section">
-  <% @show_thumb = true if @lyric.videos.length > 2 %>
-  <% @lyric.videos.each do |video| %>
-    <% if video.source == 'youtube' %>
-      <% if @show_thumb %>
-        <a href="http://www.youtube.com/watch?v=<%= video.uid %>">
-          <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg" %>
-        </a>
-      <% else %>
-        <div class="video">
-          <object style="width: 300px; height: 250px">
-            <param name="movie" value="http://www.youtube.com/v/<%= video.uid %>?version=3">
-            <param name="allowFullScreen" value="true">
-            <param name="allowScriptAccess" value="always">
-            <embed src="http://www.youtube.com/v/<%= video.uid %>?version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="300" height="250">
-          </object>
-        </div>
+    <div id="current_video_player" class="video">
+      <%= embedded_player(@lyric.videos.first.uid) %>
+    </div>
+    <div id="video_items">
+    <% @lyric.videos.each do |video| %>
+      <% if video.source == 'youtube' %>
+      <%= link_to sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'video_item' do %>
+        <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg", :class => 'video_thumb' %>
+      <% end %>
       <%- end -%>
     <%- end -%>
-  <%- end -%>
+    </div>
   </div>
 <%- end -%>

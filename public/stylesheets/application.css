@@ -226,10 +226,21 @@ form.section_form a.cancel_btn {
 /* Video */
 .section .video {
   border: 1px solid #e6e6e6;
-  width: 300px;
-  height: 250px;
+  width: 315px;
+  height: 255px;
   margin-bottom: 10px;
   background: url(/images/ajax-loader.gif) no-repeat center center;
+}
+
+.video_item {
+  display: block;
+  width: 297px;
+  padding: 10px;
+  margin: 0 0 5px 0;
+  background-color: #f2f2f2;
+}
+a.video_item:hover, a.selected_video_item {
+  background-color: #e6e6e6;
 }
 
 /* Artist
