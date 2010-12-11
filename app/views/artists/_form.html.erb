@@ -1,0 +1,53 @@
+<%= form_for(@artist) do |f| %>
+  <% if @artist.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+      <ul>
+      <% @artist.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="label"><%= f.label :name %></div>
+    <div class="input"><%= f.text_field :name %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :full_name %></div>
+    <div class="input"><%= f.text_field :full_name %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :artist_type %></div>
+    <div class="input"><%= f.text_field :artist_type %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :primary_position %></div>
+    <div class="input"><%= f.text_field :primary_position %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :secondary_position %></div>
+    <div class="input"><%= f.text_field :secondary_position %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :bio_summary %></div>
+    <div class="input"><%= f.text_area :bio_summary %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :bio_full %></div>
+    <div class="input"><%= f.text_area :bio_full %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :image_small_url %></div>
+    <div class="input"><%= f.text_field :image_small_url %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :image_large_url %></div>
+    <div class="input"><%= f.text_field :image_large_url %></div>
+  </div>
+  <div class="actions">
+    <div class="submit"><%= f.submit %></div>
+  </div>
+<% end %>

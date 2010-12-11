@@ -8,8 +8,34 @@
     <div class="author">
       <%= author = background_story.created_by and link_to author.username, user_path(author) %>
     </div>
-    <%- if current_user and current_user.own_story?(background_story) -%>
+    <%- if current_user -%>
     <div class="actions">
+      <% if false %>
+      <% if current_user.voted_for?(background_story) %>
+      <span class="action">
+        <%= background_story.plusminus %> votes
+      </span>
+      <% else %>
+      <span class="action">
+        <%= form_tag votes_thumbs_up_path, :method => :post, :remote => true, :class => 'vote_form' do %>
+          <%= hidden_field_tag :voter_id, current_user.try(:id) %>
+          <%= hidden_field_tag :voteable_id, background_story.id %>
+          <%= hidden_field_tag :voteable_class, background_story.class.to_s %>
+          <%= submit_tag '+1', :class => 'rounded_btn' %>
+        <% end %>
+      </span>
+      <span class="action">
+        <%= form_tag votes_thumbs_down_path, :method => :post, :remote => true, :class => 'vote_form' do %>
+          <%= hidden_field_tag :voter_id, current_user.try(:id) %>
+          <%= hidden_field_tag :voteable_id, background_story.id %>
+          <%= hidden_field_tag :voteable_class, background_story.class.to_s %>
+          <%= submit_tag '-1', :class => 'rounded_btn' %>
+        <% end %>
+      </span>
+      <% end %>
+      <% end %>
+      
+      <% if current_user.own_story?(background_story) %>
       <span class="action">
         <%= link_to 'edit', edit_lyric_background_story_path(background_story.lyric.id, background_story), 
                             :remote => true %>
@@ -21,6 +47,7 @@
                                 :class => 'delete_btn',
                                 :remote => true %>
       </span>
+      <% end %>
     </div>
     <%- end -%>
     <div class="clear"></div>

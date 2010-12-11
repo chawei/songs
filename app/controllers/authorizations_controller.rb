@@ -9,7 +9,7 @@ class AuthorizationsController < ApplicationController
       flash[:notice] = "Successfully added #{omniauth['provider']} authentication"
       current_user.authorizations.create(:provider => omniauth['provider'], :uid => omniauth['uid']) #Add an auth to existing user
     elsif @auth
-      flash[:notice] = "Welcome back #{omniauth['provider']} user"
+      flash[:notice] = "Welcome back!"
       UserSession.create(@auth.user, true) #User is present. Login the user with his social account
     else
       user = User.find_by_username(omniauth['user_info']['nickname']) || User.find_by_email(omniauth['extra']['user_hash']['email'])

@@ -1,0 +1,43 @@
+<div class="nav_links">
+  <%= link_to 'Edit', edit_artist_path(@artist) %> |
+  <%= link_to 'Back', artists_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Name</div>
+    <div class="data"><%= @artist.name %></div>
+  </div>
+  <div class="row">
+    <div class="label">Full name</div>
+    <div class="data"><%= @artist.full_name %></div>
+  </div>
+  <div class="row">
+    <div class="label">Artist type</div>
+    <div class="data"><%= @artist.artist_type %></div>
+  </div>
+  <div class="row">
+    <div class="label">Primary position</div>
+    <div class="data"><%= @artist.primary_position %></div>
+  </div>
+  <div class="row">
+    <div class="label">Secondary position</div>
+    <div class="data"><%= @artist.secondary_position %></div>
+  </div>
+  <div class="row">
+    <div class="label">Bio summary</div>
+    <div class="data"><%= @artist.bio_summary %></div>
+  </div>
+  <div class="row">
+    <div class="label">Bio full</div>
+    <div class="data"><%= @artist.bio_full %></div>
+  </div>
+  <div class="row">
+    <div class="label">Image small url</div>
+    <div class="data"><%= @artist.image_small_url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Image large url</div>
+    <div class="data"><%= @artist.image_large_url %></div>
+  </div>
+</div>

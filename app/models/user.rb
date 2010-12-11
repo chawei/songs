@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
     end
   end
   
+  acts_as_voter
+  
   has_many :created_lyrics, :class_name => "Lyric", :foreign_key => "created_by_id"
   has_many :updated_lyrics, :class_name => "Lyric", :foreign_key => "updated_by_id"
   

@@ -26,6 +26,7 @@ class LyricsFinder
         if song.nil?
           song = Lyric.create(:performer => artist, :writer => artist, :title => title, :content => lyric, 
                               :cover_url => cover_url, :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+          song.save
         else
           song.update_videos(options[:video_url])
         end
@@ -33,6 +34,7 @@ class LyricsFinder
       else
         song = Lyric.create(:performer => options[:artist], :writer => options[:artist], :title => options[:title],
                             :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+        song.save
         return song
       end
     rescue

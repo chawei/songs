@@ -10,7 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101210071824) do
+ActiveRecord::Schema.define(:version => 20101211180838) do
+
+  create_table "artists", :force => true do |t|
+    t.string   "name"
+    t.string   "full_name"
+    t.string   "artist_type"
+    t.string   "primary_position"
+    t.string   "secondary_position"
+    t.text     "bio_summary"
+    t.text     "bio_full"
+    t.string   "image_small_url"
+    t.string   "image_large_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "authorizations", :force => true do |t|
     t.string   "provider"
@@ -32,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20101210071824) do
 
   create_table "lyrics", :force => true do |t|
     t.string   "title"
-    t.string   "performer"
-    t.string   "writer"
+    t.string   "performer_name"
+    t.string   "writer_name"
     t.text     "content"
     t.string   "album_name"
     t.integer  "year"
@@ -49,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20101210071824) do
     t.integer  "lyric_id"
     t.text     "content"
     t.integer  "created_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participations", :force => true do |t|
+    t.integer  "artist_id"
+    t.integer  "lyric_id"
+    t.string   "participation_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -97,5 +119,19 @@ ActiveRecord::Schema.define(:version => 20101210071824) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "vote",          :default => false
+    t.integer  "voteable_id",                      :null => false
+    t.string   "voteable_type",                    :null => false
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["voteable_id", "voteable_type"], :name => "fk_voteables"
+  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], :name => "uniq_one_vote_only", :unique => true
+  add_index "votes", ["voter_id", "voter_type"], :name => "fk_voters"
 
 end

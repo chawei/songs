@@ -10,14 +10,18 @@
     <div class="header">
       <h2 class="title"><%= @lyric.title %></h2>
       <div class="song_detail">
+        <% if @lyric.performer %>
         <div class="row">
           <div class="label">performed by</div>
-          <div class="data"><%= @lyric.performer %></div>
+          <div class="data"><%= link_to @lyric.performer.name, artist_path(@lyric.performer) %></div>
         </div>
+        <% end %>
+        <% if @lyric.writer %>
         <div class="row">
           <div class="label">written by</div>
-          <div class="data"><%= @lyric.writer %></div>
+          <div class="data"><%= link_to @lyric.writer.name, artist_path(@lyric.writer) %></div>
         </div>
+        <% end %>
         <div class="row">
           <div class="label">album</div>
           <div class="data"><%= @lyric.album_name %></div>

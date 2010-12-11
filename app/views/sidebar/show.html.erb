@@ -1,7 +1,7 @@
 <div id="main">
   <div id="tabs">
   	<ul>
-  		<li><a href="#tabs-lyric">lyric</a></li>
+  		<li><a href="#tabs-lyric">lyrics</a></li>
   		<li><a href="#tabs-stories">stories</a></li>
   		<li><a href="#tabs-about">about</a></li>
   		<li><a href="#tabs-videos">videos</a></li>
@@ -17,13 +17,13 @@
     	<div id="tabs-lyric" class="tab_content">
         <div class="song_info">
           <div class="title"><%= @lyric.title %></div>
-          <div class="performer"><%= @lyric.performer %></div>
+          <div class="performer"><%= @lyric.performer_name %></div>
         </div>
 
         <div id="lyric">
           <% if @lyric.content.blank? %>
-            <p>Sorry, there is no matched lyric.<br>Wanna be the first to submit the lyric? 
-              <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@lyric.title)}+#{URI.escape(@lyric.performer)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %></p>
+            <p>Sorry, there is no matched lyric.<br>Wanna be the first to submit the lyrics? 
+              <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@lyric.title)}+#{URI.escape(@lyric.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %></p>
           <% else %>
             <%= simple_format @lyric.content  %>
           <% end %>
@@ -34,7 +34,7 @@
           <%= form_for(@lyric, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
             <% if @lyric.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@lyric.errors.count, "error") %> prohibited this lyric from being saved:</h2>
+                <h2><%= pluralize(@lyric.errors.count, "error") %> prohibited this lyrics from being saved:</h2>
 
                 <ul>
                 <% @lyric.errors.full_messages.each do |msg| %>

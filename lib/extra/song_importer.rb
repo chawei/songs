@@ -32,13 +32,14 @@ class SongImporter
       puts "Artist: #{artist}"
       puts "Title : #{title}"
         
-      if lyric = Lyric.find_by_performer_and_title(artist, title)
+      if lyric = Lyric.find_by_performer_name_and_title(artist, title)
         lyric.update_videos(options[:video_url], options[:current_user_id])
         puts "*** Found Data in DB"
         return lyric
       elsif lyric = LyricsFinder.get_lyric(:artist => artist, :title => title, :video_url => video_url, 
                                            :current_user_id => options[:current_user_id], :need_verify => need_verify)
         puts "*** Found Data by LyricsFinder"
+        #debugger
         return lyric
       else
         # save as request

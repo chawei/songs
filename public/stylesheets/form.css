@@ -61,7 +61,7 @@ form.button_to {
 .button_to div {
   display: inline;
 }
-.delete_btn, a.rounded_btn {
+.delete_btn, .rounded_btn {
   width: inherit;
   height: inherit;
   -moz-border-radius-bottomleft: 4px;
@@ -86,4 +86,9 @@ form.button_to {
 a.rounded_btn:hover {
   background: #209Bd2;
   text-decoration: none;
+}
+
+/* Vote */
+.vote_form {
+  display: inline;
 }

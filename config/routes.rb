@@ -1,4 +1,6 @@
 Songs::Application.routes.draw do
+  resources :artists
+
   resources :authorizations
   resources :notes
 
@@ -19,6 +21,9 @@ Songs::Application.routes.draw do
   
   match "/auth/:provider/callback", :to => "authorizations#create"
   match "/auth/failure", :to => "authorizations#failure"
+  
+  post "votes/thumbs_up"
+  post "votes/thumbs_down"
 
   resource :user_session
   resources :users, :constraints => { :id => /.*/ }

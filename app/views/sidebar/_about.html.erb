@@ -1,4 +1,4 @@
-<% res = LastFm.get_artist_info(@lyric.performer) %>
+<% res = LastFm.get_artist_info(@lyric.performer_name) %>
 <% @summary = res["lfm"]["artist"]["bio"]["summary"] %>
 <% @image = res["lfm"]["artist"]["image"][1] %>
 <% @similar_artists = res["lfm"]["artist"]["similar"]["artist"] %>

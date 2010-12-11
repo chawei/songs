@@ -6,15 +6,56 @@ class Lyric < ActiveRecord::Base
   has_many :notes, :dependent => :destroy
   has_many :videos, :dependent => :destroy
   
-  validates_presence_of :title, :performer
+  has_many :participations, :dependent => :destroy
+  has_many :artists, :through => :participations
   
-  has_friendly_id :performer_and_title, :use_slug => true
+  validates_presence_of :title, :performer_name
+  
+  has_friendly_id :performer_name_and_title, :use_slug => true
   
   scope :recent_updated, lambda { { :conditions => ["created_at > ?", 2.weeks.ago] } }
   scope :limited, lambda { |num| { :limit => num } }
   
-  def performer_and_title
-    "#{performer}-#{title}"
+  after_save :set_performer, :set_writer
+  
+  def set_performer
+    unless artist = Artist.find_by_name(performer_name)
+      artist = Artist.create(:name => performer_name, :full_name => performer_name)
+    end
+    unless Participation.find_by_artist_id_and_lyric_id_and_participation_type(artist.id, self.id, 'performer')
+      Participation.create(:artist => artist, :lyric => self, :participation_type => 'performer')
+    end
+  end
+  
+  def performer
+    performers = participations.performer
+    if performers.empty?
+      return nil
+    else
+      return performers.last.artist
+    end
+  end
+  
+  def set_writer
+    unless artist = Artist.find_by_name(writer_name)
+      artist = Artist.create(:name => writer_name, :full_name => writer_name, :primary_position => 'writer')
+    end
+    unless Participation.find_by_artist_id_and_lyric_id_and_participation_type(artist.id, self.id, 'writer')
+      Participation.create(:artist => artist, :lyric => self, :participation_type => 'writer')
+    end
+  end
+  
+  def writer
+    writers = participations.writer
+    if writers.empty?
+      return nil
+    else
+      return writers.last.artist
+    end
+  end
+  
+  def performer_name_and_title
+    "#{performer_name}-#{title}"
   end
   
   def youtube_id

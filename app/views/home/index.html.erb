@@ -12,7 +12,9 @@
       <div class="song_item clear_fix">
         <div class="detail">
           <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
-          <spanc class="performer">by <%= lyric.performer %></span>
+          <% if lyric.performer %>
+          <spanc class="performer">by <%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
+          <% end %>
         </div>
         <%- if current_user and current_user.own_lyric?(lyric) -%>
         <div class="actions">
@@ -31,7 +33,9 @@
       <div class="song_item clear_fix">
         <div class="detail">
           <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
-          <spanc class="performer">by <%= lyric.performer %></span>
+          <% if lyric.performer %>
+          <spanc class="performer">by <%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
+          <% end %>
         </div>
         <%- if current_user and current_user.own_lyric?(lyric) -%>
         <div class="actions">
