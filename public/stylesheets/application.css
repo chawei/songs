@@ -231,3 +231,29 @@ form.section_form a.cancel_btn {
   margin-bottom: 10px;
   background: url(/images/ajax-loader.gif) no-repeat center center;
 }
+
+/* Artist
+--------------- */
+.index .artist_item {
+  width: 500px;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+  .artist_item .detail {
+    float: left;
+    display: inline;
+  }
+    .artist_item .detail a.name {
+      font-size: 15px;
+      margin: 0 5px 0 0;
+    }
+    .artist_item .detail .type {
+      font-size: 13px;
+      color: #666;
+    }
+    
+  .artist_item .actions {
+    float: right;
+    display: inline;
+  }

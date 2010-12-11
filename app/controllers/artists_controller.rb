@@ -1,4 +1,7 @@
 class ArtistsController < ApplicationController
+  before_filter :require_user, :except => [:index, :show]
+  before_filter :check_permission, :except => [:index, :show]
+  
   # GET /artists
   # GET /artists.xml
   def index
@@ -80,4 +83,12 @@ class ArtistsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+  
+    def check_permission
+      unless current_user && current_user.admin?
+        redirect_to(artists_url, :notice => 'Sorry, you don\'t have the access to this page.')
+      end
+    end
 end

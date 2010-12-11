@@ -1,6 +1,6 @@
 <div class="nav_links">
-  <%= link_to 'Edit', edit_artist_path(@artist) %> |
-  <%= link_to 'Back', artists_path %>
+  <%= link_to 'Edit', edit_artist_path(@artist) if current_user && current_user.admin? %>
+  <%= link_to 'Back to List', artists_path %>
 </div>
 
 <div class="show_container">
