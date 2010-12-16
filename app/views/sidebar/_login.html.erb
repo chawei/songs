@@ -1,0 +1,38 @@
+<div class="edit_container">
+  <%= form_for @user_session, :html => { :class => 'hline_form' } do |f| %>
+    <% if @user_session.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user_session.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+        <ul>
+        <% @user_session.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <div class="label"><%= f.label :username %></div>
+      <div class="input"><%= f.text_field :username %></div>
+    </div>
+
+    <div class="field">
+      <div class="label"><%= f.label :password %></div>
+      <div class="input"><%= f.password_field :password %></div>
+    </div>
+
+    <!-- Uncomment this if you want this functionality
+    <div class="form_row"><%= label_tag 'remember_me', 'Remember me' %>
+    <%= check_box_tag 'remember_me', '1', @remember_me %></div>
+    -->
+
+    <div class="field">
+      <div class="submit"><%= f.submit 'Log in' %></div>
+    </div>
+  <% end -%>
+</div>
+
+<div id="social_signin_container">
+  <%= render :partial => 'shared/signin' %>
+</div>

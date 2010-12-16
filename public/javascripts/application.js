@@ -45,7 +45,7 @@ $(function() {
       $(this).removeClass('click_to_hide').addClass('click_to_edit');
       $('#lyric').fadeIn();
       $('#lyric_form').addClass('js_hidden').hide();
-      $(this).text('edit');
+      $(this).text('edit the lyrics');
     }
     return false;
   });

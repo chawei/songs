@@ -1,5 +1,11 @@
 Songs::Application.routes.draw do
-  resources :artists
+  
+
+  resources :events, :except => [:new, :show]
+  
+  resources :artists do
+    resources :events
+  end
 
   resources :authorizations
   resources :notes

@@ -1,5 +1,9 @@
 class SidebarController < ApplicationController
   def show
+    unless current_user
+      @user_session = UserSession.new
+    end 
+    
     params[:h] == "www.youtube.com" ? @is_supported = true : @is_supported = false
     if @is_supported
       @lyric = SongImporter.import_song(:query => params[:q], :video_url => params[:u], :current_user_id => current_user.try(:id))

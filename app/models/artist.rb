@@ -1,6 +1,7 @@
 class Artist < ActiveRecord::Base
   has_many :participations, :dependent => :destroy
   has_many :lyrics, :through => :participations
+  has_many :events, :dependent => :destroy
   
   has_friendly_id :full_name, :use_slug => true
   
@@ -8,8 +9,12 @@ class Artist < ActiveRecord::Base
   
   before_create :set_default_values
   
-  def getInfo
+  def get_info
     
+  end
+  
+  def performed_lyrics
+    return participations.performer.collect {|p| p.lyric}
   end
   
   protected

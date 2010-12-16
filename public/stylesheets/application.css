@@ -268,3 +268,29 @@ a.video_item:hover, a.selected_video_item {
     float: right;
     display: inline;
   }
+  
+/* Event
+--------------- */
+.index .event_item {
+  width: 500px;
+  margin: 0 0 10px 0;
+  padding: 0 0 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+  .event_item .detail {
+    float: left;
+    display: inline;
+  }
+    .event_item .detail a.name {
+      font-size: 15px;
+      margin: 0 5px 0 0;
+    }
+    .event_item .detail .type {
+      font-size: 13px;
+      color: #666;
+    }
+  
+  .event_item .actions {
+    float: right;
+    display: inline;
+  }

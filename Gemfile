@@ -10,7 +10,6 @@ gem 'rails', '3.0.3'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'nokogiri', '1.4.1'
 # gem 'aws-s3', :require => 'aws/s3'
 
 gem 'simple-navigation'
@@ -25,6 +24,7 @@ gem 'yaml_db'
 gem 'mysql2'
 gem 'thumbs_up'
 gem 'hoptoad_notifier'
+gem 'nokogiri'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

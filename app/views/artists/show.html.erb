@@ -3,41 +3,17 @@
   <%= link_to 'Back to List', artists_path %>
 </div>
 
-<div class="show_container">
-  <div class="row">
-    <div class="label">Name</div>
-    <div class="data"><%= @artist.name %></div>
-  </div>
-  <div class="row">
-    <div class="label">Full name</div>
-    <div class="data"><%= @artist.full_name %></div>
-  </div>
-  <div class="row">
-    <div class="label">Artist type</div>
-    <div class="data"><%= @artist.artist_type %></div>
-  </div>
-  <div class="row">
-    <div class="label">Primary position</div>
-    <div class="data"><%= @artist.primary_position %></div>
-  </div>
-  <div class="row">
-    <div class="label">Secondary position</div>
-    <div class="data"><%= @artist.secondary_position %></div>
-  </div>
-  <div class="row">
-    <div class="label">Bio summary</div>
-    <div class="data"><%= @artist.bio_summary %></div>
-  </div>
-  <div class="row">
-    <div class="label">Bio full</div>
-    <div class="data"><%= @artist.bio_full %></div>
-  </div>
-  <div class="row">
-    <div class="label">Image small url</div>
-    <div class="data"><%= @artist.image_small_url %></div>
-  </div>
-  <div class="row">
-    <div class="label">Image large url</div>
-    <div class="data"><%= @artist.image_large_url %></div>
+<div id="artist_page" class="show_container">
+  <div class="name"><%= @artist.name %></div>
+  <div class="bio"><%= @artist.bio_summary %></div>
+  
+  <div class="index">
+    <% @artist.performed_lyrics.each do |lyric| %>
+    <div class="song_item clear_fix">
+      <div class="detail">
+        <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
+      </div>
+    </div>  
+    <% end %>
   </div>
 </div>

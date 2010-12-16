@@ -34,6 +34,9 @@ class User < ActiveRecord::Base
   
   has_many :created_notes, :class_name => "Note", :foreign_key => "created_by_id"
   
+  has_many :created_events, :class_name => "Event", :foreign_key => "created_by_id"
+  has_many :updated_events, :class_name => "Event", :foreign_key => "updated_by_id"
+  
   def normalize_friendly_id(text)
     text
   end
@@ -48,6 +51,10 @@ class User < ActiveRecord::Base
   
   def own_note?(note)
     created_notes.include? note
+  end
+  
+  def own_event?(event)
+    created_events.include? event
   end
   
   def lyric_notes(lyric)

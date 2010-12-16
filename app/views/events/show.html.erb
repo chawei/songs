@@ -1,0 +1,29 @@
+<div class="nav_links">
+  <%- if current_user && (current_user.own_event?(@event) || current_user.admin?) -%>
+  <%= link_to 'Edit', edit_artist_event_path(@event.artist, @event) %> |
+  <% end %>
+  <%= link_to 'Back', artist_events_path(@event.artist) %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Title</div>
+    <div class="data"><%= @event.title %></div>
+  </div>
+  <div class="row">
+    <div class="label">Url</div>
+    <div class="data"><%= @event.url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Start date</div>
+    <div class="data"><%= @event.start_time %></div>
+  </div>
+  <div class="row">
+    <div class="label">End date</div>
+    <div class="data"><%= @event.end_time %></div>
+  </div>
+  <div class="row">
+    <div class="label">Detail</div>
+    <div class="data"><%= @event.detail %></div>
+  </div>
+</div>

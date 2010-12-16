@@ -1,60 +1,68 @@
 <div id="main">
-  <% if @is_supported %>
-  <div id="tabs">
-  	<ul>
-  		<li><a href="#tabs-lyric">lyrics</a></li>
-  		<li><a href="#tabs-stories">stories</a></li>
-  		<li><a href="#tabs-about">about</a></li>
-  		<li><a href="#tabs-videos">videos</a></li>
-  		<!--
-  		<li><a href="#tabs-3">thoughts</a></li>
-  		<li><a href="#tabs-3">comments</a></li>
-  		-->
-  	</ul>
+  <% if current_user %>
+    <% if @is_supported %>
+    <div id="tabs">
+    	<ul>
+    		<li><a href="#tabs-lyric">lyrics</a></li>
+    		<li><a href="#tabs-stories">stories</a></li>
+    		<li><a href="#tabs-about">about</a></li>
+    		<li><a href="#tabs-videos">videos</a></li>
+    		<!--
+    		<li><a href="#tabs-3">thoughts</a></li>
+    		<li><a href="#tabs-3">comments</a></li>
+    		-->
+    	</ul>
   	
-  	<div class="tab_container">
-      <% if @lyric %>
-    	<div id="tabs-lyric" class="tab_content">
-        <%= render :partial => 'lyric' %>
-    	</div>
-    	<div id="tabs-stories" class="tab_content">
-    	  <%= render :partial => 'background_stories/section' %>
-    	</div>
-    	<div id="tabs-about" class="tab_content">
-    	  <%= render :partial => 'about' %>
-    	</div>
-    	<div id="tabs-videos" class="tab_content">
-    	  <%= render :partial => 'videos' %>
-    	</div>
-    	<% else %>
-      <div id="tabs-lyric" class="tab_content">
-        Sorry, we can't find any matches.
-    	</div>
-    	<div id="tabs-stories" class="tab_content">
-    	</div>
-    	<div id="tabs-about" class="tab_content">
-    	</div>
-    	<div id="tabs-videos" class="tab_content">
-    	</div>
-      <% end %>
+    	<div class="tab_container">
+        <% if @lyric %>
+      	<div id="tabs-lyric" class="tab_content">
+          <%= render :partial => 'lyric' %>
+      	</div>
+      	<div id="tabs-stories" class="tab_content">
+      	  <%= render :partial => 'background_stories/section' %>
+      	</div>
+      	<div id="tabs-about" class="tab_content">
+      	  <%= render :partial => 'about' %>
+      	</div>
+      	<div id="tabs-videos" class="tab_content">
+      	  <%= render :partial => 'videos' %>
+      	</div>
+      	<% else %>
+        <div id="tabs-lyric" class="tab_content">
+          Sorry, we can't find any matches.
+      	</div>
+      	<div id="tabs-stories" class="tab_content">
+      	</div>
+      	<div id="tabs-about" class="tab_content">
+      	</div>
+      	<div id="tabs-videos" class="tab_content">
+      	</div>
+        <% end %>
+      </div>
+      <div class="clear"></div>
     </div>
-    <div class="clear"></div>
-  </div>
+  
+    <% else %>
+    <div class="tab_container">
+    	<div class="tab_content">
+        Sorry, our app is not supported in this site.<br>
+        Explore more music in <%= link_to 'our site', root_url %>!
+      </div>
+    </div>
+    <% end %>
   
   <% else %>
   <div class="tab_container">
   	<div class="tab_content">
-      Sorry, our app is not supported in this site.<br>
-      Explore more music in <%= link_to 'our site', root_url %>!
+      Please <%= link_to 'Sign Up', signup_path, :class => 'signup', :target => '_blank' %> or
+      <%= link_to 'Log in', login_path, :target => '_blank' %>
+      
+      <div style="margin: 20px 0 0;">
+        Click on the bookmarklet again after you log in.
+      </div>
     </div>
   </div>
   <% end %>
-  
-  <div id="login_section">
-  <% unless current_user %>
-    <%= render :partial => 'shared/signin', :locals => { :signin_headline => "Please sign in"} %>
-  <% end %>
-  </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">

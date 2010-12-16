@@ -1,0 +1,29 @@
+<% title "Events", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <% if @artist %>
+    <%= link_to 'add a new event', new_artist_event_path(@artist) %>
+    <% end %>
+  </div>
+  
+  <div class="index">
+    <% @events.each do |event| %>
+    <div class="event_item clear_fix">
+      <div class="detail">
+        <%= link_to event.title, artist_event_path(event.artist, event), :class => 'name' %>
+        <span class="type"><%= event.start_time.strftime('%m/%d/%y %R') %></span>
+      </div>
+      <%- if current_user && (current_user.own_event?(event) || current_user.admin?) -%>
+      <div class="actions">
+        <%= link_to 'Edit', edit_artist_event_path(event.artist, event) %>
+        <%= link_to 'Delete', artist_event_path(event.artist, event), :confirm => 'Are you sure?', :method => :delete %>
+      </div>
+      <%- end -%>
+    </div>
+    <% end %>
+  </div>
+</div>

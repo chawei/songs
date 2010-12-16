@@ -226,6 +226,7 @@ DEPENDENCIES
   httparty
   launchy
   mysql2
+  nokogiri
   omniauth
   paperclip
   pickle
