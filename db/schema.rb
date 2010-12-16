@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101216074149) do
+ActiveRecord::Schema.define(:version => 20101216085748) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(:version => 20101216074149) do
     t.integer  "artist_id"
     t.integer  "lyric_id"
     t.string   "participation_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "queue_links", :force => true do |t|
+    t.string   "artist_url"
+    t.string   "artist_name"
+    t.boolean  "imported"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

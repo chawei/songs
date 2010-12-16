@@ -30,7 +30,7 @@ class BoxImporter
     doc = Nokogiri::HTML(open(album_link))
     
     cover_url = doc.css('#info .left-column img.cover')[0]['src']
-    if artist_name.nil?
+    if artist_name.blank?
       artist_name = doc.css("#breadcrumbs li a")[1].content
     end
     album_name = doc.css('#info .right-column h3')[0].content

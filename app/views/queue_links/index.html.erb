@@ -1,0 +1,33 @@
+<% title "Queue_links", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <span class='title'>List of queue_links</span>
+    (<%= link_to 'add a new queue link', new_queue_link_path %>)
+  </div>
+
+  <table class="index">
+    <tr>
+      <th>Artist url</th>
+      <th>Artist name</th>
+      <th>Imported</th>
+      <th></th>
+    </tr>
+
+  <% @queue_links.each do |queue_link| %>
+    <tr>
+      <td><%= queue_link.artist_url %></td>
+      <td><%= queue_link.artist_name %></td>
+      <td><%= queue_link.imported %></td>
+      <td class="actions">
+        <%= link_to 'View', queue_link %> |
+        <%= link_to 'Edit', edit_queue_link_path(queue_link) %> |
+        <%= link_to 'Delete', queue_link, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

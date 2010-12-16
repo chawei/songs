@@ -1,6 +1,8 @@
 Songs::Application.routes.draw do
   
 
+  resources :queue_links
+
   resources :events, :except => [:new, :show]
   
   resources :artists do

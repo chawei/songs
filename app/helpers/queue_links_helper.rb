@@ -1,0 +1,2 @@
+module QueueLinksHelper
+end

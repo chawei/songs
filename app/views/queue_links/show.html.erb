@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<div class="nav_links">
+  <%= link_to 'Edit', edit_queue_link_path(@queue_link) %> |
+  <%= link_to 'Back', queue_links_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Artist url</div>
+    <div class="data"><%= @queue_link.artist_url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Artist name</div>
+    <div class="data"><%= @queue_link.artist_name %></div>
+  </div>
+  
+  <div class="row">
+    <div class="label">Imported</div>
+    <div class="data"><%= @queue_link.imported %></div>
+  </div>
+</div>
