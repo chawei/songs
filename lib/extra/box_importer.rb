@@ -13,6 +13,14 @@ class BoxImporter
     return lyric_content.content
   end
   
+  def self.import_artist_albums(artist_link)
+    doc = Nokogiri::HTML(open(artist_link))
+    
+    doc.css("#all-albums li .item a.url").each do |link|
+      import_album("#{BOX_HOST}#{link['href']}")
+    end
+  end
+  
   def self.import_album(album_link)
     doc = Nokogiri::HTML(open(album_link))
     
@@ -20,12 +28,20 @@ class BoxImporter
     artist_name = doc.css("#breadcrumbs li a")[1].content
     album_name = doc.css('#info .right-column h3')[0].content
     album_year = doc.css('#info .right-column dl dd').children[1].content
+    
+    puts "=== begin importing album: #{album_name} ====="
     doc.css('.song-name a').each do |link|
       title = link.children[0].content
       lyric_content = get_lyrics("#{BOX_HOST}#{link['href']}")
       if lyric = Lyric.find_by_performer_name_and_title(artist_name, title)
-        lyric.content = lyric_content if lyric.content.blank?
-        lyric.album_name = album_name if lyric.album_name.blank?
+        lyric.content    = lyric_content if lyric.content.blank?
+        if lyric.album_name.blank?
+          lyric.album_name = album_name
+        elsif !(lyric.album_name =~ /#{album_name}/)
+          lyric.album_name += " | #{album_name}"
+        end
+        lyric.year       = album_year if lyric.year.blank?
+        lyric.cover_url  = cover_url if lyric.cover_url.blank?
       else      
         lyric = Lyric.new(:performer_name => artist_name, :writer_name => artist_name, :cover_url => cover_url, 
                           :title => title, :content => lyric_content, :album_name => album_name, :year => album_year)
@@ -38,6 +54,8 @@ class BoxImporter
       end
       sleep(rand(5)+3)
     end
+    
+    puts "=== finish importing album: #{album_name} ====="
   end
 end
   
