@@ -13,19 +13,25 @@ class BoxImporter
     return lyric_content.content
   end
   
-  def self.import_artist_albums(artist_link)
+  def self.import_artist_albums(artist_link, artist_name = nil)
     doc = Nokogiri::HTML(open(artist_link))
     
     doc.css("#all-albums li .item a.url").each do |link|
-      import_album("#{BOX_HOST}#{link['href']}")
+      import_album("#{BOX_HOST}#{link['href']}", artist_name)
+      
+      sleep_time = rand(10)+10
+      puts "\n===== sleep #{sleep_time} secs ====="
+      sleep(sleep_time)
     end
   end
   
-  def self.import_album(album_link)
+  def self.import_album(album_link, artist_name = nil)
     doc = Nokogiri::HTML(open(album_link))
     
     cover_url = doc.css('#info .left-column img.cover')[0]['src']
-    artist_name = doc.css("#breadcrumbs li a")[1].content
+    if artist_name.nil?
+      artist_name = doc.css("#breadcrumbs li a")[1].content
+    end
     album_name = doc.css('#info .right-column h3')[0].content
     album_year = doc.css('#info .right-column dl dd').children[1].content
     
@@ -55,7 +61,7 @@ class BoxImporter
       sleep(rand(5)+3)
     end
     
-    puts "=== finish importing album: #{album_name} ====="
+    puts "\n=== finish importing album: #{album_name} ====="
   end
 end
   
