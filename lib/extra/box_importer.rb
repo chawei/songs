@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'open-uri'
 
 class BoxImporter
@@ -39,8 +40,9 @@ class BoxImporter
     doc.css('.song-name a').each do |link|
       title = link.children[0].content
       lyric_content = get_lyrics("#{BOX_HOST}#{link['href']}")
+      lyric_content = '' if lyric_content == "目前尚無相關歌詞"
       if lyric = Lyric.find_by_performer_name_and_title(artist_name, title)
-        lyric.content    = lyric_content if lyric.content.blank?
+        lyric.content = lyric_content if lyric.content.blank?
         if lyric.album_name.blank?
           lyric.album_name = album_name
         elsif !(lyric.album_name =~ /#{album_name}/)
