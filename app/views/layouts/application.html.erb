@@ -2,7 +2,8 @@
 <html>  
   <head>  
     <title>Songs <%= h("- #{yield(:title)}") unless yield(:title).blank? %></title>  
-  
+    
+    <link href='http://fonts.googleapis.com/css?family=Arvo:regular,bold' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag 'base', 'layout', "form", "application" %>  
     
     <%= csrf_meta_tag %>  
@@ -17,7 +18,7 @@
       </div>
       
       <div id="header_wrap">
-        <div id="header">
+        <div id="header" class="clear_fix">
           <div id="logo"><%= link_to "behind".html_safe, root_path %></div>
           <div id="login_box">
             <%- if current_user -%>
@@ -39,7 +40,7 @@
         </div> <!-- END header -->
       </div>
 
-      <div id="navigation_wrap" class="clear">
+      <div id="navigation_wrap" class="clear_fix">
         <div id="navigation">
           <%= render_navigation %>
         </div>

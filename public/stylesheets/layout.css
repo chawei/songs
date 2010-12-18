@@ -5,29 +5,28 @@
  
 #header_wrap {
   text-align: center;
-  margin: 10px 0 0;
-  
+  margin: 0;
+}
+#header_wrap * {
+  font-family: 'Arvo', arial, serif;
 }
   #header {
     text-align: left;
-    margin: 10px auto 30px;
+    margin: 0 auto 10px;
+    padding: 10px 0;
     position: relative;
     width: 800px;
-    height: 20px;
   }
     #logo {
-      position: absolute;
-      top: 0px;
-      left: 0px;
+      float: left;
       font-size: 30px;
     }
       #logo a {
       }
     #login_box {
-      position: absolute;
-      top: 0px;
-      right: 0px;
+      float: right;
       font-size: 14px;
+      padding: 15px 0 0;
     }
       #greeting {
         float: left;
@@ -45,7 +44,7 @@
 #navigation_wrap {
   text-align: center;
   margin: 10px 0 0;
-  background-color: #333;
+
 }
   #navigation {
     text-align: left;
@@ -54,6 +53,8 @@
     width: 800px;
     height: 30px;
     line-height: 30px;
+    background-color: #eee;
+    border-bottom: 3px solid #333;
   }
     #navigation ul {
       list-style: none;
@@ -71,20 +72,19 @@
         #navigation li a {
           padding: 0px 10px;
           margin: 0 0px 0 0;
-          font-size: 18px;
+          font-size: 14px;
           display: block;
-          font-family: Georgia, serif;
+          font-family: 'Arvo', arial, serif;
           text-decoration: none;
-          background-color: #f2f2f2;
-          color: #29ABE2;
+          color: #333;
         }
           #navigation li a.selected {
             color: #fff;
-            background-color: #29ABE2;
+            background-color: #333;
           }
         #navigation li a:hover {
           color: #fff;
-          background-color: #29ABE2;
+          background-color: #333;
         }
         #navigation li:hover ul{
           display: block;
