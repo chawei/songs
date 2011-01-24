@@ -38,7 +38,10 @@ class NotesController < ApplicationController
   # GET /notes/1/edit
   def edit
     @note = Note.find(params[:id])
-    render :action => :new
+    respond_to do |format|
+      format.html { render :action => :new }
+      format.js   { render :layout => false }
+    end
   end
 
   # POST /notes
@@ -63,10 +66,11 @@ class NotesController < ApplicationController
   # PUT /notes/1.xml
   def update
     @note = Note.find(params[:id])
-
+    
     respond_to do |format|
       if @note.update_attributes(params[:note])
         format.html { redirect_to(@note.lyric, :notice => 'Note was successfully updated.') }
+        format.js   { render :layout => false }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -13,12 +13,12 @@
         <div class="detail">
           <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
           <% if lyric.performer %>
-          <span class="performer">by <%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
+          <span class="performer"><%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
           <% end %>
         </div>
         <%- if current_user and current_user.own_lyric?(lyric) -%>
         <div class="actions">
-          <%= link_to 'Edit', edit_lyric_path(lyric) %> |
+          <%= link_to 'Edit', edit_lyric_path(lyric) %>
           <%= link_to 'Delete', lyric, :confirm => 'Are you sure?', :method => :delete %>
         </div>
         <%- end -%>
@@ -34,12 +34,12 @@
         <div class="detail">
           <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
           <% if lyric.performer %>
-          <span class="performer">by <%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
+          <span class="performer"><%= link_to lyric.performer.name, artist_path(lyric.performer) %></span>
           <% end %>
         </div>
         <%- if current_user and current_user.own_lyric?(lyric) -%>
         <div class="actions">
-          <%= link_to 'Edit', edit_lyric_path(lyric) %> |
+          <%= link_to 'Edit', edit_lyric_path(lyric) %>
           <%= link_to 'Delete', lyric, :confirm => 'Are you sure?', :method => :delete %>
         </div>
         <%- end -%>

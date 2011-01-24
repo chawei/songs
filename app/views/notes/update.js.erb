@@ -1,0 +1,2 @@
+$('#note-item_<%= @note.id %> form.section_form').slideUp();
+$("#note-item_<%= @note.id %> .content").html("<%= escape_javascript(text_format(auto_link(@note.content, :html => { :target => '_blank' }))) %>").show();

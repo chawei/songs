@@ -1,4 +1,4 @@
-<%- if @lyric and @lyric.videos -%>
+<%- if @lyric && !@lyric.videos.blank? -%>
   <div class="section">
     <div id="current_video_player" class="video">
       <%= embedded_player(@lyric.videos.first.uid) %>

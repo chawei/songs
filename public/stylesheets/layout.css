@@ -15,7 +15,7 @@
     margin: 0 auto 10px;
     padding: 10px 0;
     position: relative;
-    width: 800px;
+    width: 900px;
   }
     #logo {
       float: left;
@@ -50,7 +50,7 @@
     text-align: left;
     margin: 0 auto 20px;
     padding: 0 0 0px 0;
-    width: 800px;
+    width: 900px;
     height: 30px;
     line-height: 30px;
     background-color: #eee;
@@ -117,12 +117,13 @@
   text-align: center;
   margin: 10px 0 0;
   padding: 0 0 50px 0;
+  min-height: 300px;
   /*overflow: hidden;*/
 }
   #main_wrap div#main {
     text-align: left;
     margin: 0 auto;
-    width: 800px;
+    width: 900px;
   }
     #main_wrap #main #sidebar {
       text-align: left;
@@ -161,7 +162,7 @@
     text-align: left;
     margin: 10px auto 50px;
     position: relative;
-    width: 800px;
+    width: 900px;
   }
   
   #bookmarklet_container {

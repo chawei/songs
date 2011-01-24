@@ -5,6 +5,7 @@ $(function() {
   
   //$('#lyric_show_container form').hide();
   
+  /*
   $('#lyric_show_container .section .add_btn').click(function() {
     var form = $(this).parents('.section').find('#add_new_form_container form');
     if (form.hasClass('expanded')) {
@@ -14,6 +15,7 @@ $(function() {
     }
     return false;
   });
+  */
   
   $('.tab_content .add_btn').click(function() {
     var form = $(this).parents('.tab_content').find('#add_new_form_container form');
@@ -25,7 +27,7 @@ $(function() {
     return false;
   });
   
-  $('#lyric_show_container .section .cancel_btn, .tab_content .cancel_btn').live('click', function() {
+  $('.tab_content .cancel_btn').live('click', function() {
     $(this).parents('form').removeClass('expanded').slideUp();
     var item = $(this).parents('.item');
     if(item.length > 0) {

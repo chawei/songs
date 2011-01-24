@@ -1,4 +1,6 @@
 class Lyric < ActiveRecord::Base
+  require 'youtube_g'
+   
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name => "User", :foreign_key => 'updated_by_id'
   
@@ -70,6 +72,28 @@ class Lyric < ActiveRecord::Base
     video = Video.new(:url => new_video_url, :created_by_id => viewer_id)
     if video.save
       self.videos << video
+    end
+  end
+  
+  def get_youtube_video
+    begin
+      client = YouTubeG::Client.new
+      query = "#{self.performer_name} #{self.title}"
+      result = client.videos_by(:query => query)
+      video = result.videos[0]
+      if video.embeddable?
+        if video_from_db = Video.find_by_uid_and_source(video.unique_id, 'youtube')
+          self.videos << video_from_db
+        else
+          self.video_url = "http://www.youtube.com/watch?v=#{video.unique_id}"
+        end
+      end
+    rescue => e
+      message =  "[YouTubeG] Error when getting video with query##{query}"
+      if defined?(HoptoadNotifier) == "constant"
+        HoptoadNotifier.notify(:error_class => e.class.name, :error_message => "#{e.message} | #{message}")
+      end
+      puts message
     end
   end
 end

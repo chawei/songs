@@ -18,6 +18,9 @@ class LyricsController < ApplicationController
     @lyric = Lyric.find(params[:id])
     @background_story = @lyric.background_stories.build
     @note = @lyric.notes.build
+    @is_supported = true
+    
+    @lyric.get_youtube_video if @lyric.videos.blank?
 
     respond_to do |format|
       format.html # show.html.erb

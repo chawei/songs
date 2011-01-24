@@ -53,6 +53,7 @@ form.section_form a.cancel_btn {
 .right_col {
   float: right;
   display: inline-block;
+  width: 400px;
 }
  .right_col .section {
    margin: 0 0 20px 0;
@@ -111,29 +112,48 @@ form.section_form a.cancel_btn {
 .index .song_item {
   width: 500px;
   margin: 0 0 10px 0;
-  padding: 0 0 5px 0;
+  padding: 0 0 0px 0;
   border-bottom: 1px solid #ddd;
+  position: relative;
+  height: 25px;
+  line-height: 25px;
 }
   .song_item .detail {
     float: left;
-    display: inline;
+    width: 100%;
   }
     .song_item .detail a.title {
       font-size: 15px;
       margin: 0 5px 0 0;
     }
     .song_item .detail .performer {
+      float: right;
       font-size: 13px;
       color: #666;
+      display: block;
     }
     
   .song_item .actions {
-    float: right;
-    display: inline;
+    position: absolute;
+    right: -120px;
+    /*width: 100px;*/
+    text-align: center;
+    padding: 0px;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    /*display: none;*/
   }
+  .song_item:hover .actions {
+    /*display: block;*/
+  }
+    .song_item .actions a {
+      padding: 3px;
+      background-color: #eee;
+    }
 .lyric_container {
   position: relative;
-  width: 450px;
+  width: 400px;
   padding-right: 20px;
 }
 
@@ -293,4 +313,23 @@ a.video_item:hover, a.selected_video_item {
   .event_item .actions {
     float: right;
     display: inline;
+  }
+  
+/* Artist
+--------------- */
+#artist_page .name {
+  font-size: 20px;
+}
+
+/* Note
+--------------- */
+.note {
+  float: left;
+  width: 230px;
+  border: 1px solid #eee;
+  padding: 10px;
+  margin: 3px;
+}
+  .note .content {
+    font-size: 16px;
   }

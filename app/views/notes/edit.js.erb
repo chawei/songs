@@ -1,0 +1,6 @@
+
+if ($('#note-item_<%= @note.id %> form.section_form').length == 0) {  
+  $('#note-item_<%= @note.id %>').prepend("<%= escape_javascript(render(:partial => 'notes/form', :locals => { :note => @note })) %>");
+}
+$('#note-item_<%= @note.id %> form').slideDown();
+$('#note-item_<%= @note.id %> .content').hide();

@@ -1,0 +1,52 @@
+<div id="tabs">
+	<ul>
+	  <li><a href="#tabs-lyric">lyrics</a></li>
+	  <li><a href="#tabs-stories">stories</a></li>
+		<li><a href="#tabs-about">about</a></li>
+		<!--
+		<li><a href="#tabs-videos">videos</a></li>
+		<li><a href="#tabs-3">thoughts</a></li>
+		<li><a href="#tabs-3">comments</a></li>
+		-->
+	</ul>
+
+	<div class="tab_container">
+    <% if @lyric %>
+    <div id="tabs-stories" class="tab_content">
+  	  <%= render :partial => 'background_stories/section' %>
+  	</div>
+  	<div id="tabs-lyric" class="tab_content">
+      <%= render :partial => 'sidebar/lyric' %>
+  	</div>
+  	<div id="tabs-about" class="tab_content">
+  	  <%= render :partial => 'sidebar/about' %>
+  	</div>
+  	<!--
+  	<div id="tabs-videos" class="tab_content">
+  	  <%= render :partial => 'sidebar/videos' %>
+  	</div>
+  	-->
+  	<% else %>
+    <div id="tabs-lyric" class="tab_content">
+      Sorry, we can't find any matches.
+  	</div>
+  	<div id="tabs-stories" class="tab_content">
+  	</div>
+  	<div id="tabs-about" class="tab_content">
+  	</div>
+  	<!--
+  	<div id="tabs-videos" class="tab_content">
+  	</div>
+  	-->
+    <% end %>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<% content_for :foot do %>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+  	$("#tabs").tabs();
+  });
+</script>
+<% end %>
