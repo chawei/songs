@@ -19,9 +19,11 @@
   }
     #logo {
       float: left;
-      font-size: 30px;
+      font-size: 24px;
     }
       #logo a {
+        color: #333;
+        font-weight: bold;
       }
     #login_box {
       float: right;

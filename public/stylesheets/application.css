@@ -321,6 +321,30 @@ a.video_item:hover, a.selected_video_item {
   font-size: 20px;
 }
 
+#artist_info {
+  float: right;
+  width: 350px;
+}
+  #artist_info .basic_info {
+    margin: 0 0 10px 0;
+  }
+  #artist_info .basic_info .name {
+    font-weight: bold;
+  }
+  #artist_info .basic_info .position {
+    color: #666;
+  }
+  #artist_info .basic_info .image {
+    float: right;
+  }
+    #artist_info .basic_info .image img {
+      width: 100px;
+    }
+
+#artist_page .index {
+  float: left;
+}
+
 /* Note
 --------------- */
 .note {

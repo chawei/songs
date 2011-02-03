@@ -14,7 +14,6 @@
     <div class="artist_item clear_fix">
       <div class="detail">
         <%= link_to artist.name, artist_path(artist), :class => 'name' %>
-        <span class="type"><%= artist.artist_type %></span>
       </div>
       <%- if current_user -%>
       <div class="actions">
@@ -25,4 +24,6 @@
     </div>
     <%- end -%>
   </div>
+  
+  <%= will_paginate @artists %>
 </div>
