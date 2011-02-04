@@ -41,21 +41,21 @@ class BoxImporter
       title = link.children[0].content
       lyric_content = get_lyrics("#{BOX_HOST}#{link['href']}")
       lyric_content = '' if lyric_content == "目前尚無相關歌詞"
-      if lyric = Lyric.find_by_performer_name_and_title(artist_name, title)
-        lyric.content = lyric_content if lyric.content.blank?
-        if lyric.album_name.blank?
-          lyric.album_name = album_name
-        elsif !(lyric.album_name =~ /#{album_name}/)
-          lyric.album_name += " | #{album_name}"
+      if song = Song.find_by_performer_name_and_title(artist_name, title)
+        song.content = lyric_content if song.content.blank?
+        if song.album_name.blank?
+          song.album_name = album_name
+        elsif !(song.album_name =~ /#{album_name}/)
+          song.album_name += " | #{album_name}"
         end
-        lyric.year       = album_year if lyric.year.blank?
-        lyric.cover_url  = cover_url if lyric.cover_url.blank?
+        song.year       = album_year if song.year.blank?
+        song.cover_url  = cover_url if song.cover_url.blank?
       else      
-        lyric = Lyric.new(:performer_name => artist_name, :writer_name => artist_name, :cover_url => cover_url, 
+        song = Song.new(:performer_name => artist_name, :writer_name => artist_name, :cover_url => cover_url, 
                           :title => title, :content => lyric_content, :album_name => album_name, :year => album_year)
       end
       
-      if lyric.save
+      if song.save
         print('.')
       else
         puts "Error] link: #{link}"

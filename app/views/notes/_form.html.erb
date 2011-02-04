@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :lyric_id %>
+  <%= f.hidden_field :song_id %>
   <div class="field">
     <div class="input nice_edit_outer"><%= f.text_area :content, :id => 'note_textarea' %></div>
   </div>
   <div class="actions">
     <div class="submit">
       <%= f.submit %> 
-      <%= link_to 'cancel', lyric_path(@lyric), :class => 'cancel_btn' %>
+      <%= link_to 'cancel', song_path(@song), :class => 'cancel_btn' %>
     </div>
   </div>
 <% end %>

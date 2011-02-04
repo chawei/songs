@@ -55,12 +55,6 @@ form.section_form a.cancel_btn {
   display: inline-block;
   width: 400px;
 }
- .right_col .section {
-   margin: 0 0 20px 0;
-   padding: 10px;
-   border: 1px solid #ccc;
-   width: 300px;
- }
   .section h3 {
     height: 20px;
     line-height: 20px;
@@ -107,7 +101,7 @@ form.section_form a.cancel_btn {
   margin: 0 0 20px 0;
 }
 
-/* Lyric
+/* Song
 --------------- */
 .index .song_item {
   width: 500px;
@@ -151,25 +145,34 @@ form.section_form a.cancel_btn {
       padding: 3px;
       background-color: #eee;
     }
-.lyric_container {
+  .song_item .vote_block_container {
+    display: inline-block;
+    margin: 0 0 0 5px;
+  }
+.song_container {
   position: relative;
   width: 400px;
   padding-right: 20px;
 }
 
-.lyric_container .lyric p {
+.song_container .lyric p {
   margin: 0 0 10px 0;
   line-height: 1.3em;
 }
 
-.lyric_container h2.title {
+.song_container h2.title {
   margin: 0 0 10px 0;
 }
 
-.lyric_container .edit_btn {
+.song_container .edit_btn {
   font-weight: normal;
   font-size: 13px;
   margin: 0 0 0 10px;
+}
+
+.song_container .vote_block_container {
+  margin: 0 0 5px 0;
+  text-align: right;
 }
 
 .song_detail {

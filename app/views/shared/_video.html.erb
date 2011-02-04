@@ -1,5 +1,5 @@
-<%- if @lyric and @lyric.videos -%>
-  <% @lyric.videos.each do |video| %>
+<%- if @song and @song.videos -%>
+  <% @song.videos.each do |video| %>
     <% if video.source == 'youtube' %>
     <div class="section">
       <object style="width: 400px; height: 300px" id="ytplayer">

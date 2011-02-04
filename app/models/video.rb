@@ -1,18 +1,18 @@
 class Video < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
-  belongs_to :lyric
+  belongs_to :song
   
   validates_uniqueness_of :uid, :scope => :source
   before_validation :parse_url
   
-  def self.get_lyric(url)
+  def self.get_song(url)
     uri = URI(url)
     if uri.host =~ /youtube/
       uid = url.match(/[\?|\&]v=([\w_-]*)/)[1]
       source = 'youtube'
     end
     if video = self.find_by_uid_and_source(uid, source)
-      return video.lyric
+      return video.song
     else
       return nil
     end

@@ -57,6 +57,7 @@ $(function() {
     $(this).addClass('selected_video_item');
   });
 
+  $('[rel=tipsy]').tipsy({gravity: 'n'});
 });
 
 $.fn.clearForm = function() {

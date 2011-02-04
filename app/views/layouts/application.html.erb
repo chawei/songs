@@ -4,7 +4,7 @@
     <title>Songs <%= h("- #{yield(:title)}") unless yield(:title).blank? %></title>  
     
     <link href='http://fonts.googleapis.com/css?family=Arvo:regular,bold' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag 'base', 'layout', "form", "application" %>  
+    <%= stylesheet_link_tag 'base', 'layout', "form", "application", "tipsy" %>  
     <link rel="stylesheet" href="/sidebar/basic_sidebar.css" type="text/css" charset="utf-8" />
     
     <%= csrf_meta_tag %>  
@@ -61,7 +61,7 @@
         <div id="footer">
           <div id="bookmarklet_container">
             <span class="explanation">start using our app by dragging this button</span>
-            <a id="bookmarklet" href="javascript:var e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://<%= HOST %>/sidebar/load.js');document.body.appendChild(e);void(0);">show lyric</a>
+            <a id="bookmarklet" href="javascript:var e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://<%= HOST %>/sidebar/load.js');document.body.appendChild(e);void(0);">show song</a>
             <span class="explanation">to your toolbar</span>
           </div>
         </div>
@@ -70,7 +70,7 @@
     
     <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
-    <%= javascript_include_tag 'rails', 'application' %>
+    <%= javascript_include_tag 'jquery.tipsy', 'rails', 'application' %>
     <%= yield(:foot) %>
     
     <script src="http://static.getclicky.com/js" type="text/javascript"></script>

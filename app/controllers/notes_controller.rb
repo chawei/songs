@@ -1,6 +1,6 @@
 class NotesController < ApplicationController
   before_filter :require_user, :except => [:index, :show]
-  before_filter :find_lyric, :only => [:new, :show, :edit]
+  before_filter :find_song, :only => [:new, :show, :edit]
   
   # GET /notes
   # GET /notes.xml
@@ -27,7 +27,7 @@ class NotesController < ApplicationController
   # GET /notes/new
   # GET /notes/new.xml
   def new
-    @note = @lyric.notes.build
+    @note = @song.notes.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -52,7 +52,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to(@note.lyric, :notice => 'Note was successfully created.') }
+        format.html { redirect_to(@note.song, :notice => 'Note was successfully created.') }
         format.js   { render :layout => false }
         format.xml  { render :xml => @note, :status => :created, :location => @note }
       else
@@ -69,7 +69,7 @@ class NotesController < ApplicationController
     
     respond_to do |format|
       if @note.update_attributes(params[:note])
-        format.html { redirect_to(@note.lyric, :notice => 'Note was successfully updated.') }
+        format.html { redirect_to(@note.song, :notice => 'Note was successfully updated.') }
         format.js   { render :layout => false }
         format.xml  { head :ok }
       else
@@ -84,18 +84,18 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note_id = @note.id
-    @lyric = @note.lyric
+    @song = @note.song
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to(@lyric) }
+      format.html { redirect_to(@song) }
       format.js   { render :layout => false }
       format.xml  { head :ok }
     end
   end
   
   private
-    def find_lyric
-      @lyric = Lyric.find(params[:lyric_id])
+    def find_song
+      @song = Song.find(params[:song_id])
     end
 end

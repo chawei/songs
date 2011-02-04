@@ -1,6 +1,6 @@
 class BackgroundStoriesController < ApplicationController
   before_filter :require_user, :except => [:index, :show]
-  before_filter :find_lyric, :only => [:new, :show, :edit]
+  before_filter :find_song, :only => [:new, :show, :edit]
   
   # GET /background_stories
   # GET /background_stories.xml
@@ -27,7 +27,7 @@ class BackgroundStoriesController < ApplicationController
   # GET /background_stories/new
   # GET /background_stories/new.xml
   def new
-    @background_story = @lyric.background_stories.build
+    @background_story = @song.background_stories.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -53,7 +53,7 @@ class BackgroundStoriesController < ApplicationController
 
     respond_to do |format|
       if @background_story.save
-        format.html { redirect_to(@background_story.lyric, :notice => 'Background story was successfully created.') }
+        format.html { redirect_to(@background_story.song, :notice => 'Background story was successfully created.') }
         format.js   { render :layout => false }
         format.xml  { render :xml => @background_story, :status => :created, :location => @background_story }
       else
@@ -71,7 +71,7 @@ class BackgroundStoriesController < ApplicationController
 
     respond_to do |format|
       if @background_story.update_attributes(params[:background_story])
-        format.html { redirect_to(@background_story.lyric, :notice => 'Background story was successfully updated.') }
+        format.html { redirect_to(@background_story.song, :notice => 'Background story was successfully updated.') }
         format.js   { render :layout => false }
         format.xml  { head :ok }
       else
@@ -86,18 +86,18 @@ class BackgroundStoriesController < ApplicationController
   def destroy
     @background_story = BackgroundStory.find(params[:id])
     @background_story_id = @background_story.id
-    @lyric = @background_story.lyric
+    @song = @background_story.song
     @background_story.destroy
 
     respond_to do |format|
-      format.html { redirect_to(@lyric) }
+      format.html { redirect_to(@song) }
       format.js   { render :layout => false }
       format.xml  { head :ok }
     end
   end
   
   private
-    def find_lyric
-      @lyric = Lyric.find(params[:lyric_id])
+    def find_song
+      @song = Song.find(params[:song_id])
     end
 end

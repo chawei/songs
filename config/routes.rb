@@ -14,7 +14,11 @@ Songs::Application.routes.draw do
 
   resources :background_stories
 
-  resources :lyrics
+  resources :songs do
+    collection do
+      get :next_song
+    end
+  end
 
   root :to => "home#index"
   
@@ -36,7 +40,7 @@ Songs::Application.routes.draw do
 
   resource :user_session
   resources :users, :constraints => { :id => /.*/ }
-  resources :lyrics do
+  resources :songs do
     resources :background_stories
     resources :notes
   end

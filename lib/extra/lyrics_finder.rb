@@ -6,10 +6,10 @@ class LyricsFinder
 
   DEVELOPER_KEY = "6bb71335d98954463-temporary.API.access"
   
-  def self.get_lyric(options)
+  def self.get_song(options)
     result, raw_result, song = nil, nil, nil
-    unless song = Lyric.find_by_performer_name_and_title(options[:artist], options[:title])
-      song = Lyric.create(:performer_name => options[:artist], :writer_name => options[:artist], :title => options[:title], 
+    unless song = Song.find_by_performer_name_and_title(options[:artist], options[:title])
+      song = Song.create(:performer_name => options[:artist], :writer_name => options[:artist], :title => options[:title], 
                           :video_url => options[:video_url], :created_by_id => options[:current_user_id])
     end
     song.update_videos(options[:video_url])
@@ -27,7 +27,7 @@ class LyricsFinder
         lyric     = result[:lyric]
         cover_url = result[:cover_url]
         
-        song = Lyric.find_by_performer_and_title(artist, title)
+        song = Song.find_by_performer_and_title(artist, title)
         if song.nil?
           song.content = lyric
           song.cover_url = cover_url

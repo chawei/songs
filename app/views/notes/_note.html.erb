@@ -12,8 +12,8 @@
     </div>
     <%- if current_user and current_user.own_note?(note) -%>
     <div class="actions">
-      <span class="action"><%= link_to 'edit', edit_lyric_note_path(note.lyric, note), :remote => true %></span> |
-      <span class="action"><%= link_to 'delete', lyric_note_path(note.lyric, note), 
+      <span class="action"><%= link_to 'edit', edit_song_note_path(note.song, note), :remote => true %></span> |
+      <span class="action"><%= link_to 'delete', song_note_path(note.song, note), 
                                                  :confirm => "Are you sure?",
                                                  :method => :delete,
                                                  :class => 'delete_btn',

@@ -1,52 +1,52 @@
 <div class="nav_links">
-  <%- if current_user and current_user.own_lyric?(@lyric) -%>
-  <%= link_to 'Edit', edit_lyric_path(@lyric) %> |
+  <%- if current_user and current_user.own_song?(@song) -%>
+  <%= link_to 'Edit', edit_song_path(@song) %> |
   <%- end -%>
-  <%= link_to 'Back to List', lyrics_path %>
+  <%= link_to 'Back to List', songs_path %>
 </div>
 
 <div class="left_col">
-  <div class="lyric_container">
+  <div class="song_container">
     <div class="header">
-      <h2 class="title"><%= @lyric.title %></h2>
+      <h2 class="title"><%= @song.title %></h2>
       <div class="song_detail">
-        <% if @lyric.performer %>
+        <% if @song.performer %>
         <div class="row">
           <div class="label">performed by</div>
-          <div class="data"><%= link_to @lyric.performer.name, artist_path(@lyric.performer) %></div>
+          <div class="data"><%= link_to @song.performer.name, artist_path(@song.performer) %></div>
         </div>
         <% end %>
-        <% if @lyric.writer %>
+        <% if @song.writer %>
         <div class="row">
           <div class="label">written by</div>
-          <div class="data"><%= link_to @lyric.writer.name, artist_path(@lyric.writer) %></div>
+          <div class="data"><%= link_to @song.writer.name, artist_path(@song.writer) %></div>
         </div>
         <% end %>
         <div class="row">
           <div class="label">album</div>
-          <div class="data"><%= @lyric.album_name %></div>
+          <div class="data"><%= @song.album_name %></div>
         </div>
         <div class="row">
           <div class="label">year</div>
-          <div class="data"><%= @lyric.year %></div>
+          <div class="data"><%= @song.year %></div>
         </div>
-        <%- if @lyric.created_by -%>
+        <%- if @song.created_by -%>
         <div class="row">
           <div class="label">created by</div>
-          <div class="data"><%= link_to @lyric.created_by.username, user_path(@lyric.created_by) %></div>
+          <div class="data"><%= link_to @song.created_by.username, user_path(@song.created_by) %></div>
         </div>
         <%- end -%>
-        <%- if @lyric.updated_by -%>
+        <%- if @song.updated_by -%>
         <div class="row">
           <div class="label">updated by</div>
-          <div class="data"><%= link_to @lyric.updated_by.username, user_path(@lyric.updated_by) %></div>
+          <div class="data"><%= link_to @song.updated_by.username, user_path(@song.updated_by) %></div>
         </div>
         <%- end -%>
       </div>
     </div>
 
-    <div id="lyric">
-      <%= simple_format @lyric.content %>
+    <div id="song">
+      <%= simple_format @song.content %>
     </div>
   </div>
 </div>

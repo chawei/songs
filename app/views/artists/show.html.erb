@@ -16,10 +16,10 @@
   </div>
   
   <div class="index">
-    <% @artist.performed_lyrics.each do |lyric| %>
+    <% @artist.performed_songs.each do |song| %>
     <div class="song_item clear_fix">
       <div class="detail">
-        <%= link_to lyric.title, lyric_path(lyric), :class => 'title' %>
+        <%= link_to song.title, song_path(song), :class => 'title' %>
       </div>
     </div>  
     <% end %>

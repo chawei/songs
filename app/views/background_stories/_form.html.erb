@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :lyric_id %>
+  <%= f.hidden_field :song_id %>
   <div class="field">
     <div class="label"><%= f.label :title %></div>
     <div class="input"><%= f.text_field :title, :class => 'text' %></div>
@@ -23,7 +23,7 @@
   <div class="actions">
     <div class="submit">
       <%= f.submit %>
-      <%= link_to 'cancel', lyric_path(@lyric), :class => 'cancel_btn' %>
+      <%= link_to 'cancel', song_path(@song), :class => 'cancel_btn' %>
     </div>
   </div>
 <% end %>

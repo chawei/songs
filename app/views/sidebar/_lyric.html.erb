@@ -1,27 +1,27 @@
 <div class="song_info">
-  <div class="title"><%= @lyric.title %></div>
-  <div class="performer">performer/ <%= @lyric.performer_name %></div>
-  <div class="writer">writer/ <%= @lyric.writer_name %></div>
+  <div class="title"><%= @song.title %></div>
+  <div class="performer">performer/ <%= @song.performer_name %></div>
+  <div class="writer">writer/ <%= @song.writer_name %></div>
 </div>
 
 <div id="lyric">
-  <% if @lyric.content.blank? %>
+  <% if @song.content.blank? %>
     <p>Sorry, there is no matched lyrics.<br>Wanna be the first to submit the lyrics?</p>
-    <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@lyric.title)}+#{URI.escape(@lyric.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %> and 
+    <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@song.title)}+#{URI.escape(@song.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %> and 
   <% else %>
-    <%= simple_format @lyric.content  %>
+    <%= simple_format @song.content  %>
   <% end %>
 </div>
 
-<% if current_user && (@lyric.content.blank? || current_user.own_lyric?(@lyric)) %>
+<% if current_user && (@song.content.blank? || current_user.own_song?(@song)) %>
   <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' %>
-  <%= form_for(@lyric, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
-    <% if @lyric.errors.any? %>
+  <%= form_for(@song, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
+    <% if @song.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@lyric.errors.count, "error") %> prohibited this lyrics from being saved:</h2>
+        <h2><%= pluralize(@song.errors.count, "error") %> prohibited this lyrics from being saved:</h2>
 
         <ul>
-        <% @lyric.errors.full_messages.each do |msg| %>
+        <% @song.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>

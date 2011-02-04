@@ -1,0 +1,10 @@
+<% title "Edit Song" %>
+
+<div class="nav_links">
+  <%= link_to 'View details', @song %> |
+  <%= link_to 'Back to List', songs_path %>
+</div>
+
+<div class="edit_container">
+  <%= render 'form' %>
+</div>

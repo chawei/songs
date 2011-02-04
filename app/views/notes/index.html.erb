@@ -3,7 +3,7 @@
   <div class="content"><%= simple_format note.content %></div>
   <div class="author">
     <%= link_to note.created_by.username, user_path(note.created_by) %>
-    <%= link_to note.lyric.title, lyric_path(note.lyric) %>
+    <%= link_to note.song.title, song_path(note.song) %>
   </div>
 </div>
 <% end %>

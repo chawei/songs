@@ -1,5 +1,7 @@
-class Lyric < ActiveRecord::Base
+class Song < ActiveRecord::Base
   require 'youtube_g'
+  
+  acts_as_voteable
    
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
   belongs_to :updated_by, :class_name => "User", :foreign_key => 'updated_by_id'
@@ -17,6 +19,8 @@ class Lyric < ActiveRecord::Base
   
   scope :recent_updated, lambda { { :conditions => ["created_at > ?", 2.weeks.ago] } }
   scope :limited, lambda { |num| { :limit => num } }
+  scope :previous, lambda { |i| { :conditions => ["#{self.table_name}.id < ?", i.id], :order => "#{self.table_name}.id DESC"} }
+  scope :next, lambda { |i| {:conditions => ["#{self.table_name}.id > ?", i.id], :order => "#{self.table_name}.id ASC"} }
   
   after_save :set_performer, :set_writer
   
@@ -24,8 +28,8 @@ class Lyric < ActiveRecord::Base
     unless artist = Artist.find_by_name(performer_name)
       artist = Artist.create(:name => performer_name, :full_name => performer_name)
     end
-    unless Participation.find_by_artist_id_and_lyric_id_and_participation_type(artist.id, self.id, 'performer')
-      Participation.create(:artist => artist, :lyric => self, :participation_type => 'performer')
+    unless Participation.find_by_artist_id_and_song_id_and_participation_type(artist.id, self.id, 'performer')
+      Participation.create(:artist => artist, :song => self, :participation_type => 'performer')
     end
   end
   
@@ -42,8 +46,8 @@ class Lyric < ActiveRecord::Base
     unless artist = Artist.find_by_name(writer_name)
       artist = Artist.create(:name => writer_name, :full_name => writer_name, :primary_position => 'writer')
     end
-    unless Participation.find_by_artist_id_and_lyric_id_and_participation_type(artist.id, self.id, 'writer')
-      Participation.create(:artist => artist, :lyric => self, :participation_type => 'writer')
+    unless Participation.find_by_artist_id_and_song_id_and_participation_type(artist.id, self.id, 'writer')
+      Participation.create(:artist => artist, :song => self, :participation_type => 'writer')
     end
   end
   
@@ -80,14 +84,16 @@ class Lyric < ActiveRecord::Base
       client = YouTubeG::Client.new
       query = "#{self.performer_name} #{self.title}"
       result = client.videos_by(:query => query)
-      video = result.videos[0]
-      if video.embeddable?
-        if video_from_db = Video.find_by_uid_and_source(video.unique_id, 'youtube')
-          self.videos << video_from_db
-        else
-          self.video_url = "http://www.youtube.com/watch?v=#{video.unique_id}"
+      for video in result.videos
+        if video.embeddable?
+          if video_from_db = Video.find_by_uid_and_source(video.unique_id, 'youtube')
+            self.videos << video_from_db
+          else
+            self.video_url = "http://www.youtube.com/watch?v=#{video.unique_id}"
+          end
+          break
         end
-      end
+      end  
     rescue => e
       message =  "[YouTubeG] Error when getting video with query##{query}"
       if defined?(HoptoadNotifier) == "constant"
@@ -95,5 +101,11 @@ class Lyric < ActiveRecord::Base
       end
       puts message
     end
+  end
+  
+  def next(limit = 1)
+    items = self.class.next(self).find(:all, :limit => (limit || 1))
+    return nil if items.empty?
+    items.size == 1 ? items.first : items
   end
 end

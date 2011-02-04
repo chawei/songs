@@ -1,0 +1,104 @@
+<div id="song_show_container">
+  <div class="nav_links clear_fix">
+    <div class="left">
+      <%= link_to 'Back', :back, :class => 'rounded_btn' %>
+    </div>
+    
+    <div class="right">
+      <%= link_to "next song", song_path(@song.next), :class => 'rounded_btn', :rel => 'tipsy', :title => @song.next.title %>
+    </div>
+  </div>
+
+  <div class="left_col">
+    <div class="song_container">
+      <div class="header clear_fix">
+        <div class="left">
+          <h2 class="title"><%= @song.title %></h2>
+          <div class="song_detail">
+            <% if @song.performer %>
+            <div class="row">
+              <div class="label">performed by</div>
+              <div class="data"><%= link_to @song.performer.name, artist_path(@song.performer) %></div>
+            </div>
+            <% end %>
+            <% if @song.writer %>
+            <div class="row">
+              <div class="label">written by</div>
+              <div class="data"><%= link_to @song.writer.name, artist_path(@song.writer) %></div>
+            </div>
+            <% end %>
+            <div class="row">
+              <div class="label">album</div>
+              <div class="data"><%= @song.album_name %></div>
+            </div>
+            <div class="row">
+              <div class="label">year</div>
+              <div class="data"><%= @song.year %></div>
+            </div>
+            <%- if @song.created_by -%>
+            <div class="row">
+              <div class="label">created by</div>
+              <div class="data"><%= link_to @song.created_by.username, user_path(@song.created_by) %></div>
+            </div>
+            <%- end -%>
+            <%- if @song.updated_by -%>
+            <div class="row">
+              <div class="label">updated by</div>
+              <div class="data"><%= link_to @song.updated_by.username, user_path(@song.updated_by) %></div>
+            </div>
+            <%- end -%>
+          </div>
+        </div>
+        
+        <div class="right">
+          <div class="vote_block_container">
+          <%= render :partial => 'shared/vote_block', :locals => { :resource => @song } %>
+          </div>
+          <%- if current_user and current_user.own_song?(@song) -%>
+          <%= link_to 'Edit this song', edit_song_path(@song) %>
+          <%- end -%>
+        </div>
+      </div>
+
+      <div id="song">
+        <%= render :partial => 'shared/video' %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right_col">
+    <%= render :partial => 'sidebar/sidebar' %>
+    
+    <!--
+    <div class="section">
+      <h3>the meaning of the terms <span>ask</span></h3>
+      <div class="items">
+        <div class="item"></div>
+      </div>
+    </div>
+    <%= render :partial => 'background_stories/section' %>
+    <%= render :partial => 'notes/section' %>
+    <div class="section">
+      <h3>comments</h3>
+    </div>
+    -->
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  function onYouTubePlayerReady(playerId) {
+    ytplayer = document.getElementById("ytplayer");
+    ytplayer.playVideo();
+    ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+  }
+  
+  function onytplayerStateChange(newState) {
+    if (newState == 0) {
+      $.getJSON('/songs/next_song.json', function(data) {
+        url = "http://" + window.location.host + "/songs/" + data.song.id
+        window.location = url;
+      });
+      //alert("Player's state: end");
+    }
+  }
+</script>

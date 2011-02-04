@@ -1,10 +1,10 @@
-<%= form_for(@lyric, :html => { :class => 'hline_form' }) do |f| %>
-  <% if @lyric.errors.any? %>
+<%= form_for(@song, :html => { :class => 'hline_form' }) do |f| %>
+  <% if @song.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@lyric.errors.count, "error") %> prohibited this lyric from being saved:</h2>
+      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
 
       <ul>
-      <% @lyric.errors.full_messages.each do |msg| %>
+      <% @song.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <div class="label"><%= f.label :content %></div>
-    <div class="input"><%= f.text_area :content, :class => 'lyric' %></div>
+    <div class="input"><%= f.text_area :content, :class => 'song' %></div>
   </div>
   <div class="field">
     <div class="label"><%= f.label :video_url, 'Video URL' %></div>

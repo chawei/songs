@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
   
   acts_as_voter
   
-  has_many :created_lyrics, :class_name => "Lyric", :foreign_key => "created_by_id"
-  has_many :updated_lyrics, :class_name => "Lyric", :foreign_key => "updated_by_id"
+  has_many :created_songs, :class_name => "Song", :foreign_key => "created_by_id"
+  has_many :updated_songs, :class_name => "Song", :foreign_key => "updated_by_id"
   
   has_many :created_stories, :class_name => "BackgroundStory", :foreign_key => "created_by_id"
   has_many :updated_stories, :class_name => "BackgroundStory", :foreign_key => "updated_by_id"
@@ -45,8 +45,8 @@ class User < ActiveRecord::Base
     created_stories.include? story
   end
   
-  def own_lyric?(lyric)
-    created_lyrics.include? lyric
+  def own_song?(song)
+    created_songs.include? song
   end
   
   def own_note?(note)
@@ -57,8 +57,12 @@ class User < ActiveRecord::Base
     created_events.include? event
   end
   
-  def lyric_notes(lyric)
-    notes = Note.find_all_by_lyric_id_and_created_by_id(lyric, self)
+  def song_notes(song)
+    notes = Note.find_all_by_song_id_and_created_by_id(song, self)
+  end
+  
+  def voted_for_songs
+    Vote.where(:voter_id => id, :voteable_type => "Song", :vote => true).map(&:voteable)
   end
   
   def self.create_from_hash(hash)

@@ -92,3 +92,9 @@ a.rounded_btn:hover {
 .vote_form {
   display: inline;
 }
+.vote_block .rounded_btn {
+  background: #ddd none repeat scroll 0 0;
+}
+.vote_block .thumbs_up_true .rounded_btn, .vote_block .thumbs_down_true .rounded_btn {
+  background: #29ABE2 none repeat scroll 0 0;
+}

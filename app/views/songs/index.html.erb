@@ -1,0 +1,36 @@
+<% title "Songs", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <%= link_to 'add a new song', new_song_path, :class => 'rounded_btn' %>
+  </div>
+
+  <div class="index">
+    <%- @songs.each do |song| -%>
+    <div class="song_item clear_fix">
+      <div class="detail">
+        <%= link_to song.title, song_path(song), :class => 'title' %>
+        <% if song.performer %>
+        <span class="performer">
+          <%= link_to song.performer.name, artist_path(song.performer) %>
+          <div class="vote_block_container">
+            <%= render :partial => 'shared/vote_block', :locals => { :resource => song } %>
+          </div>
+        </span>
+        <% end %>
+      </div>
+      <%- if current_user -%>
+      <div class="actions">
+        <%= link_to 'Edit', edit_song_path(song) if current_user.own_song?(song) or current_user.admin? %>
+        <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete if current_user.admin? %>
+      </div>
+      <%- end -%>
+    </div>
+    <%- end -%>
+  </div>
+  
+  <%= will_paginate @songs %>
+</div>

@@ -1,6 +1,6 @@
 class Artist < ActiveRecord::Base
   has_many :participations, :dependent => :destroy
-  has_many :lyrics, :through => :participations
+  has_many :songs, :through => :participations
   has_many :events, :dependent => :destroy
   
   has_friendly_id :full_name, :use_slug => true
@@ -13,8 +13,8 @@ class Artist < ActiveRecord::Base
     
   end
   
-  def performed_lyrics
-    return participations.performer.collect {|p| p.lyric}
+  def performed_songs
+    return participations.performer.collect {|p| p.song}
   end
   
   protected

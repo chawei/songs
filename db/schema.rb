@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101216085748) do
+ActiveRecord::Schema.define(:version => 20110203195938) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20101216085748) do
   end
 
   create_table "background_stories", :force => true do |t|
-    t.integer  "lyric_id"
+    t.integer  "song_id"
     t.string   "title"
     t.text     "content"
     t.integer  "created_by_id"
@@ -57,23 +57,8 @@ ActiveRecord::Schema.define(:version => 20101216085748) do
     t.datetime "updated_at"
   end
 
-  create_table "lyrics", :force => true do |t|
-    t.string   "title"
-    t.string   "performer_name"
-    t.string   "writer_name"
-    t.text     "content"
-    t.string   "album_name"
-    t.string   "year"
-    t.integer  "created_by_id"
-    t.integer  "updated_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "video_url"
-    t.string   "cover_url"
-  end
-
   create_table "notes", :force => true do |t|
-    t.integer  "lyric_id"
+    t.integer  "song_id"
     t.text     "content"
     t.integer  "created_by_id"
     t.datetime "created_at"
@@ -82,7 +67,7 @@ ActiveRecord::Schema.define(:version => 20101216085748) do
 
   create_table "participations", :force => true do |t|
     t.integer  "artist_id"
-    t.integer  "lyric_id"
+    t.integer  "song_id"
     t.string   "participation_type"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -107,6 +92,21 @@ ActiveRecord::Schema.define(:version => 20101216085748) do
 
   add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
   add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "songs", :force => true do |t|
+    t.string   "title"
+    t.string   "performer_name"
+    t.string   "writer_name"
+    t.text     "content"
+    t.string   "album_name"
+    t.string   "year"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "video_url"
+    t.string   "cover_url"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username",                           :null => false
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20101216085748) do
     t.string   "uid"
     t.string   "url"
     t.string   "source"
-    t.integer  "lyric_id"
+    t.integer  "song_id"
     t.integer  "created_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
