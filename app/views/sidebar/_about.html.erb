@@ -9,7 +9,7 @@
 
 <div class="section">
   <h3>Bio</h3>
-  <div class="artist_image"><%= image_tag @image if @image %></div>
+  <div class="artist_image"><%= image_tag @image if @image && @image == String %></div>
   <div class="artist_summary"><%= simple_format @summary if @summary %></div>
 </div>
 
