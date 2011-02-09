@@ -26,6 +26,10 @@ gem 'thumbs_up'
 gem 'hoptoad_notifier'
 gem 'nokogiri'
 gem 'youtube-g'
+gem 'thinking-sphinx',
+  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
+  :branch  => 'rails3',
+  :require => 'thinking_sphinx'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

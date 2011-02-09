@@ -3,25 +3,54 @@
 <div class="index_container">
   <div class="description">
   </div>
+  
+  <div id="profile_tabs">
+    <ul>
+  	  <li><a href="#profile_tabs-like">Like</a></li>
+  	  <li><a href="#profile_tabs-note">Notes</a></li>
+  	</ul>
 
-  <div class="index">    
-    <%- @songs.each do |song| -%>
-    <div class="song_item clear_fix">
-      <div class="detail">
-        <%= link_to song.title, song_path(song), :class => 'title' %>
-        <% if song.performer %>
-        <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
+    <div class="tab_container">
+      <div id="profile_tabs-like" class="tab_content">
+        <div class="index">    
+          <%- @songs.each do |song| -%>
+          <div class="song_item clear_fix">
+            <div class="detail">
+              <%= link_to song.title, song_path(song), :class => 'title' %>
+              <% if song.performer %>
+              <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
+              <% end %>
+            </div>
+            <%- if current_user and current_user.own_song?(song) -%>
+            <div class="actions">
+              <%= link_to 'Edit', edit_song_path(song) %> |
+              <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete %>
+            </div>
+            <%- end -%>
+          </div>
+          <%- end -%>
+    
+          <%= will_paginate @songs %>
+        </div>
+      </div>
+  
+      <div id="profile_tabs-note" class="tab_content">
+        <div class="index"> 
+        <% @notes.each do |note| %>
+        <div class="song_item clear_fix">
+          <div class="left"><%= note.title %></div>
+          <div class="right"><%= link_to note.song.title, song_path(note.song) %></div>
+        </div>
         <% end %>
       </div>
-      <%- if current_user and current_user.own_song?(song) -%>
-      <div class="actions">
-        <%= link_to 'Edit', edit_song_path(song) %> |
-        <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete %>
-      </div>
-      <%- end -%>
     </div>
-    <%- end -%>
-    
-    <%= will_paginate @songs %>
   </div>
 </div>
+
+<% content_for :foot do %>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+  	$("#profile_tabs").tabs();
+  });
+</script>
+<% end %>

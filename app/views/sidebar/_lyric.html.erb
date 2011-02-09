@@ -1,8 +1,10 @@
+<% if @is_sidebar %>
 <div class="song_info">
   <div class="title"><%= @song.title %></div>
   <div class="performer">performer/ <%= @song.performer_name %></div>
   <div class="writer">writer/ <%= @song.writer_name %></div>
 </div>
+<% end %>
 
 <div id="lyric">
   <% if @song.content.blank? %>

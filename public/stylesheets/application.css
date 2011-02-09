@@ -256,8 +256,7 @@ form.section_form a.cancel_btn {
 }
 
 .video_item {
-  display: block;
-  width: 297px;
+  display: inline-block;
   padding: 10px;
   margin: 0 0 5px 0;
   background-color: #f2f2f2;

@@ -5,7 +5,7 @@
     </div>
     
     <div class="right">
-      <%= link_to "next song", song_path(@song.next), :class => 'rounded_btn', :rel => 'tipsy', :title => @song.next.title %>
+      <%= link_to "next song", song_path(@song.next), :class => 'rounded_btn', :rel => 'tipsy', :title => @song.next.title if @song.next %>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
       </div>
 
       <div id="song">
-        <%= render :partial => 'shared/video' %>
+        <%= render :partial => 'sidebar/videos' %>
       </div>
     </div>
   </div>
@@ -84,21 +84,3 @@
     -->
   </div>
 </div>
-
-<script type="text/javascript" charset="utf-8">
-  function onYouTubePlayerReady(playerId) {
-    ytplayer = document.getElementById("ytplayer");
-    ytplayer.playVideo();
-    ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
-  }
-  
-  function onytplayerStateChange(newState) {
-    if (newState == 0) {
-      $.getJSON('/songs/next_song.json', function(data) {
-        url = "http://" + window.location.host + "/songs/" + data.song.id
-        window.location = url;
-      });
-      //alert("Player's state: end");
-    }
-  }
-</script>

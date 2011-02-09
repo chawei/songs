@@ -1,4 +1,8 @@
 class Artist < ActiveRecord::Base
+  define_index do
+    indexes name
+  end
+  
   has_many :participations, :dependent => :destroy
   has_many :songs, :through => :participations
   has_many :events, :dependent => :destroy

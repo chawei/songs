@@ -3,7 +3,7 @@
     <% if video.source == 'youtube' %>
     <div class="section">
       <object style="width: 400px; height: 300px" id="ytplayer">
-      <param name="movie" value="http://www.youtube.com/v/<%= video.uid %>?version=3">
+      <param name="movie" value="http://www.youtube.com/v/<%= video.uid %>?enablejsapi=1&version=3">
       <param name="allowFullScreen" value="true">
       <param name="allowScriptAccess" value="always">
       <embed src="http://www.youtube.com/v/<%= video.uid %>?enablejsapi=1&version=3" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="300" height="250"></object>

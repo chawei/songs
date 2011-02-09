@@ -21,6 +21,7 @@ Songs::Application.routes.draw do
   end
 
   root :to => "home#index"
+  match '/search', :to => "home#search"
   
   match '/sidebar/show', :to => "sidebar#show"
   match '/sidebar/switch_video', :to => "sidebar#switch_video"

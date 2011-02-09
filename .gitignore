@@ -2,5 +2,6 @@
 .bundle
 db/*.sqlite3
 db/data.yml
+db/sphinx/*
 log/*.log
 tmp/**/*

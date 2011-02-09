@@ -1,6 +1,10 @@
 class Song < ActiveRecord::Base
   require 'youtube_g'
   
+  define_index do
+    indexes title, performer_name
+  end
+  
   acts_as_voteable
    
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
@@ -91,8 +95,8 @@ class Song < ActiveRecord::Base
           else
             self.video_url = "http://www.youtube.com/watch?v=#{video.unique_id}"
           end
-          break
         end
+        break if self.videos.length > 3
       end  
     rescue => e
       message =  "[YouTubeG] Error when getting video with query##{query}"

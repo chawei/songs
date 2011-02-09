@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def account
     if @user = current_user
       @songs = @user.voted_for_songs.paginate(:per_page => 10, :page => params[:page])
+      @notes = @user.created_stories
       render :action => :show
     else
       redirect_back_or_default root_url
@@ -26,7 +27,8 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-    @songs = @user.created_songs.order('songs.created_at DESC').paginate(:per_page => 10, :page => params[:page])
+    @songs = @user.voted_for_songs.paginate(:per_page => 10, :page => params[:page])
+    @notes = @user.created_stories
   end
 
   def edit

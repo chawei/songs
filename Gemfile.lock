@@ -1,3 +1,12 @@
+GIT
+  remote: git://github.com/freelancing-god/thinking-sphinx.git
+  revision: 849d0fe4ad496ca6d8462d264e82029e91a45353
+  branch: rails3
+  specs:
+    thinking-sphinx (2.0.2)
+      activerecord (>= 3.0.3)
+      riddle (>= 1.2.2)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -167,6 +176,7 @@ GEM
     rake (0.8.7)
     rest-client (1.6.1)
       mime-types (>= 1.16)
+    riddle (1.2.2)
     rspec (2.2.0)
       rspec-core (~> 2.2)
       rspec-expectations (~> 2.2)
@@ -237,6 +247,7 @@ DEPENDENCIES
   ruby-debug
   simple-navigation
   spork
+  thinking-sphinx!
   thumbs_up
   will_paginate (~> 3.0.pre2)
   yaml_db

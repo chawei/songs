@@ -1,16 +1,38 @@
 <%- if @song && !@song.videos.blank? -%>
-  <div class="section">
-    <div id="current_video_player" class="video">
-      <%= embedded_player(@song.videos.first.uid) %>
-    </div>
-    <div id="video_items">
-    <% @song.videos.each do |video| %>
-      <% if video.source == 'youtube' %>
-      <%= link_to sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'video_item' do %>
-        <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg", :class => 'video_thumb' %>
-      <% end %>
-      <%- end -%>
-    <%- end -%>
-    </div>
+  <div id="current_video_player" class="video">
+    <%= embedded_player(@song.videos.first.uid) %>
   </div>
+  <div id="video_items">
+  <% @song.videos.each do |video| %>
+    <% if video.source == 'youtube' %>
+    <%= link_to sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'video_item' do %>
+      <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg", :class => 'video_thumb' %>
+    <% end %>
+    <%- end -%>
+  <%- end -%>
+  </div>
+  
+  <% content_for :foot do %>
+  <script type="text/javascript" charset="utf-8">
+    var params = { allowScriptAccess: "always" };
+    var atts = { id: "ytplayer" };
+    swfobject.embedSWF("http://www.youtube.com/e/<%= @song.videos.first.uid %>?enablejsapi=1&playerapiid=ytplayer",
+                           "ytplayer", "425", "356", "8", null, null, params, atts);
+
+    function onYouTubePlayerReady(playerId) {
+      ytplayer = document.getElementById("ytplayer");
+      ytplayer.playVideo();
+      ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+    }
+
+    function onytplayerStateChange(newState) {
+      if (newState == 0) {
+        $.getJSON('/songs/next_song.json', function(data) {
+          url = "http://" + window.location.host + "/songs/" + data.song.id
+          window.location = url;
+        });
+      }
+    }
+  </script>
+  <% end %>
 <%- end -%>
