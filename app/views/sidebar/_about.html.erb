@@ -1,11 +1,5 @@
-<% @summary, @image, @similar_artists = nil, nil, [] %>
-
-<% begin %>
-<% res = LastFm.get_artist_info(@song.performer_name) %>
-<% @summary = res["lfm"]["artist"]["bio"]["summary"] %>
-<% @image = res["lfm"]["artist"]["image"][1] %>
-<% @similar_artists = res["lfm"]["artist"]["similar"]["artist"] %>
-<% end %>
+<% @summary = @song.performer.bio_summary %>
+<% @image = @song.performer.image_small_url %>
 
 <div class="vote_block_container">
 <%= render :partial => 'shared/vote_block', :locals => { :resource => @song } %>
@@ -15,14 +9,4 @@
   <h3>Performer Bio</h3>
   <div class="artist_image"><%= image_tag @image if @image && @image == String %></div>
   <div class="artist_summary"><%= simple_format @summary if @summary %></div>
-</div>
-
-<div class="section">
-  <h3>Similar Artists</h3>
-	<% @similar_artists.each do |similar_artist| %>
-	<div class="similar_artist clear_fix">
-	  <div class="image"><%= image_tag similar_artist['image'][0] %></div> 
-	  <div class="name"><%= link_to similar_artist['name'], "http://www.youtube.com/results?search_query=#{URI.escape(similar_artist['name'])}" %></div>
-	</div>
-	<% end %>
 </div>

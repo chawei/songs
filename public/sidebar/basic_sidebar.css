@@ -65,6 +65,9 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 
 
 .tab_container {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.417969) 0 2px 9px;
+  border-bottom-left-radius: 3px 3px;
+  border-bottom-right-radius: 3px 3px;
 	border: 1px solid #999;
 	border-top: none;
 	overflow: hidden;

@@ -1,0 +1,9 @@
+<div class="section">
+  <h3>Similar Artists</h3>
+	<% @similar_artists.each do |similar_artist| %>
+	<div class="similar_artist clear_fix">
+	  <div class="image"><%= image_tag similar_artist['image'][0] %></div> 
+	  <div class="name"><%= link_to similar_artist['name'], "http://www.youtube.com/results?search_query=#{URI.escape(similar_artist['name'])}" %></div>
+	</div>
+	<% end %>
+</div>

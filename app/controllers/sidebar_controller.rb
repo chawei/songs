@@ -8,6 +8,7 @@ class SidebarController < ApplicationController
     params[:h] == "www.youtube.com" ? @is_supported = true : @is_supported = false
     if @is_supported
       @song = SongImporter.import_song(:query => params[:q], :video_url => params[:u], :current_user_id => current_user.try(:id))
+      @song.performer.grab_info if @song && @song.performer.bio_summary.blank?
       if @song.class == Song
         @background_story = @song.background_stories.build
       end

@@ -65,5 +65,10 @@ class BoxImporter
     
     puts "\n=== finish importing album: #{album_name} ====="
   end
+  
+  def self.normalize_str(str)
+    str = str.gsub(/(\(.*\))/, '').strip
+    return str
+  end
 end
   

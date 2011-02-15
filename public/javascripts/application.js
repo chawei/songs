@@ -58,6 +58,8 @@ $(function() {
   });
 
   $('[rel=tipsy]').tipsy({gravity: 'n'});
+  
+  $('.autogrow').autogrow();
 });
 
 $.fn.clearForm = function() {

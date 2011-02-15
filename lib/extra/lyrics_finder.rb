@@ -3,8 +3,6 @@ require 'httparty'
 class LyricsFinder
   include HTTParty
   format :xml
-
-  DEVELOPER_KEY = "6bb71335d98954463-temporary.API.access"
   
   def self.get_song(options)
     result, raw_result, song = nil, nil, nil
@@ -12,13 +10,14 @@ class LyricsFinder
       song = Song.create(:performer_name => options[:artist], :writer_name => options[:artist], :title => options[:title], 
                           :video_url => options[:video_url], :created_by_id => options[:current_user_id])
     end
-    song.update_videos(options[:video_url])
     
     begin
-      if raw_result = direct_chartlyrics_search(options)
+      if raw_result = musixmatch_search(options)
         result = raw_result
-      elsif raw_result = advanced_lyric_search(options)
-        result = raw_result
+      #elsif raw_result = direct_chartlyrics_search(options)
+      #  result = raw_result
+      #elsif raw_result = advanced_lyric_search(options)
+      #  result = raw_result
       end
       
       if result
@@ -27,8 +26,8 @@ class LyricsFinder
         lyric     = result[:lyric]
         cover_url = result[:cover_url]
         
-        song = Song.find_by_performer_and_title(artist, title)
-        if song.nil?
+        # make sure the title is matched
+        if song = Song.find_by_performer_name_and_title(artist, title)
           song.content = lyric
           song.cover_url = cover_url
           song.save
@@ -38,7 +37,34 @@ class LyricsFinder
       puts "error - please try later."
     end
     return song
-    #self.get("http://api.lyricsfly.com/api/api.php?i=#{DEVELOPER_KEY}&a=#{options[:artist]}&t=#{options[:title]}")
+  end
+  
+  def self.musixmatch_search(options)
+    begin
+      output = nil
+      query_artist = options[:artist]
+      
+      res = self.get("http://api.musixmatch.com/ws/1.1/track.search?apikey=7f27fb14d4d9bd1197cfc3a1613d6113&q_artist=#{URI.escape(query_artist)}&q_track=#{URI.escape(options[:title])}&format=xml&page_size=1&f_has_lyrics=1")
+            
+      if res['message']['body']
+        artist     = res['message']['body']['track_list']['track']['artist_name']
+        title      = res['message']['body']['track_list']['track']['track_name']
+        track_id   = res['message']['body']['track_list']['track']['track_id']
+        
+        lyrics_res = self.get("http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=#{track_id}&format=xml&apikey=7f27fb14d4d9bd1197cfc3a1613d6113")
+        lyric      = lyrics_res['message']['body']['lyrics']['lyrics_body']
+        
+        output = {:artist => artist, :title => title, :lyric => lyric, :cover_url => nil}
+      #  if options[:need_verify] 
+      #    output = nil unless artist.downcase == query_artist.downcase && !options[:title].downcase.match(/#{title.downcase}/).nil?
+      #  end
+      end
+    
+      return output
+    rescue
+      puts "[Error] MusixMatch #{res}"
+      return nil
+    end
   end
   
   def self.direct_chartlyrics_search(options)
@@ -65,7 +91,7 @@ class LyricsFinder
       return nil
     end
   end
-  
+    
   def self.advanced_lyric_search(options)
     @output = nil
     begin

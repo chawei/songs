@@ -18,7 +18,7 @@
   </div>
   <div class="field">
     <div class="label"><%= f.label :content %></div>
-    <div class="input nice_edit_outer"><%= f.text_area :content, :id => "bg_story_textarea_#{@background_story.id}" %></div>
+    <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{@background_story.id}", :class => 'autogrow' %></div>
   </div>
   <div class="actions">
     <div class="submit">
