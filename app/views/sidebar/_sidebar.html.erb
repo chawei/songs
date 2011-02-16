@@ -1,6 +1,6 @@
 <div id="tabs">
 	<ul>
-	  <% if @song.content.blank? %>
+	  <% if @song && @song.content.blank? %>
 	  <li><a href="#tabs-about">about</a></li>
 	  <li><a href="#tabs-lyric">lyrics</a></li>
 	  <% else %>

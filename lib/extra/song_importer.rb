@@ -108,12 +108,15 @@ class SongImporter
       
       res = LastFm.get_album_info(artist_name, album_name)
       album_release_date = nil
-      unless res['lfm']['album']['releasedate'].blank?
-        album_release_date = Time.parse(res['lfm']['album']['releasedate'])
-      end
-      album_track_titles = []
-      res['lfm']['album']['tracks']['track'].each do |t|
-        album_track_titles << t['name'] #if t['artist']['name'] == artist_name
+      
+      unless res['lfm']['album'].blank?
+        unless res['lfm']['album']['releasedate'].blank?
+          album_release_date = Time.parse(res['lfm']['album']['releasedate'])
+        end
+        album_track_titles = []
+        res['lfm']['album']['tracks']['track'].each do |t|
+          album_track_titles << t['name'] #if t['artist']['name'] == artist_name
+        end
       end
       
       unless release = Release.find_by_mbid(release_group.id.uuid)
