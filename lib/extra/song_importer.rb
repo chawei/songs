@@ -130,7 +130,7 @@ class SongImporter
         puts "Duplicated Artist"
       end
       
-      if res['lfm']['album']['image'].length > 0
+      if !res['lfm']['album'].blank? && res['lfm']['album']['image'].length > 0
         release.small_image_url  = res['lfm']['album']['image'][0] #album_images[:small][:url]
         release.medium_image_url = res['lfm']['album']['image'][1] #album_images[:medium][:url]
         release.large_image_url  = res['lfm']['album']['image'][2] #album_images[:large][:url]
