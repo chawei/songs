@@ -141,7 +141,11 @@ class SongImporter
           song = Song.new(:performer_name => artist_name, :writer_name => artist_name, :title => track_name)
           song.save
         end
-        release.songs << song
+        begin
+          release.songs << song
+        rescue
+          puts "Duplicated Song"
+        end
       end
       if release.save
         print '.'
