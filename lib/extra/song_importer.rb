@@ -113,7 +113,7 @@ class SongImporter
       end
       album_track_titles = []
       res['lfm']['album']['tracks']['track'].each do |t|
-        album_track_titles << t['name'] if t['artist']['name'] == artist_name
+        album_track_titles << t['name'] #if t['artist']['name'] == artist_name
       end
       
       unless release = Release.find_by_mbid(release_group.id.uuid)
