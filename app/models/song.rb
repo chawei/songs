@@ -82,7 +82,7 @@ class Song < ActiveRecord::Base
       self.lyrics_last_updated = current_time
       
       result = LyricsFinder.musixmatch_search(:artist => performer.name, :title => title)
-      self.content = result[:lyric] unless result[:lyric].blank?
+      self.content = result[:lyric] unless result.nil? || result[:lyric].blank?
     end
     self.save
   end
