@@ -24,6 +24,7 @@ class SongsController < ApplicationController
   # GET /songs/1.xml
   def show
     @song = Song.find(params[:id])
+    @song.refresh_lyrics if @song.content.blank?
     @background_story = @song.background_stories.build
     @note = @song.notes.build
     @is_supported = true

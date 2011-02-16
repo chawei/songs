@@ -1,0 +1,39 @@
+<% title "Releases", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <span class='title'>List of releases</span>
+    (<%= link_to 'add a new release', new_admin_release_path %>)
+  </div>
+
+  <table class="index">
+    <tr>
+      <th>Release type</th>
+      <th>Title</th>
+      <th>Release date</th>
+      <th>Small image url</th>
+      <th>Medium image url</th>
+      <th>Large image url</th>
+      <th></th>
+    </tr>
+
+  <% @releases.each do |release| %>
+    <tr>
+      <td><%= release.release_type %></td>
+      <td><%= release.title %></td>
+      <td><%= release.release_date %></td>
+      <td><%= release.small_image_url %></td>
+      <td><%= release.medium_image_url %></td>
+      <td><%= release.large_image_url %></td>
+      <td class="actions">
+        <%= link_to 'View', [:admin, release] %> |
+        <%= link_to 'Edit', edit_admin_release_path(release) %> |
+        <%= link_to 'Delete', [:admin, release], :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

@@ -17,6 +17,9 @@ class Song < ActiveRecord::Base
   has_many :participations, :dependent => :destroy
   has_many :artists, :through => :participations
   
+  has_many :relationships, :as => :target
+  has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
+  
   validates_presence_of :title, :performer_name
   
   has_friendly_id :performer_name_and_title, :use_slug => true
@@ -66,6 +69,22 @@ class Song < ActiveRecord::Base
   
   def performer_name_and_title
     "#{performer_name}-#{title}"
+  end
+  
+  def main_release
+    releases.first
+  end
+  
+  def refresh_lyrics
+    current_time = Time.now
+    self.lyrics_last_updated = current_time - 11.days if self.lyrics_last_updated.nil?
+    if self.lyrics_last_updated + 10.days < current_time
+      self.lyrics_last_updated = current_time
+      
+      result = LyricsFinder.musixmatch_search(:artist => performer.name, :title => title)
+      self.content = result[:lyric] unless result[:lyric].blank?
+    end
+    self.save
   end
   
   def youtube_id

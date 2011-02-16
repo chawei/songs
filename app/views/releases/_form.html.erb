@@ -1,0 +1,41 @@
+<%= form_for([:admin, @release]) do |f| %>
+  <% if @release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@release.errors.count, "error") %> prohibited this release from being saved:</h2>
+
+      <ul>
+      <% @release.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="label"><%= f.label :release_type %></div>
+    <div class="input"><%= f.text_field :release_type %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :title %></div>
+    <div class="input"><%= f.text_field :title %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :release_date %></div>
+    <div class="input"><%= f.date_select :release_date %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :small_image_url %></div>
+    <div class="input"><%= f.text_field :small_image_url %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :medium_image_url %></div>
+    <div class="input"><%= f.text_field :medium_image_url %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :large_image_url %></div>
+    <div class="input"><%= f.text_field :large_image_url %></div>
+  </div>
+  <div class="actions">
+    <div class="submit"><%= f.submit %></div>
+  </div>
+<% end %>

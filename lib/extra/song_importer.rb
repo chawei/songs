@@ -87,22 +87,58 @@ class SongImporter
 
     mbid = Model::MBID.new(artist_uuid, :artist)
     query = Webservice::Query.new
-    artist = query.get_artist_by_id(mbid, artist_includes)
-    artist_name = artist.name
+    m_artist = query.get_artist_by_id(mbid, artist_includes)
+    artist_name = m_artist.name
+    break if artist_name.blank?
     
-    artist.release_groups.each do |release_group|
+    unless artist = Artist.find_by_name(artist_name)
+      artist = Artist.create(:name => artist_name, :full_name => artist_name, :mbid => artist_uuid)
+    end
+    if artist.mbid.nil?
+      artist.mbid = artist_uuid
+      artist.save
+    end
+    
+    m_artist.release_groups.each do |release_group|
       #release.id.uuid
       #release.asin
       #release = q.get_release_by_id(release_id, :artist=>true, :tracks=>true)
       album_name = release_group.title
-      album_images = get_album_cover_images(release_group)
+      #album_images = get_album_cover_images(release_group)
       
       res = LastFm.get_album_info(artist_name, album_name)
       album_release_date = Time.parse(res['lfm']['album']['releasedate'])
       album_track_titles = []
-      res['lfm']['album']['tracks']['track'].each do |t| 
-        album_track_titles << t['name'] unless t['artist']['mbid'].nil?
-      end   
+      res['lfm']['album']['tracks']['track'].each do |t|
+        album_track_titles << t['name'] if t['artist']['name'] == artist_name
+      end
+      
+      unless release = Release.find_by_mbid(release_group.id.uuid)
+        release = Release.create(:title => album_name, :release_date => album_release_date, 
+                                 :release_type => 'album', :mbid => release_group.id.uuid)
+      end
+      
+      begin
+        release.artists << artist
+      rescue
+        puts "Duplicated Artist"
+      end
+      release.small_image_url  = res['lfm']['album']['image'][0] #album_images[:small][:url]
+      release.medium_image_url = res['lfm']['album']['image'][1] #album_images[:medium][:url]
+      release.large_image_url  = res['lfm']['album']['image'][2] #album_images[:large][:url]
+      
+      album_track_titles.each do |track_name|
+        unless song = Song.find_by_performer_name_and_title(artist_name, track_name)
+          song = Song.new(:performer_name => artist_name, :writer_name => artist_name, :title => track_name)
+          song.save
+        end
+        release.songs << song
+      end
+      if release.save
+        print '.'
+      else
+        print 'F'
+      end
     end
   end
   
@@ -114,9 +150,9 @@ class SongImporter
     #res = Amazon::Ecs.item_lookup('B00005OAIE', {:response_group => 'Images'})
     res = Amazon::Ecs.item_search("#{artist_name} #{album_title}", {:response_group => 'Images'})
     
-    images['small'] = res.items[0].get_hash('smallimage')
-    images['medium'] = res.items[0].get_hash('mediumimage')
-    images['large'] = res.items[0].get_hash('largeimage')
+    images[:small]  = res.items[0].try(:get_hash, 'smallimage')
+    images[:medium] = res.items[0].try(:get_hash, 'mediumimage')
+    images[:large]  = res.items[0].try(:get_hash, 'largeimage')
     
     return images
   end

@@ -132,7 +132,7 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 }
 
 .artist_summary {
-  
+  line-height: 16px;
 }
 
 .similar_artist {
@@ -140,12 +140,36 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
   height: 30px;
   line-height: 30px;
 }
- .similar_artist .image {
+  .similar_artist .image {
    float: left;
    margin: 0 10px 0 0;
    height: 30px;
    overflow: hidden;
- }
- .similar_artist .name {
+  }
+  .similar_artist .name {
    float: left;
- }
+  }
+ 
+#album_section .cover_image {
+  margin: 0 10px 0 0 ;
+}
+  #album_section .cover_image img {
+    width: 100px;
+  }
+#album_section .song {
+  margin: 0 0 3px 0;
+}
+
+#tabs-about .vote_block_container {
+  background-color: #666;
+  color: #fff;
+  font-size: 15px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  margin: 0 0 10px 0;
+}
+
+#tabs-about .vote_block_container .left {
+  margin-right: 10px;
+}

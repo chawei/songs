@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110203195938) do
+ActiveRecord::Schema.define(:version => 20110216055152) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20110203195938) do
     t.string   "image_large_url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "mbid"
   end
 
   create_table "authorizations", :force => true do |t|
@@ -81,6 +82,27 @@ ActiveRecord::Schema.define(:version => 20110203195938) do
     t.datetime "updated_at"
   end
 
+  create_table "relationships", :force => true do |t|
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "releases", :force => true do |t|
+    t.string   "release_type"
+    t.string   "title"
+    t.date     "release_date"
+    t.string   "small_image_url"
+    t.string   "medium_image_url"
+    t.string   "large_image_url"
+    t.string   "mbid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.integer  "sluggable_id"
@@ -106,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20110203195938) do
     t.datetime "updated_at"
     t.string   "video_url"
     t.string   "cover_url"
+    t.datetime "lyrics_last_updated"
   end
 
   create_table "users", :force => true do |t|

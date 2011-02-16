@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="nav_links">
+  <%= link_to 'Edit', edit_admin_release_path(@release) %> |
+  <%= link_to 'Back', admin_releases_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Release type</div>
+    <div class="data"><%= @release.release_type %></div>
+  </div>
+  <div class="row">
+    <div class="label">Title</div>
+    <div class="data"><%= @release.title %></div>
+  </div>
+  <div class="row">
+    <div class="label">Release date</div>
+    <div class="data"><%= @release.release_date %></div>
+  </div>
+  <div class="row">
+    <div class="label">Small image url</div>
+    <div class="data"><%= @release.small_image_url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Medium image url</div>
+    <div class="data"><%= @release.medium_image_url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Large image url</div>
+    <div class="data"><%= @release.large_image_url %></div>
+  </div>
+</div>

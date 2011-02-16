@@ -1,8 +1,13 @@
 <div id="tabs">
 	<ul>
+	  <% if @song.content.blank? %>
+	  <li><a href="#tabs-about">about</a></li>
 	  <li><a href="#tabs-lyric">lyrics</a></li>
+	  <% else %>
+	  <li><a href="#tabs-lyric">lyrics</a></li>
+	  <li><a href="#tabs-about">about</a></li>
+	  <% end %>
 	  <li><a href="#tabs-stories">stories</a></li>
-		<li><a href="#tabs-about">about</a></li>
 		<!--
 		<li><a href="#tabs-videos">videos</a></li>
 		<li><a href="#tabs-3">thoughts</a></li>
