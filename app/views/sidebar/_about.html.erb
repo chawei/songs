@@ -12,6 +12,7 @@
   <div class="artist_summary"><%= simple_format @summary if @summary %></div>
 </div>
 
+<% if @song.main_release %>
 <div id="album_section" class="section clear_fix">
   <h3>Album - <%= @song.main_release.title %></h3>
   <div class="left cover_image"><%= image_tag @song.main_release.large_image_url %></div>
@@ -22,3 +23,4 @@
   <% end %>
   </div>
 </div>
+<% end %>
