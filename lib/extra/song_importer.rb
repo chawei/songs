@@ -107,7 +107,10 @@ class SongImporter
       #album_images = get_album_cover_images(release_group)
       
       res = LastFm.get_album_info(artist_name, album_name)
-      album_release_date = Time.parse(res['lfm']['album']['releasedate'])
+      album_release_date = nil
+      unless res['lfm']['album']['releasedate'].blank?
+        album_release_date = Time.parse(res['lfm']['album']['releasedate'])
+      end
       album_track_titles = []
       res['lfm']['album']['tracks']['track'].each do |t|
         album_track_titles << t['name'] if t['artist']['name'] == artist_name
@@ -123,9 +126,12 @@ class SongImporter
       rescue
         puts "Duplicated Artist"
       end
-      release.small_image_url  = res['lfm']['album']['image'][0] #album_images[:small][:url]
-      release.medium_image_url = res['lfm']['album']['image'][1] #album_images[:medium][:url]
-      release.large_image_url  = res['lfm']['album']['image'][2] #album_images[:large][:url]
+      
+      if res['lfm']['album']['image'].length > 0
+        release.small_image_url  = res['lfm']['album']['image'][0] #album_images[:small][:url]
+        release.medium_image_url = res['lfm']['album']['image'][1] #album_images[:medium][:url]
+        release.large_image_url  = res['lfm']['album']['image'][2] #album_images[:large][:url]
+      end
       
       album_track_titles.each do |track_name|
         unless song = Song.find_by_performer_name_and_title(artist_name, track_name)

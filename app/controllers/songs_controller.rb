@@ -25,6 +25,8 @@ class SongsController < ApplicationController
   def show
     @song = Song.find(params[:id])
     @song.refresh_lyrics if @song.content.blank?
+    @song.performer.grab_info if @song && @song.performer.bio_summary.blank?
+    
     @background_story = @song.background_stories.build
     @note = @song.notes.build
     @is_supported = true
