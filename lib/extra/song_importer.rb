@@ -132,7 +132,7 @@ class SongImporter
       end
       
       release.tracks.each do |track|
-        album_track_titles << track.title
+        album_track_titles << Song.normalize_title(track.title)
       end
       
       #unless res['lfm']['album'].blank?

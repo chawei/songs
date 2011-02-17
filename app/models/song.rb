@@ -134,4 +134,10 @@ class Song < ActiveRecord::Base
     return nil if items.empty?
     items.size == 1 ? items.first : items
   end
+  
+  def self.normalize_title(title)
+    title = title.gsub(/(\(.*\))|(\[.*\])/, '')
+    title = title.gsub(/[-_\/\\]/, ' ')
+    return title.strip
+  end
 end
