@@ -156,9 +156,12 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
   #album_section .cover_image img {
     width: 100px;
   }
-#album_section .song {
-  margin: 0 0 3px 0;
+#album_section .songs {
+  width: 240px;
 }
+  #album_section .song {
+    margin: 0 0 3px 0;
+  }
 
 #tabs-about .vote_block_container {
   background-color: #666;

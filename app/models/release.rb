@@ -6,4 +6,8 @@ class Release < ActiveRecord::Base
   def primary_artist
     artists.first
   end
+  
+  def album_url
+    large_image_url.blank? ? '/images/default_album.png' : large_image_url
+  end
 end
