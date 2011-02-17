@@ -108,6 +108,9 @@ class Song < ActiveRecord::Base
       query = "#{self.performer_name} #{self.title}"
       result = client.videos_by(:query => query)
       for video in result.videos
+        # TODO: provide better algorithm to determine if this is the correct music video
+        #next if !(video.title =~ /#{self.performer_name}/i) || !(video.description =~ /#{self.performer_name}/i)
+        #next if !(video.title =~ /#{self.title}/i) || !(video.description =~ /#{self.title}/i)
         if video.embeddable?
           if video_from_db = Video.find_by_uid_and_source(video.unique_id, 'youtube')
             self.videos << video_from_db

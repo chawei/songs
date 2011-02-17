@@ -103,20 +103,50 @@ class SongImporter
       #release.id.uuid
       #release.asin
       #release = q.get_release_by_id(release_id, :artist=>true, :tracks=>true)
-      album_name = release_group.title
-      #album_images = get_album_cover_images(release_group)
       
-      res = LastFm.get_album_info(artist_name, album_name)
+      album_name = release_group.title
+      
+      release_id = nil
       album_release_date = nil
       album_track_titles = []
-      unless res['lfm']['album'].blank?
-        unless res['lfm']['album']['releasedate'].blank?
-          album_release_date = Time.parse(res['lfm']['album']['releasedate'])
-        end
-        res['lfm']['album']['tracks']['track'].each do |t|
-          album_track_titles << t['name'] #if t['artist']['name'] == artist_name
-        end
+      
+      release_filter = Webservice::ReleaseFilter.new(:title=> album_name, :artistid => artist_uuid)
+      releases = query.get_releases(release_filter)
+
+      if releases[0].score == 100
+        release_id = releases.entities[0].id.uuid
+      else
+        puts "No Matching Album"
       end
+      
+      sleep(1)
+
+      release_includes = Webservice::ReleaseIncludes.new(:tracks => true, :release_events => true)
+      release = query.get_release_by_id(release_id, release_includes)
+
+      if rel_date = release.release_events[0].try(:date)
+        year  = rel_date.year  || 2020
+        month = rel_date.month || 1
+        day   = rel_date.day   || 1
+        album_release_date = Date.strptime("{ #{year}, #{month}, #{day} }", "{ %Y, %m, %d }")
+      end
+      
+      release.tracks.each do |track|
+        album_track_titles << track.title
+      end
+      
+      #unless res['lfm']['album'].blank?
+      #  unless res['lfm']['album']['releasedate'].blank?
+      #    album_release_date = Time.parse(res['lfm']['album']['releasedate'])
+      #  end
+      #  begin
+      #    res['lfm']['album']['tracks']['track'].each do |t|
+      #      album_track_titles << t['name'] #if t['artist']['name'] == artist_name
+      #    end
+      #  rescue
+      #    puts 'No tracks'
+      #  end
+      #end
       
       unless release = Release.find_by_mbid(release_group.id.uuid)
         release = Release.create(:title => album_name, :release_date => album_release_date, 
@@ -129,10 +159,20 @@ class SongImporter
         puts "Duplicated Artist"
       end
       
-      if !res['lfm']['album'].blank? && res['lfm']['album']['image'].length > 0
-        release.small_image_url  = res['lfm']['album']['image'][0] #album_images[:small][:url]
-        release.medium_image_url = res['lfm']['album']['image'][1] #album_images[:medium][:url]
-        release.large_image_url  = res['lfm']['album']['image'][2] #album_images[:large][:url]
+      album_images = get_album_cover_images(release_group)
+      if !album_images[:small].nil?
+        release.small_image_url  = album_images[:small][:url]
+        release.medium_image_url = album_images[:medium][:url]
+        release.large_image_url  = album_images[:large][:url]
+      end
+      
+      if release.small_image_url.nil?
+        res = LastFm.get_album_info(artist_name, album_name)
+        if !res['lfm']['album'].blank? && res['lfm']['album']['image'].length > 0
+          release.small_image_url  = res['lfm']['album']['image'][0] 
+          release.medium_image_url = res['lfm']['album']['image'][1]
+          release.large_image_url  = res['lfm']['album']['image'][2]
+        end
       end
       
       album_track_titles.each do |track_name|

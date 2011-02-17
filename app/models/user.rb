@@ -68,7 +68,8 @@ class User < ActiveRecord::Base
   def self.create_from_hash(hash)
     #if hash['provider']
     #debugger
-    user = User.new(:username => hash['user_info']['nickname'], :email => hash['extra']['user_hash']['email'], :name => hash['user_info']['name'])
+    username = hash['user_info']['nickname'] || hash['user_info']['name'].downcase.gsub(/\s/, '-')
+    user = User.new(:username => username, :email => hash['extra']['user_hash']['email'], :name => hash['user_info']['name'])
     user.save(:validate => false) #create the user without performing validations. This is because most of the fields are not set.
     user.reset_persistence_token! #set persistence_token else sessions will not be created
     user
