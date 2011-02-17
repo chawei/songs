@@ -28,14 +28,6 @@
               <div class="data"><%= link_to @song.writer.name, artist_path(@song.writer) %></div>
             </div>
             <% end %>
-            <div class="row">
-              <div class="label">album</div>
-              <div class="data"><%= @song.album_name %></div>
-            </div>
-            <div class="row">
-              <div class="label">year</div>
-              <div class="data"><%= @song.year %></div>
-            </div>
             <%- if @song.created_by -%>
             <div class="row">
               <div class="label">created by</div>

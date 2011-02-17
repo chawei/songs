@@ -15,7 +15,9 @@
 <% if @song.main_release %>
 <div id="album_section" class="section clear_fix">
   <h3>Album - <%= @song.main_release.title %></h3>
-  <div class="left cover_image"><%= image_tag @song.main_release.large_image_url %></div>
+  <div class="left cover_image">
+    <%= image_tag @song.main_release.large_image_url if @song.main_release.large_image_url %>
+  </div>
   
   <div class="left">
   <% @song.main_release.songs.each do |song| %>
