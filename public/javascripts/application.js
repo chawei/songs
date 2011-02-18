@@ -57,8 +57,8 @@ $(function() {
     $(this).addClass('selected_video_item');
   });
 
-  //$('[rel=tipsy]').tipsy({gravity: 'n'});
-  $('.vote_block .action').tipTip();
+  $('[rel=tipsy]').tipsy({gravity: 'n'});
+  //$('.vote_block .action').tipTip();
   
   $('.autogrow').autogrow();
 });

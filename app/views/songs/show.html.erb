@@ -44,9 +44,6 @@
         </div>
         
         <div class="right">
-          <div class="vote_block_container">
-          <%= render :partial => 'shared/vote_block', :locals => { :resource => @song } %>
-          </div>
           <%- if current_user and current_user.own_song?(@song) -%>
           <%= link_to 'Edit this song', edit_song_path(@song) %>
           <%- end -%>
