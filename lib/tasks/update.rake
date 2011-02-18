@@ -22,4 +22,18 @@ namespace :update do
       end
     end
   end
+  
+  desc "delete duplicated songs that have similar titles"
+  task :delete_duplicated_songs => :environment do
+    Song.find_in_batches do |songs|
+      songs.each do |song|
+        puts "== ID: #{song.id}, Performer: #{song.performer_name}"
+        song.title = Song.normalize_title(song.title)
+        unless song.save
+          song.destroy
+        end
+      end
+    end
+  end
+  
 end
