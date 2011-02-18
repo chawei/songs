@@ -159,6 +159,9 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 #album_section .songs {
   width: 240px;
 }
+#sidebar #album_section .songs {
+  width: 180px;
+}
   #album_section .song {
     margin: 0 0 3px 0;
   }
