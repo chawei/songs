@@ -8,6 +8,6 @@ class Release < ActiveRecord::Base
   end
   
   def album_url
-    large_image_url.blank? ? '/images/default_album.png' : large_image_url
+    (large_image_url.blank? || large_image_url == 'sizelarge') ? '/images/default_album.png' : large_image_url
   end
 end
