@@ -21,6 +21,7 @@ class Song < ActiveRecord::Base
   has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
   
   validates_presence_of :title, :performer_name
+  validates_uniqueness_of :title, :scope => [:performer_name]
   
   has_friendly_id :performer_name_and_title, :use_slug => true
   
