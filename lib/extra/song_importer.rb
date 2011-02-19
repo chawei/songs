@@ -159,19 +159,20 @@ class SongImporter
         puts "Duplicated Artist"
       end
       
-      album_images = get_album_cover_images(release_group)
-      if !album_images[:small].nil?
-        release.small_image_url  = album_images[:small][:url]
-        release.medium_image_url = album_images[:medium][:url]
-        release.large_image_url  = album_images[:large][:url]
+      res = LastFm.get_album_info(artist_name, album_name)
+      if !res['lfm']['album'].blank? && res['lfm']['album']['image'].length > 0
+        release.small_image_url  = res['lfm']['album']['image'][0] 
+        release.medium_image_url = res['lfm']['album']['image'][1]
+        release.large_image_url  = res['lfm']['album']['image'][2]
       end
       
+      # From Amazon (less accurate)
       if release.small_image_url.nil?
-        res = LastFm.get_album_info(artist_name, album_name)
-        if !res['lfm']['album'].blank? && res['lfm']['album']['image'].length > 0
-          release.small_image_url  = res['lfm']['album']['image'][0] 
-          release.medium_image_url = res['lfm']['album']['image'][1]
-          release.large_image_url  = res['lfm']['album']['image'][2]
+        album_images = get_album_cover_images(release_group)
+        if !album_images[:small].nil?
+          release.small_image_url  = album_images[:small][:url]
+          release.medium_image_url = album_images[:medium][:url]
+          release.large_image_url  = album_images[:large][:url]
         end
       end
       

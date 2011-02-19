@@ -5,9 +5,21 @@
   <div id="video_items">
   <% @song.videos.each do |video| %>
     <% if video.source == 'youtube' %>
-    <%= link_to sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'video_item' do %>
-      <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg", :class => 'video_thumb' %>
-    <% end %>
+    <div class="video_item clear_fix">
+      <div class="image left">
+        <%= link_to sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'ajax_video' do %>
+          <%= image_tag "http://img.youtube.com/vi/#{video.uid}/default.jpg", :class => 'video_thumb' %>
+        <% end %>
+      </div>
+      <div class="info left">
+        <div class="title"><%= link_to video.title, sidebar_switch_video_path(:id => video.id), :remote => true, :class => 'ajax_video' %></div>
+        <% if video.similarity == 'first_result' %>
+        <div class="notice">This might not be the exact one, but please enjoy!</div>
+        <% elsif video.similarity == 'possible' %>
+        <div class="notice">Possible</div>
+        <% end %>
+      </div>
+    </div>
     <%- end -%>
   <%- end -%>
   </div>
@@ -35,4 +47,6 @@
     }
   </script>
   <% end %>
+<% else %>
+  It seems like there is no related video on the web<br>please submit one and let us know!
 <%- end -%>

@@ -2,8 +2,11 @@ class Video < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
   belongs_to :song
   
-  validates_uniqueness_of :uid, :scope => :source
+  validates_presence_of :uid, :song_id
+  validates_uniqueness_of :uid, :scope => [:source, :song_id]
   before_validation :parse_url
+  
+  scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
   
   def self.get_song(url)
     uri = URI(url)
@@ -11,10 +14,11 @@ class Video < ActiveRecord::Base
       uid = url.match(/[\?|\&]v=([\w_-]*)/)[1]
       source = 'youtube'
     end
-    if video = self.find_by_uid_and_source(uid, source)
-      return video.song
-    else
+    videos = self.where(:uid => uid, :source => source).possible
+    if videos.blank?
       return nil
+    else
+      return videos[0].song
     end
   end
   

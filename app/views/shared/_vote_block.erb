@@ -1,8 +1,8 @@
 <% if current_user %>
 <div class="vote_block_song_<%= resource.id %> vote_block">
-  <% thumbs_up_class = (current_user.voted_for?(resource) ? "thumbs_up_true" : "") %>
-  <% thumbs_down_class = (current_user.voted_against?(resource) ? "thumbs_down_true" : "") %>
-  <span class="action <%= thumbs_up_class %>" title="Love it!">
+  <% thumbs_up_class = (current_user.voted_for?(resource) ? "thumbs_true" : "") %>
+  <% thumbs_down_class = (current_user.voted_against?(resource) ? "thumbs_true" : "") %>
+  <span class="action thumbs_up <%= thumbs_up_class %>" title="Love it!">
     <%= form_tag votes_thumbs_up_path, :method => :post, :remote => true, :class => 'vote_form' do %>
       <%= hidden_field_tag :voter_id, current_user.try(:id) %>
       <%= hidden_field_tag :voteable_id, resource.id %>
@@ -10,7 +10,7 @@
       <%= submit_tag ':)', :class => 'rounded_btn' %>
     <% end %>
   </span>
-  <span class="action <%= thumbs_down_class %>" title="Not that good...">
+  <span class="action thumbs_down <%= thumbs_down_class %>" title="Not that good...">
     <%= form_tag votes_thumbs_down_path, :method => :post, :remote => true, :class => 'vote_form' do %>
       <%= hidden_field_tag :voter_id, current_user.try(:id) %>
       <%= hidden_field_tag :voteable_id, resource.id %>

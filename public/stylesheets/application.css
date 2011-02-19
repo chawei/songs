@@ -151,7 +151,7 @@ form.section_form a.cancel_btn {
   }
 .song_container {
   position: relative;
-  width: 400px;
+  width: 425px;
   padding-right: 20px;
 }
 
@@ -256,14 +256,26 @@ form.section_form a.cancel_btn {
 }
 
 .video_item {
-  display: inline-block;
+  display: block;
   padding: 10px;
   margin: 0 0 5px 0;
   background-color: #f2f2f2;
 }
-a.video_item:hover, a.selected_video_item {
+.video_item:hover, .selected_video_item {
   background-color: #e6e6e6;
 }
+  .video_item .image {
+    margin: 0 10px 0 0;
+  }
+  .video_item .info {
+    width: 275px;
+  }
+  .video_item .title {
+    margin: 0 0 5px 0;
+  }
+  .video_item .notice {
+    color: #f66;
+  }
 
 /* Artist
 --------------- */

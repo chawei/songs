@@ -27,7 +27,7 @@ namespace :update do
   task :delete_duplicated_songs => :environment do
     Song.find_in_batches do |songs|
       songs.each do |song|
-        puts "== ID: #{song.id}, Performer: #{song.performer_name}"
+        puts "== ID: #{song.id}, Title: #{song.title}"
         song.title = Song.normalize_title(song.title)
         unless song.save
           song.destroy

@@ -52,15 +52,28 @@ $(function() {
     return false;
   });
   
-  $('.video_item').click(function() {
+  $('.ajax_video').click(function() {
+    var video_item = $(this).parents('.video_item')
     $('.video_item').removeClass('selected_video_item');
-    $(this).addClass('selected_video_item');
+    video_item.addClass('selected_video_item');
   });
 
   $('[rel=tipsy]').tipsy({gravity: 'n'});
   //$('.vote_block .action').tipTip();
   
   $('.autogrow').autogrow();
+  
+  
+  /* Vote Block */
+  $('.vote_block .action').click(function(){
+    var btn = $(this);
+    if (btn.hasClass('thumbs_true')) {
+      btn.removeClass('thumbs_true');
+    } else {
+      btn.parent('.vote_block').find('.action').removeClass('thumbs_true');
+      btn.addClass('thumbs_true');
+    }
+  });
 });
 
 $.fn.clearForm = function() {

@@ -6,15 +6,7 @@
 </div>
 <% end %>
 
-<div id="lyric">
-  <% if @song.content.blank? %>
-    <p>Sorry, there is no matched lyrics.<br>Wanna be the first to submit the lyrics?</p>
-    <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@song.title)}+#{URI.escape(@song.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %> and 
-  <% else %>
-    <%= simple_format @song.content  %>
-  <% end %>
-</div>
-
+<div class="action_bar">
 <% if current_user && (@song.content.blank? || current_user.own_song?(@song)) %>
   <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' %>
   <%= form_for(@song, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
@@ -37,3 +29,14 @@
     </div>
   <% end %>
 <% end %>
+</div>
+
+<div id="lyric">
+  <% if @song.content.blank? %>
+    <p>Sorry, there is no matched lyrics.<br>Wanna be the first to submit the lyrics?</p>
+    <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@song.title)}+#{URI.escape(@song.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %> and 
+  <% else %>
+    <%= simple_format @song.content  %>
+  <% end %>
+</div>
+

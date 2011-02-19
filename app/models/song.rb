@@ -17,7 +17,7 @@ class Song < ActiveRecord::Base
   has_many :participations, :dependent => :destroy
   has_many :artists, :through => :participations
   
-  has_many :relationships, :as => :target
+  has_many :relationships, :as => :target, :dependent => :destroy
   has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
   
   validates_presence_of :title, :performer_name
@@ -96,11 +96,10 @@ class Song < ActiveRecord::Base
     self.update_videos(url) unless url.blank?
   end
   
-  def update_videos(new_video_url, viewer_id = nil)
-    video = Video.new(:url => new_video_url, :created_by_id => viewer_id)
-    if video.save
-      self.videos << video
-    end
+  def update_videos(new_video_url, video_title = nil, similarity_type = nil, viewer_id = nil)
+    video = Video.new(:url => new_video_url, :created_by_id => viewer_id, 
+                      :title => video_title, :similarity => similarity_type, :song_id => self.id)
+    video.save
   end
   
   def get_youtube_video
@@ -108,18 +107,57 @@ class Song < ActiveRecord::Base
       client = YouTubeG::Client.new
       query = "#{self.performer_name} #{self.title}"
       result = client.videos_by(:query => query)
+      
+      return if result.videos.length == 0
+      
+      exact_video_index    = []
+      possible_video_index = []
       for video in result.videos
         # TODO: provide better algorithm to determine if this is the correct music video
-        #next if !(video.title =~ /#{self.performer_name}/i) || !(video.description =~ /#{self.performer_name}/i)
-        #next if !(video.title =~ /#{self.title}/i) || !(video.description =~ /#{self.title}/i)
-        if video.embeddable?
+        video_title        = Song.remove_puncuation(video.title)
+        video_description  = Song.remove_puncuation(video.description)
+        standardized_name  = Song.remove_puncuation(self.performer_name)
+        standardized_title = Song.remove_puncuation(self.title)
+        
+        next if !video.embeddable?
+        
+        point = 0
+        point += 1 if (video_title =~ /#{standardized_name}/i) || (video_description =~ /#{standardized_name}/i)
+        point += 1 if (video_title =~ /#{standardized_title}/i) || (video_description =~ /#{standardized_title}/i)
+        
+        if point == 2
+          exact_video_index << result.videos.index(video)
+        elsif point == 1
+          possible_video_index << result.videos.index(video)
+        end
+      end
+      
+      # Add the first search result even it is not the right one
+      #if possible_video_index.length == 0
+      #  possible_video_index << 0
+      #end
+      
+      index_hash = {}
+      if exact_video_index.length > 1
+        index_hash['exact'] = exact_video_index[0..3]
+      elsif possible_video_index.length > 1
+        index_hash['possible'] = possible_video_index[0..3]
+      else
+        index_hash['first_result'] = [0]
+      end
+      
+      index_hash.each do |similarity_type, video_index|
+        video_index.each do |i|
+          video = result.videos[i]
           if video_from_db = Video.find_by_uid_and_source(video.unique_id, 'youtube')
+            video_from_db.similarity = similarity_type
+            video_from_db.title = video.title
+            video_from_db.save
             self.videos << video_from_db
           else
-            self.video_url = "http://www.youtube.com/watch?v=#{video.unique_id}"
+            self.update_videos("http://www.youtube.com/watch?v=#{video.unique_id}", video.title, similarity_type)
           end
         end
-        break if self.videos.length > 3
       end  
     rescue => e
       message =  "[YouTubeG] Error when getting video with query##{query}"
@@ -134,6 +172,11 @@ class Song < ActiveRecord::Base
     items = self.class.next(self).find(:all, :limit => (limit || 1))
     return nil if items.empty?
     items.size == 1 ? items.first : items
+  end
+  
+  def self.remove_puncuation(raw_title)
+    return '' if raw_title.nil?
+    raw_title.gsub(/[[:punct:]＠＃＄％！︿～＆＊－＝＋，、。「」（）；：＼｜]/, '')
   end
   
   def self.normalize_title(title)

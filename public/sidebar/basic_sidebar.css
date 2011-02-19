@@ -86,13 +86,16 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
   height: 80%;
 }
 
+#tabs-lyric .action_bar {
+  margin: 0 0 10px 0;
+}
 #tabs-lyric .edit_lyric_btn {
-  margin: 0;
 }
 
 #tabs-lyric form {
   margin: 10px 0 0;
 }
+
 
 .tab_container form .actions {
   margin-top: 20px;
