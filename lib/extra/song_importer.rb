@@ -16,7 +16,7 @@ class SongImporter
   def self.import_song(options)
     return if options[:query].blank?
     video_url = options[:video_url]
-    if song = Video.get_song(video_url)
+    if song = Video.find_song_by_url(video_url)
       return song
     end
     

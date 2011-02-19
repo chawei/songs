@@ -1,6 +1,4 @@
-class Song < ActiveRecord::Base
-  require 'youtube_g'
-  
+class Song < ActiveRecord::Base  
   define_index do
     indexes title, performer_name
   end

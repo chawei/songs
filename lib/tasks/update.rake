@@ -7,6 +7,32 @@ namespace :update do
     end
   end
   
+  desc "update video title"
+  task :video_title => :environment do
+    client = YouTubeG::Client.new
+    Video.all.each do |video|
+      puts "== ID: #{video.id}, URL: #{video.url}"
+      next if video.uid.blank?
+      
+      begin
+        res_video = client.video_by(video.uid)
+      rescue
+        video.destroy
+        puts "Error on YoutubeG"
+        next
+      end
+      
+      if res_video
+        if res_video.embeddable?
+          video.title = res_video.title
+          video.save
+        else
+          video.destroy
+        end
+      end
+    end
+  end
+  
   task :artist => :environment do
     Song.all.each do |song|
       puts "== ID: #{song.id}, Performer: #{song.performer_name}"

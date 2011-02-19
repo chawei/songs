@@ -4,7 +4,7 @@ describe Song do
   context 'performer' do
     it 'should return performer name' do
       artist_name = "Jason Mraz"
-      song = Song.create(:performer_name => artist_name, :title => 'I am Yours')
+      song = Factory(:song, :performer_name => artist_name, :title => 'I am Yours')
       Artist.count.should == 1
       song.performer.name.should == 'Jason Mraz'
     end
