@@ -62,4 +62,14 @@ namespace :update do
     end
   end
   
+  desc "merge participation to relationship"
+  task :merge_participation => :environment do
+    Song.find_in_batches do |songs|
+      songs.each do |song|
+        puts "== ID: #{song.id}, Title: #{song.title}"
+        song.save
+      end
+    end
+  end
+  
 end

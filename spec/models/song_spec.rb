@@ -1,6 +1,18 @@
 require 'spec_helper'
 
 describe Song do
+  context "set_performer and set_writer" do
+    it "should create performer and writer based on performer_name and writer_name" do
+      artist_name = "Awesome Artist"
+      artist = Factory(:artist, :name => artist_name)
+      song = Factory(:song, :performer_name => artist_name, :writer_name => artist_name)
+      song.performers.should include artist
+      song.writers.should include artist
+      song.performer.should == artist
+      song.writer.should == artist
+    end
+  end
+  
   context 'performer' do
     it 'should return performer name' do
       artist_name = "Jason Mraz"

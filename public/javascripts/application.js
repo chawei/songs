@@ -20,20 +20,32 @@ $(function() {
   $('.tab_content .add_btn').click(function() {
     var form = $(this).parents('.tab_content').find('#add_new_form_container form');
     if (form.hasClass('expanded')) {
-      form.removeClass('expanded').slideUp();
+      form.removeClass('expanded').fadeOut();
     } else {
-      form.addClass('expanded').slideDown();
+      form.addClass('expanded').fadeIn();
+    }
+    return false;
+  });
+  
+  $('.tab_content .edit_btn').click(function() {
+    var form = $(this).parents('.item').find('.form_container form');
+    if (form.hasClass('expanded')) {
+      form.removeClass('expanded').fadeOut();
+    } else {
+      form.addClass('expanded').fadeIn();
     }
     return false;
   });
   
   $('.tab_content .cancel_btn').live('click', function() {
-    $(this).parents('form').removeClass('expanded').slideUp();
-    var item = $(this).parents('.item');
-    if(item.length > 0) {
-      item.find('.title').show();
-      item.find('.content').show();
-    }
+    var cancel_btn = $(this);
+    cancel_btn.parents('form').removeClass('expanded').fadeOut(function(){
+      var item = cancel_btn.parents('.item');
+      if(item.length > 0) {
+        item.find('.title').show();
+        item.find('.content').show();
+      }
+    });
     return false;
   });
   

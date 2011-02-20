@@ -1,3 +1,3 @@
-$('#story-item_<%= @background_story.id %> form.section_form').slideUp();
+$('#story-item_<%= @background_story.id %> form.section_form').hide().removeClass('expanded');
 $("#story-item_<%= @background_story.id %> .title").html("<%= escape_javascript(@background_story.title) %>").show();
 $("#story-item_<%= @background_story.id %> .content").html("<%= escape_javascript(text_format(auto_link(@background_story.content, :html => { :target => '_blank' }))) %>").show();

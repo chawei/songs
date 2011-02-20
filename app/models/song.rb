@@ -17,6 +17,10 @@ class Song < ActiveRecord::Base
   
   has_many :relationships, :as => :target, :dependent => :destroy
   has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
+  has_many :performers, :through => :relationships, :source => :source, :source_type => 'Artist', 
+                        :conditions => { 'relationships.relationship_type' => 'perform' }
+  has_many :writers, :through => :relationships, :source => :source, :source_type => 'Artist', 
+                        :conditions => { 'relationships.relationship_type' => 'write' }
   
   validates_presence_of :title, :performer_name
   validates_uniqueness_of :title, :scope => [:performer_name]
@@ -29,41 +33,28 @@ class Song < ActiveRecord::Base
   scope :next, lambda { |i| {:conditions => ["#{self.table_name}.id > ?", i.id], :order => "#{self.table_name}.id ASC"} }
   
   after_save :set_performer, :set_writer
-  
+  #after_create :get_youtube_video
+        
   def set_performer
     unless artist = Artist.find_by_name(performer_name)
       artist = Artist.create(:name => performer_name, :full_name => performer_name)
     end
-    unless Participation.find_by_artist_id_and_song_id_and_participation_type(artist.id, self.id, 'performer')
-      Participation.create(:artist => artist, :song => self, :participation_type => 'performer')
-    end
+    Relationship.create(:source => artist, :target => self, :relationship_type => 'perform')
   end
   
   def performer
-    performers = participations.performer
-    if performers.empty?
-      return nil
-    else
-      return performers.last.artist
-    end
+    return performers.last
   end
   
   def set_writer
     unless artist = Artist.find_by_name(writer_name)
       artist = Artist.create(:name => writer_name, :full_name => writer_name, :primary_position => 'writer')
     end
-    unless Participation.find_by_artist_id_and_song_id_and_participation_type(artist.id, self.id, 'writer')
-      Participation.create(:artist => artist, :song => self, :participation_type => 'writer')
-    end
+    Relationship.create(:source => artist, :target => self, :relationship_type => 'write')
   end
   
   def writer
-    writers = participations.writer
-    if writers.empty?
-      return nil
-    else
-      return writers.last.artist
-    end
+    return writers.last
   end
   
   def performer_name_and_title
@@ -143,7 +134,7 @@ class Song < ActiveRecord::Base
       else
         index_hash['first_result'] = [0]
       end
-      
+
       index_hash.each do |similarity_type, video_index|
         video_index.each do |i|
           video = result.videos[i]

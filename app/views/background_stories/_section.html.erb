@@ -4,7 +4,7 @@
   </h3>
   
   <div id="add_new_form_container">
-    <%= render 'background_stories/form' if @background_story %>
+    <%= render :partial => 'background_stories/form', :locals => { :background_story => @background_story } if @background_story %>
   </div>
   
   <div class="items">

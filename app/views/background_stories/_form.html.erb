@@ -1,10 +1,10 @@
-<%= form_for(@background_story, :html => { :class => 'section_form js_hidden' }, :remote => true) do |f| %>
-  <% if @background_story.errors.any? %>
+<%= form_for(background_story, :html => { :class => 'section_form js_hidden' }, :remote => true) do |f| %>
+  <% if background_story.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@background_story.errors.count, "error") %> prohibited this background_story from being saved:</h2>
+      <h2><%= pluralize(background_story.errors.count, "error") %> prohibited this background_story from being saved:</h2>
 
       <ul>
-      <% @background_story.errors.full_messages.each do |msg| %>
+      <% background_story.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -18,12 +18,12 @@
   </div>
   <div class="field">
     <div class="label"><%= f.label :content %></div>
-    <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{@background_story.id}", :class => 'autogrow' %></div>
+    <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{background_story.id}", :class => 'autogrow' %></div>
   </div>
   <div class="actions">
     <div class="submit">
       <%= f.submit %>
-      <%= link_to 'cancel', song_path(@song), :class => 'cancel_btn' %>
+      <%= link_to 'cancel', '#', :class => 'cancel_btn' %>
     </div>
   </div>
 <% end %>

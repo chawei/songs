@@ -1,4 +1,7 @@
 <div id="story-item_<%= background_story.id %>" class="item">
+  <div class="form_container">
+    <%= render :partial => 'background_stories/form', :locals => { :background_story => background_story } %>
+  </div>
   <div class="title"><%= background_story.title %></div>
   <div class="content">
     <%= text_format(auto_link(background_story.content, :html => { :target => '_blank' })) %>
@@ -13,6 +16,7 @@
       <% if current_user.own_story?(background_story) %>
       <span class="action">
         <%= link_to 'edit', edit_song_background_story_path(background_story.song.id, background_story), 
+                            :class => 'edit_btn',
                             :remote => true %>
       </span>
       <span class="action">

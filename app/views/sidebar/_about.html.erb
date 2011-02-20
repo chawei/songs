@@ -1,5 +1,7 @@
+<% if @song.performer %>
 <% @summary = @song.performer.bio_summary %>
 <% @image = @song.performer.image_small_url %>
+<% end %>
 
 <div class="vote_block_container clear_fix">
   <div class="left">Like this song?</div>

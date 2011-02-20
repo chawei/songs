@@ -2,8 +2,16 @@ Factory.sequence :youtube_url do |n|
   "http://www.youtube.com/watch?v=wI-GsAi#{n}"
 end
 
+Factory.sequence :title do |n|
+  "Title #{n}"
+end
+
+Factory.define :artist do |s|
+  s.name 'Awesome Artist'
+end
+
 Factory.define :song do |s|
-  s.title 'Title'
+  s.title { Factory.next(:title) }
   s.performer_name 'Performer'
 end
 
