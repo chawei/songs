@@ -18,3 +18,6 @@ end
 Factory.define :video do |v|
   v.url { Factory.next(:youtube_url) }
 end
+
+Factory.define :release do |r|
+end

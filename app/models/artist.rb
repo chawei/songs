@@ -45,6 +45,36 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def update_songs_release
+    puts "\n== Artist ID: #{self.id}, Name: #{self.name}"
+    self.performed_songs.each do |song|
+      puts "== Song ID: #{song.id}, Title: #{song.title}"
+      release = nil
+      unless song.main_release
+        if song.album_name.blank?
+          releases = self.releases.where(:title => "Unknown", :release_type => 'unknown')
+          if releases.exists?
+            release = releases.first
+          else
+            release = Release.create(:title => "Unknown", :release_type => 'unknown')
+            self.releases << release
+          end
+        else
+          album_name = song.album_name.strip
+          releases = self.releases.where(:title => album_name)
+          if releases.exists?
+            release = releases.first
+          else 
+            release = Release.create(:title => album_name, :release_type => 'album')
+            self.releases << release
+          end
+        end
+        release.songs << song
+        puts "== Release ID: #{release.id}, Title: #{release.title}"
+      end
+    end
+  end
+  
   protected
   
     def set_full_name

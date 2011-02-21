@@ -74,10 +74,9 @@ namespace :update do
   
   desc "update albums by album_name"
   task :albums_by_album_name => :environment do
-    Song.find_in_batches do |songs|
-      songs.each do |song|
-        puts "== ID: #{song.id}, Title: #{song.title}"
-        #if release = Release.find()
+    Artist.find_in_batches do |artists|
+      artists.each do |artist|
+        artist.update_songs_release
       end
     end
   end
