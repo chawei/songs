@@ -46,7 +46,7 @@ class Artist < ActiveRecord::Base
   end
   
   def update_songs_release
-    puts "\n== Artist ID: #{self.id}, Name: #{self.name}"
+    puts "== Artist ID: #{self.id}, Name: #{self.name}"
     self.performed_songs.each do |song|
       puts "== Song ID: #{song.id}, Title: #{song.title}"
       release = nil

@@ -20,27 +20,36 @@ textarea.lyric {
 }
 
 form.section_form .actions {
-  margin-top: 5px;
+  margin-top: 0px;
 }
 form.section_form {
   margin: 0 0 20px 0;
-  padding: 10px 20px;
-  background-color: #29ABE2;
+  padding: 10px;
+  background-color: #EDEFF4;
 }
 form.section_form .label {
   margin: 0 0 3px 0;
   color: #fff;
 }
 form.section_form .input .text {
-  width: 250px;
+  width: 327px;
+  padding: 3px;
+  color: #333;
 }
 form.section_form .input textarea {
-  width: 250px;
+  width: 323px;
   height: 100px;
+  padding: 3px 5px;
+  resize: none;
+  color: #333;
 }
 
 form.section_form a.cancel_btn {
-  color: #fff;
+  margin: 0 0 0 10px;
+}
+
+form.section_form .input .watermark {
+  color: #999;
 }
 
 /* Structure

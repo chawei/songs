@@ -96,11 +96,6 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
   margin: 10px 0 0;
 }
 
-
-.tab_container form .actions {
-  margin-top: 20px;
-}
-
 /* Notes */
 .note {
   border-bottom: 1px solid #e6e6e6;

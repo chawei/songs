@@ -6,7 +6,7 @@
 
   <div class='index_header'>
     <span class='title'>List of releases</span>
-    (<%= link_to 'add a new release', new_admin_release_path %>)
+    (<%= link_to 'add a new release', new_release_path %>)
   </div>
 
   <table class="index">
@@ -15,8 +15,6 @@
       <th>Title</th>
       <th>Release date</th>
       <th>Small image url</th>
-      <th>Medium image url</th>
-      <th>Large image url</th>
       <th></th>
     </tr>
 
@@ -26,12 +24,10 @@
       <td><%= release.title %></td>
       <td><%= release.release_date %></td>
       <td><%= release.small_image_url %></td>
-      <td><%= release.medium_image_url %></td>
-      <td><%= release.large_image_url %></td>
       <td class="actions">
-        <%= link_to 'View', [:admin, release] %> |
-        <%= link_to 'Edit', edit_admin_release_path(release) %> |
-        <%= link_to 'Delete', [:admin, release], :confirm => 'Are you sure?', :method => :delete %>
+        <%= link_to 'View', release %> |
+        <%= link_to 'Edit', edit_release_path(release) %> |
+        <%= link_to 'Delete', release, :confirm => 'Are you sure?', :method => :delete %>
       </td>
     </tr>
   <% end %>

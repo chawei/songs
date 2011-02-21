@@ -13,16 +13,14 @@
 
   <%= f.hidden_field :song_id %>
   <div class="field">
-    <div class="label"><%= f.label :title %></div>
-    <div class="input"><%= f.text_field :title, :class => 'text' %></div>
+    <div class="input"><%= f.text_field :title, :class => 'text title' %></div>
   </div>
   <div class="field">
-    <div class="label"><%= f.label :content %></div>
-    <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{background_story.id}", :class => 'autogrow' %></div>
+    <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{background_story.id}", :class => 'autogrow content' %></div>
   </div>
   <div class="actions">
     <div class="submit">
-      <%= f.submit %>
+      <%= f.submit :class => 'save_btn srounded_btn', :value => 'save' %>
       <%= link_to 'cancel', '#', :class => 'cancel_btn' %>
     </div>
   </div>

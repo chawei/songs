@@ -20,9 +20,9 @@ $(function() {
   $('.tab_content .add_btn').click(function() {
     var form = $(this).parents('.tab_content').find('#add_new_form_container form');
     if (form.hasClass('expanded')) {
-      form.removeClass('expanded').fadeOut();
+      form.removeClass('expanded').hide();
     } else {
-      form.addClass('expanded').fadeIn();
+      form.addClass('expanded').show();
     }
     return false;
   });
@@ -30,22 +30,29 @@ $(function() {
   $('.tab_content .edit_btn').live('click', function() {
     var form = $(this).parents('.item').find('.form_container form');
     if (form.hasClass('expanded')) {
-      form.removeClass('expanded').fadeOut();
+      form.removeClass('expanded').hide();
     } else {
-      form.addClass('expanded').fadeIn();
+      form.addClass('expanded').show();
     }
     return false;
   });
   
   $('.tab_content .cancel_btn').live('click', function() {
     var cancel_btn = $(this);
-    cancel_btn.parents('form').removeClass('expanded').fadeOut(function(){
+    cancel_btn.parents('form').removeClass('expanded').hide(function(){
       var item = cancel_btn.parents('.item');
       if(item.length > 0) {
         item.find('.title').show();
         item.find('.content').show();
       }
     });
+    return false;
+  });
+  
+  $('.tab_content .save_btn').live('click', function() {
+    var save_btn = $(this);
+    save_btn.val('saving..');
+    save_btn.submit();
     return false;
   });
   
@@ -86,6 +93,10 @@ $(function() {
       btn.addClass('thumbs_true');
     }
   });
+  
+  /* Stories */
+  $('#story_section form .title').watermark('Title (Optional)');
+  $('#story_section form .content').watermark('Start writing your story here...');
 });
 
 $.fn.clearForm = function() {

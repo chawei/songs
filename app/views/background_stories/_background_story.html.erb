@@ -1,4 +1,4 @@
-<div id="story-item_<%= background_story.id %>" class="item">
+<div id="story-item_<%= background_story.id %>" class="item story">
   <div class="form_container">
     <%= render :partial => 'background_stories/form', :locals => { :background_story => background_story } %>
   </div>
@@ -23,7 +23,7 @@
         <%= button_to 'delete', song_background_story_path(background_story.song, background_story), 
                                 :confirm => "Are you sure?",
                                 :method => :delete,
-                                :class => 'delete_btn',
+                                :class => 'delete_btn srounded_btn',
                                 :remote => true %>
       </span>
       <% else %>
