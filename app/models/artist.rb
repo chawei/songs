@@ -7,8 +7,8 @@ class Artist < ActiveRecord::Base
   has_many :songs, :through => :participations
   has_many :events, :dependent => :destroy
   
-  has_many :relationships, :as => :target, :dependent => :destroy
-  has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
+  has_many :parent_relationships, :class_name => "Relationship", :as => :target, :dependent => :destroy
+  has_many :releases, :through => :parent_relationships, :source => :source, :source_type => 'Release'
   
   has_many :relationships, :as => :source, :dependent => :destroy
   has_many :performed_songs, :through => :relationships, :source => :target, :source_type => 'Song',

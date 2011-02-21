@@ -27,7 +27,7 @@ $(function() {
     return false;
   });
   
-  $('.tab_content .edit_btn').click(function() {
+  $('.tab_content .edit_btn').live('click', function() {
     var form = $(this).parents('.item').find('.form_container form');
     if (form.hasClass('expanded')) {
       form.removeClass('expanded').fadeOut();

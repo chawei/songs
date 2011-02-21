@@ -32,6 +32,7 @@ class SongsController < ApplicationController
     @is_supported = true
     
     @song.get_youtube_video if @song.videos.blank?
+    @song.reload
 
     session[:current_song_id] = @song.id
     respond_to do |format|
