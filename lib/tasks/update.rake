@@ -72,4 +72,28 @@ namespace :update do
     end
   end
   
+  desc "update albums by album_name"
+  task :albums_by_album_name => :environment do
+    Song.find_in_batches do |songs|
+      songs.each do |song|
+        puts "== ID: #{song.id}, Title: #{song.title}"
+        #if release = Release.find()
+      end
+    end
+  end
+  
+  desc "update artist's lang"
+  task :artist_lang => :environment do
+    Artist.find_in_batches do |artists|
+      artists.each do |artist|
+        puts "== ID: #{artist.id}, Name: #{artist.name}"
+        if LanguageDetector.asian_language?(artist.name)
+          artist.lang = "zh-TW"
+          artist.save
+          puts "zh-TW"
+        end
+      end
+    end
+  end
+  
 end

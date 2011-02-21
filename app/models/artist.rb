@@ -28,12 +28,13 @@ class Artist < ActiveRecord::Base
   #end
   
   def grab_info
-    res = LastFm.get_artist_info(self.name)
-    self.bio_summary = res["lfm"]["artist"]["bio"]["summary"].try(:gsub, /<\/?[^>]*>/, "")
-    self.bio_full    = res["lfm"]["artist"]["bio"]["content"].try(:gsub, /<\/?[^>]*>/, "")
-    self.image_small_url = res["lfm"]["artist"]["image"][2]
-    self.image_large_url = res["lfm"]["artist"]["image"][4]
-    self.save
+    artist = Artist.find(self)
+    res = LastFm.get_artist_info(artist.name)
+    artist.bio_summary = res["lfm"]["artist"]["bio"]["summary"].try(:gsub, /<\/?[^>]*>/, "")
+    artist.bio_full    = res["lfm"]["artist"]["bio"]["content"].try(:gsub, /<\/?[^>]*>/, "")
+    artist.image_small_url = res["lfm"]["artist"]["image"][2]
+    artist.image_large_url = res["lfm"]["artist"]["image"][4]
+    artist.save
   end
   
   def preload_song_videos

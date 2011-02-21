@@ -267,6 +267,9 @@ form.section_form a.cancel_btn {
   .video_item .image {
     margin: 0 10px 0 0;
   }
+    .video_item .image img {
+      width: 120px;
+    }
   .video_item .info {
     width: 275px;
   }

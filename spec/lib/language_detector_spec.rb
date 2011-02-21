@@ -9,4 +9,14 @@ describe LanguageDetector do
       lang.should == "zh-TW"
     end
   end
+  
+  context "asian_language?" do
+    it "should return true if the given query string is zh-TW, zh-CN or ja" do
+      LanguageDetector.should_receive(:get_lang).with('我愛台灣').and_return('zh-TW')
+      LanguageDetector.should_receive(:get_lang).with('Hello').and_return('en-US')
+       
+      LanguageDetector.asian_language?('我愛台灣').should == true
+      LanguageDetector.asian_language?('Hello').should == false
+    end
+  end
 end
