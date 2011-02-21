@@ -51,6 +51,9 @@ form.section_form a.cancel_btn {
 form.section_form .input .watermark {
   color: #999;
 }
+form.section_form .input .error {
+  color: #f88;
+}
 
 /* Structure
 --------------- */

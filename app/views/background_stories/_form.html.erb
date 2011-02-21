@@ -18,10 +18,11 @@
   <div class="field">
     <div class="input"><%= f.text_area :content, :id => "bg_story_textarea_#{background_story.id}", :class => 'autogrow content' %></div>
   </div>
-  <div class="actions">
-    <div class="submit">
+  <div class="actions clear_fix">
+    <div class="submit left">
       <%= f.submit :class => 'save_btn srounded_btn', :value => 'save' %>
       <%= link_to 'cancel', '#', :class => 'cancel_btn' %>
     </div>
+    <div class="msg right"></div>
   </div>
 <% end %>
