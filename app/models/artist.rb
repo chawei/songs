@@ -13,7 +13,7 @@ class Artist < ActiveRecord::Base
                                      :secret_access_key => S3[:secret]
                                     },
                                     :bucket => S3[:bucket],
-                                    :path => "artists/profile_image/:id/:style_:basename.:extension",
+                                    :path => "artists/profile_image/:id/:style_:artist_name.:extension",
                                     :default_url => "/images/s3/artist_image/default_:style.png"
                            
   has_many :participations, :dependent => :destroy
@@ -41,6 +41,10 @@ class Artist < ActiveRecord::Base
   #def performed_songs
   #  return participations.performer.collect {|p| p.song}
   #end
+  
+  Paperclip.interpolates('artist_name') do |attachment, style|
+    attachment.instance.friendly_id
+  end
   
   def grab_info
     artist = Artist.find(self)

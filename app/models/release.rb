@@ -10,7 +10,7 @@ class Release < ActiveRecord::Base
                                      :secret_access_key => S3[:secret]
                                     },
                                     :bucket => S3[:bucket],
-                                    :path => "releases/cover_image/:id/:style_:basename.:extension",
+                                    :path => "releases/cover_image/:id/:style_:release_title.:extension",
                                     :default_url => "/images/s3/cover_image/default_:style.png"
                                     
   #validates_uniqueness_of :title, :scope => [:performer_name]
@@ -20,6 +20,10 @@ class Release < ActiveRecord::Base
   has_many :artists, :through => :relationships, :source => :target, :source_type => 'Artist'
   
   after_create :download_remote_image
+  
+  Paperclip.interpolates('release_title') do |attachment, style|
+    attachment.instance.friendly_id
+  end
   
   def primary_artist
     if artists.exists?
