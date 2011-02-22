@@ -17,4 +17,25 @@ class Release < ActiveRecord::Base
       (medium_image_url.blank? || medium_image_url == 'sizemedium') ? '/images/default_album.png' : medium_image_url
     end
   end
+  
+  def separate_releases
+    titles = self.title.split('|')
+    if titles.length > 1
+      self.title = titles[0].strip
+      self.save
+      titles[1..-1].each do |title|
+        parsed_title = title.strip
+        if release = Release.find_by_title(parsed_title)
+          if release.primary_artist == self.primary_artist
+            release.songs << self.songs
+          end
+        else
+          release = Release.create(:title => parsed_title, :release_type => 'album')
+          release.artists << self.primary_artist
+          release.songs << self.songs
+        end
+        puts "== Release ID: #{release.id} Title #{release.title}"
+      end
+    end
+  end
 end

@@ -81,6 +81,15 @@ namespace :update do
     end
   end
   
+  desc "separate releases"
+  task :separate_releases => :environment do
+    Release.find_in_batches do |releases|
+      releases.each do |release|
+        release.separate_releases
+      end
+    end
+  end
+  
   desc "update artist's lang"
   task :artist_lang => :environment do
     Artist.find_in_batches do |artists|
