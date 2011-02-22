@@ -12,4 +12,17 @@ namespace :import do
       qlink.save
     end
   end
+  
+  desc "import artists and everything"
+  task :artists => :environment do
+    Artist.all.each do |artist|
+      # TODO: if artist_name not chinese but from taiwan
+      if artist.lang == "zh-TW"
+        BoxImporter.import_artist(artist.name)
+      else
+        SongImporter.import_albums_by_artist_name(artist.name)
+      end
+      sleep(2)
+    end
+  end
 end
