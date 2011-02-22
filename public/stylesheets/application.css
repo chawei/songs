@@ -57,6 +57,13 @@ form.section_form .input textarea {
   color: #333;
 }
 
+#sidebar form.section_form .input .text {
+  width: 290px;
+}
+#sidebar form.section_form .input textarea {
+  width: 286px;
+}
+
 form.section_form a.cancel_btn {
   margin: 0 0 0 10px;
 }
