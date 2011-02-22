@@ -56,23 +56,4 @@ class Release < ActiveRecord::Base
     end
     self.destroy
   end
-  
-  def merge_releases
-    releases = Release.where(:title => self.title)
-    if releases.length > 1
-      releases.each do |release|
-        if release.primary_artist == self.primary_artist
-          release.songs.each do |song|
-            begin
-              self.songs << song
-            rescue
-              puts "-- Duplicated Song"
-            end
-          end
-          puts "== Delete Release ID: #{release.id} Title #{release.title}"
-          release.destroy
-        end
-      end
-    end
-  end
 end

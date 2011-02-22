@@ -75,6 +75,24 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def merge_releases
+    releases = self.releases.where(:title => self.title)
+    if releases.length > 1
+      only_release = releases[0]
+      releases[1..-1].each do |release|
+        release.songs.each do |song|
+          begin
+            only_release.songs << song
+          rescue
+            puts "-- Duplicated Song"
+          end
+        end
+        puts "== Delete Release ID: #{release.id} Title #{release.title}"
+        release.destroy
+      end
+    end
+  end
+  
   protected
   
     def set_full_name
