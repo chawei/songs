@@ -13,7 +13,7 @@ class Release < ActiveRecord::Base
                                     :path => "releases/cover_image/:id/:style_:release_title.:extension",
                                     :default_url => "/images/s3/cover_image/default_:style.png"
                                     
-  #validates_uniqueness_of :title, :scope => [:performer_name]
+  validates_uniqueness_of :title, :scope => [:artist_name]
   
   has_many :relationships, :as => :source, :dependent => :destroy
   has_many :songs, :through => :relationships, :source => :target, :source_type => 'Song'

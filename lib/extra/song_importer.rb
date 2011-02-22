@@ -152,7 +152,8 @@ class SongImporter
       #end
       
       unless release = Release.find_by_mbid(release_group.id.uuid)
-        release = Release.create(:title => album_name, :release_date => album_release_date, 
+        release = Release.create(:title => album_name, :artist_name => artist.name, 
+                                 :release_date => album_release_date, 
                                  :release_type => 'album', :mbid => release_group.id.uuid)
       end
       

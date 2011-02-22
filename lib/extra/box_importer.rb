@@ -65,8 +65,10 @@ class BoxImporter
     if releases.size > 0
       release = releases.first
     else
+      release_date = parse_release_date(album_year)        
       release = Release.create(:title => album_name, 
-                               :release_date => Date.strptime(album_year, "%Y-%m"),
+                               :artist_name => artist_name, 
+                               :release_date => release_date,
                                :release_type => 'album', 
                                :small_image_url => cover_url, 
                                :medium_image_url => cover_url,
@@ -107,6 +109,25 @@ class BoxImporter
     end
     
     puts "\n=== finish importing album: #{album_name} ====="
+  end
+  
+  def self.parse_release_date(raw_date)
+    release_date = nil
+    if raw_date =~ /\d{4}-\d{2}/
+      date  = raw_date.split('-')
+      year  = date[0]
+      month = date[1]
+      if month == '00'
+        release_date = Date.strptime(year, "%Y")
+      else
+        begin 
+          release_date = Date.strptime(raw_date, "%Y-%m")
+        rescue
+          puts "invalid release date"
+        end
+      end
+    end
+    return release_date
   end
   
   def self.normalize_str(str)

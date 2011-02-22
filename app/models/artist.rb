@@ -21,7 +21,8 @@ class Artist < ActiveRecord::Base
   has_many :events, :dependent => :destroy
   
   has_many :parent_relationships, :class_name => "Relationship", :as => :target, :dependent => :destroy
-  has_many :releases, :through => :parent_relationships, :source => :source, :source_type => 'Release'
+  has_many :releases, :through => :parent_relationships, :source => :source, :source_type => 'Release', 
+                      :dependent => :destroy
   
   has_many :relationships, :as => :source, :dependent => :destroy
   has_many :performed_songs, :through => :relationships, :source => :target, :source_type => 'Song',
@@ -75,7 +76,7 @@ class Artist < ActiveRecord::Base
           if releases.exists?
             release = releases.first
           else
-            release = Release.create(:title => "Unknown", :release_type => 'unknown')
+            release = Release.create(:title => "Unknown", :release_type => 'unknown', :artist_name => self.name)
             self.releases << release
           end
         else
@@ -84,7 +85,7 @@ class Artist < ActiveRecord::Base
           if releases.exists?
             release = releases.first
           else 
-            release = Release.create(:title => album_name, :release_type => 'album')
+            release = Release.create(:title => album_name, :release_type => 'album', :artist_name => self.name)
             self.releases << release
           end
         end

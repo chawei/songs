@@ -97,7 +97,7 @@ GEM
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
-    hoptoad_notifier (2.3.12)
+    hoptoad_notifier (2.4.6)
       activesupport
       builder
     hpricot (0.8.3)
@@ -251,7 +251,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   friendly_id (~> 3.1)
-  hoptoad_notifier
+  hoptoad_notifier (~> 2.4.6)
   httparty
   launchy
   mysql2

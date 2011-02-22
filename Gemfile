@@ -23,7 +23,7 @@ gem 'httparty'
 gem 'yaml_db'
 gem 'mysql2'
 gem 'thumbs_up'
-gem 'hoptoad_notifier'
+gem 'hoptoad_notifier', '~> 2.4.6'
 gem 'nokogiri'
 gem 'youtube-g'
 gem 'thinking-sphinx',

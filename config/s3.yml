@@ -8,12 +8,12 @@ test:
   key: AKIAJ6PXZ7USNNIKTG6Q
   secret: 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
 
-edge:
-  bucket: app-songs-edge
+cucumber:
+  bucket: app-songs-test
   key: AKIAJ6PXZ7USNNIKTG6Q
   secret: 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
   
-production:
-  bucket: app-songs-production
+edge:
+  bucket: app-songs-edge
   key: AKIAJ6PXZ7USNNIKTG6Q
   secret: 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

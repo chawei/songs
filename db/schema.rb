@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222171649) do
+ActiveRecord::Schema.define(:version => 20110222215608) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20110222171649) do
     t.integer  "cover_image_file_size"
     t.string   "cover_image_content_type"
     t.datetime "cover_image_updated_at"
+    t.string   "artist_name"
   end
 
   create_table "slugs", :force => true do |t|
