@@ -18,7 +18,7 @@ describe Release do
       artist.releases[1].songs.should == songs
       artist.releases[2].songs.should == songs
       
-      artist.releases.where(:title => 'Album A')[0].should == release
+      artist.releases.where(:title => 'Album A')[0].title.should == "Album A"
       artist.releases.where(:title => 'Album B')[0].title.should == "Album B"
       artist.releases.where(:title => 'Album C')[0].title.should == "Album C"
     end

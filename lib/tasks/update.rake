@@ -90,6 +90,15 @@ namespace :update do
     end
   end
   
+  desc "merge releases"
+  task :merge_releases => :environment do
+    Release.find_in_batches do |releases|
+      releases.each do |release|
+        release.merge_releases
+      end
+    end
+  end
+  
   desc "update artist's lang"
   task :artist_lang => :environment do
     Artist.find_in_batches do |artists|

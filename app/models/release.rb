@@ -23,22 +23,55 @@ class Release < ActiveRecord::Base
   def separate_releases
     titles = self.title.split('|')
     if titles.length > 1
-      self.title = titles[0].strip
-      if self.save
-        puts "== Original Release ID: #{self.id} Title #{self.title}"
-      end
-      titles[1..-1].each do |title|
+      titles[0..-1].each do |title|
         parsed_title = title.strip
         if release = Release.find_by_title(parsed_title)
           if release.primary_artist == self.primary_artist
-            release.songs << self.songs
+            self.songs.each do |song|
+              begin
+                release.songs << song
+              rescue
+                puts "-- Duplicated Song"
+              end
+            end
           end
         else
           release = Release.create(:title => parsed_title, :release_type => 'album')
-          release.artists << self.primary_artist
-          release.songs << self.songs
+          begin
+            release.artists << self.primary_artist
+          rescue
+            puts "-- Duplicated Artist"
+          end
+          
+          self.songs.each do |song|
+            begin
+              release.songs << song
+            rescue
+              puts "-- Duplicated Song"
+            end
+          end
         end
         puts "== Release ID: #{release.id} Title #{release.title}"
+      end
+    end
+    self.destroy
+  end
+  
+  def merge_releases
+    releases = Release.where(:title => self.title)
+    if releases.length > 1
+      releases.each do |release|
+        if release.primary_artist == self.primary_artist
+          release.songs.each do |song|
+            begin
+              self.songs << song
+            rescue
+              puts "-- Duplicated Song"
+            end
+          end
+          puts "== Delete Release ID: #{release.id} Title #{release.title}"
+          release.destroy
+        end
       end
     end
   end
