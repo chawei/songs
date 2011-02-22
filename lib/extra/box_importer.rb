@@ -57,7 +57,7 @@ class BoxImporter
     
     artist_name = artist.name
     cover_url = doc.css('#info .left-column img.cover')[0]['src']
-    album_name = doc.css('#info .right-column h3')[0].content.strip
+    album_name = Song.normalize_title(doc.css('#info .right-column h3')[0].content)
     album_year = doc.css('#info .right-column dl dd').children[1].content.strip
     
     release = nil
@@ -77,35 +77,43 @@ class BoxImporter
     end
     
     puts "=== begin importing album: #{album_name} ====="
-    doc.css('.song-name a').each do |link|
-      title = link.children[0].content
-      lyric_content = get_lyrics("#{BOX_HOST}#{link['href']}")
-      lyric_content = '' if lyric_content == "目前尚無相關歌詞"
-      if song = Song.find_by_performer_name_and_title(artist_name, title)
-        song.content = lyric_content if song.content.blank?
-        if song.album_name.blank?
-          song.album_name = album_name
-        elsif !(song.album_name =~ /#{album_name}/)
-          song.album_name += " | #{album_name}"
+    
+    tracks = doc.css('.song-name a')
+    
+    # TODO: add 'Force' option
+    if release.songs.size >= tracks.size 
+      puts "----- Skip -----"
+    else
+      tracks.each do |link|
+        title = Song.normalize_title(link.children[0].content)
+        lyric_content = get_lyrics("#{BOX_HOST}#{link['href']}")
+        lyric_content = '' if lyric_content == "目前尚無相關歌詞"
+        if song = Song.find_by_performer_name_and_title(artist_name, title)
+          song.content = lyric_content if song.content.blank?
+          if song.album_name.blank?
+            song.album_name = album_name
+          elsif !(song.album_name =~ /#{album_name}/)
+            song.album_name += " | #{album_name}"
+          end
+          song.year       = album_year if song.year.blank?
+          song.cover_url  = cover_url if song.cover_url.blank?
+        else      
+          song = Song.new(:performer_name => artist_name, :writer_name => artist_name, :cover_url => cover_url, 
+                            :title => title, :content => lyric_content, :album_name => album_name, :year => album_year)
         end
-        song.year       = album_year if song.year.blank?
-        song.cover_url  = cover_url if song.cover_url.blank?
-      else      
-        song = Song.new(:performer_name => artist_name, :writer_name => artist_name, :cover_url => cover_url, 
-                          :title => title, :content => lyric_content, :album_name => album_name, :year => album_year)
-      end
       
-      if song.save
-        begin
-          release.songs << song
-        rescue
-          puts "Duplicated Song"
+        if song.save
+          begin
+            release.songs << song
+          rescue
+            puts "Duplicated Song"
+          end
+          print('.')
+        else
+          puts "Error] link: #{link}"
         end
-        print('.')
-      else
-        puts "Error] link: #{link}"
+        sleep(rand(5)+3)
       end
-      sleep(rand(5)+3)
     end
     
     puts "\n=== finish importing album: #{album_name} ====="
