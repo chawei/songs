@@ -16,12 +16,12 @@
     
     <div class="field">
       <div class="label"><%= f.label :username %></div>
-      <div class="input"><%= f.text_field :username %></div>
+      <div class="input"><%= f.text_field :username, :class => 'text' %></div>
     </div>
 
     <div class="field">
       <div class="label"><%= f.label :password %></div>
-      <div class="input"><%= f.password_field :password %></div>
+      <div class="input"><%= f.password_field :password, :class => 'text' %></div>
     </div>
 
     <!-- Uncomment this if you want this functionality
@@ -30,7 +30,7 @@
     -->
 
     <div class="field">
-      <div class="submit"><%= f.submit 'Log in' %></div>
+      <div class="submit"><%= f.submit 'Log in', :class => 'rounded_btn' %></div>
     </div>
   <% end -%>
 </div>

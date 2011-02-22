@@ -1,5 +1,3 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
 $(function() {  
   $('.tab_content .add_btn').click(function() {
     var form = $(this).parents('.tab_content').find('#add_new_form_container form');

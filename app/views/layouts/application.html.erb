@@ -11,10 +11,12 @@
   </head>  
   <body>  
     <div id="container" class="no_js"> 
-      <div id="flash_msgs"> 
-        <% flash.each do |name, msg| %>  
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>  
-        <% end %>
+      <div id="flash_msgs_container">
+        <div id="flash_msgs"> 
+          <% flash.each do |name, msg| %>  
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>  
+          <% end %>
+        </div>
       </div>
       
       <div id="header_wrap">
@@ -41,12 +43,12 @@
       </div>
 
       <div id="navigation_wrap" class="clear_fix">
-        <div id="navigation">
-          <%= render_navigation %>
-          <div>
+        <div id="navigation" class="clear_fix">
+          <div class="left"><%= render_navigation %></div>
+          <div class="right">
             <%= form_tag search_path, :method => :get do %>
-            <%= text_field_tag :search %>
-            <%= submit_tag "Search" %>
+            <%= text_field_tag :search, nil, :class => 'text' %>
+            <%= submit_tag "Search", :class => 'rounded_btn' %>
             <% end %>
           </div>
         </div>

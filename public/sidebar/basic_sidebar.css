@@ -1,8 +1,11 @@
 #container { 
-  padding: 10px; 
   font-size: 12px; 
   font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif; 
   height: 100%;
+}
+
+#sidebar #container {
+  padding: 10px; 
 }
 
 .song_info {
@@ -165,7 +168,7 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
   }
 
 #tabs-about .vote_block_container {
-  background-color: #666;
+  background-color: #92CD00;
   color: #fff;
   font-size: 15px;
   height: 30px;

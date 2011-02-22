@@ -9,7 +9,12 @@ class Release < ActiveRecord::Base
     artists.first
   end
   
-  def album_url
-    (large_image_url.blank? || large_image_url == 'sizelarge') ? '/images/default_album.png' : large_image_url
+  def album_url(size = 'large')
+    case size
+    when 'large'
+      (large_image_url.blank? || large_image_url == 'sizelarge') ? '/images/default_album.png' : large_image_url
+    when 'medium'
+      (medium_image_url.blank? || medium_image_url == 'sizemedium') ? '/images/default_album.png' : medium_image_url
+    end
   end
 end

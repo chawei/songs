@@ -15,13 +15,27 @@
     <div class="bio"><%= @artist.bio_summary %></div>
   </div>
   
-  <div class="index">
-    <% @artist.performed_songs.each do |song| %>
-    <div class="song_item clear_fix">
-      <div class="detail">
-        <%= link_to song.title, song_path(song), :class => 'title' %>
-      </div>
-    </div>  
+  <div id="release_songs">
+    <% @artist.releases.each do |release| %>
+    <div id="release_<%= release.id %>" class="songs hidden">
+      <% release.songs.each do |song| %>
+      <div class="song_item clear_fix">
+        <div class="detail">
+          <%= link_to song.title, song_path(song), :class => 'title' %>
+        </div>
+      </div>  
+      <% end %>
+    </div>
     <% end %>
+  </div>
+  
+  <div id="releases_container">
+    <div id="releases" class="clear_fix">
+      <% @artist.releases.each do |release| %>
+      <a class="release" rel="release_<%= release.id %>" href="#<%= release.id %>">
+        <%= image_tag release.album_url('medium'), :title => release.title, :rel => 'top-tipsy' %>
+      </a>
+      <% end %>
+    </div>
   </div>
 </div>

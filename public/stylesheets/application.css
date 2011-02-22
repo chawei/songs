@@ -1,3 +1,16 @@
+/* Flash Message 
+---------------------- */
+#flash_msgs_container {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+#flash_msgs {
+  width: 900px;
+  margin: 0 auto;
+}
+
 .index .section {
   width: 600px;
   margin: 0 0 20px 0;
@@ -115,7 +128,7 @@ form.section_form .input .error {
 
 /* Song
 --------------- */
-.index .song_item {
+.song_item {
   width: 500px;
   margin: 0 0 10px 0;
   padding: 0 0 0px 0;
@@ -370,9 +383,38 @@ form.section_form .input .error {
       width: 100px;
     }
 
-#artist_page .index {
+#releases_container {
+  background-color: #ddd;
+  position: fixed;;
+  bottom: 0;
+  margin: 0;
+  z-index: 100;
+  width: 890px;
+  padding: 5px;
+} 
+#releases {
+  
+}
+  #releases .release {
+    display: inline-block;
+    margin: 0 5px 0 0;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    text-align: center;
+  }
+  #releases a.release:hover, #releases a.selected_release {
+    border: 1px solid #aaa;
+  }
+    #releases .release img {
+      height: 80px;
+    }
+
+#artist_page #release_songs {
   float: left;
 }
+  #artist_page .songs .song_item {
+    width: 400px;
+  }
 
 /* Note
 --------------- */

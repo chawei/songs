@@ -11,6 +11,8 @@ $(function() {
   });
 
   $('[rel=tipsy]').tipsy({gravity: 'n'});
+  $('[rel=left-tipsy]').tipsy({gravity: 'e'});
+  $('[rel=top-tipsy]').tipsy({gravity: 's'});
   //$('.vote_block .action').tipTip();
 
   /* Vote Block */
