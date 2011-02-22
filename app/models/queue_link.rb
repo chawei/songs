@@ -3,4 +3,12 @@ class QueueLink < ActiveRecord::Base
   
   default_scope :order => 'created_at DESC'
   scope :unimported, :conditions => ["imported IS NULL or imported = ?", false]
+  
+  before_create :initialize_imported
+  
+  private
+  
+    def initialize_imported
+      self.imported = false if imported.nil?
+    end
 end

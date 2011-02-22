@@ -99,6 +99,8 @@ class SongImporter
       artist.save
     end
     
+    puts "== Start importing artist: #{artist.name}"
+    
     m_artist.release_groups.each do |release_group|
       #release.id.uuid
       #release.asin
@@ -121,6 +123,7 @@ class SongImporter
       
       sleep(1)
 
+      puts "===== start importing album: #{album_name} ====="
       release_includes = Webservice::ReleaseIncludes.new(:tracks => true, :release_events => true)
       release = query.get_release_by_id(release_id, release_includes)
 
@@ -183,16 +186,22 @@ class SongImporter
         end
         begin
           release.songs << song
+          print '.'
         rescue
-          puts "Duplicated Song"
+          print "Dup Song"
         end
       end
+      
       if release.save
-        print '.'
+        release.download_remote_image
+        puts "===== end importing album: #{album_name} ====="
+        sleep(3)
       else
         print 'F'
       end
     end
+    
+    puts "== End importing artist: #{artist.name}"
   end
   
   def self.get_album_cover_images(release_group)

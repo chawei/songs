@@ -16,12 +16,21 @@ class BoxImporter
   
   def self.get_artist_url(artist_name)
     doc = Nokogiri::HTML(open("#{BOX_HOST}/search.php?word=#{URI.escape(artist_name)}&search=song&search_lang="))
-    return BOX_HOST+doc.css('table tr')[1].children[2].children[0].attributes['href'].value
+    
+    rows = doc.css('table tr')
+    rows[1..-1].each do |row|
+      if row.children[2].text =~ /#{artist_name}/
+        return BOX_HOST+row.children[2].children[0].attributes['href'].value
+      end
+    end
+    return nil
   end
   
   def self.import_artist(artist_name)
     if artist_link = get_artist_url(artist_name)
+      puts "== Start importing artist: #{artist_name}"
       import_artist_albums(artist_link, artist_name)
+      puts "== End importing artist: #{artist_name}"
     end
   end
   
