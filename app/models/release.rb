@@ -1,6 +1,8 @@
 class Release < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
   
+  #validates_uniqueness_of :title, :scope => [:performer_name]
+  
   has_many :relationships, :as => :source, :dependent => :destroy
   has_many :songs, :through => :relationships, :source => :target, :source_type => 'Song'
   has_many :artists, :through => :relationships, :source => :target, :source_type => 'Artist'
@@ -22,7 +24,9 @@ class Release < ActiveRecord::Base
     titles = self.title.split('|')
     if titles.length > 1
       self.title = titles[0].strip
-      self.save
+      if self.save
+        puts "== Original Release ID: #{self.id} Title #{self.title}"
+      end
       titles[1..-1].each do |title|
         parsed_title = title.strip
         if release = Release.find_by_title(parsed_title)
