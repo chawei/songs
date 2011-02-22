@@ -10,7 +10,7 @@
         <div class="name"><%= @artist.name %></div>
         <div class="position"><%= @artist.primary_position %></div>
       </div>
-      <div class="image"><%= image_tag @artist.image_large_url if @artist.image_large_url %></div>
+      <div class="image"><%= image_tag @artist.profile_image(:large) %></div>
     </div>
     <div class="bio"><%= @artist.bio_summary %></div>
   </div>
@@ -33,7 +33,7 @@
     <div id="releases" class="clear_fix">
       <% @artist.releases.each do |release| %>
       <a class="release" rel="release_<%= release.id %>" href="#<%= release.id %>">
-        <%= image_tag release.album_url('medium'), :title => release.title, :rel => 'top-tipsy' %>
+        <%= image_tag release.cover_image(:medium), :title => release.title, :rel => 'top-tipsy' %>
       </a>
       <% end %>
     </div>

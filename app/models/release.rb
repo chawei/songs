@@ -1,14 +1,31 @@
 class Release < ActiveRecord::Base
   has_friendly_id :title, :use_slug => true
   
+  has_attached_file :cover_image, :styles => { :large  => "300x300>", 
+                                               :medium => "150x150>",
+                                               :thumb  => "75x75>" },
+                                    :storage => :s3, 
+                                    :s3_credentials => {
+                                     :access_key_id => S3[:key],
+                                     :secret_access_key => S3[:secret]
+                                    },
+                                    :bucket => S3[:bucket],
+                                    :path => "releases/cover_image/:id/:style_:basename.:extension",
+                                    :default_url => "/images/s3/cover_image/default_:style.png"
+                                    
   #validates_uniqueness_of :title, :scope => [:performer_name]
   
   has_many :relationships, :as => :source, :dependent => :destroy
   has_many :songs, :through => :relationships, :source => :target, :source_type => 'Song'
   has_many :artists, :through => :relationships, :source => :target, :source_type => 'Artist'
   
+  after_create :download_remote_image
+  
   def primary_artist
-    artists.first
+    if artists.exists?
+      artist = Artist.find_by_id(artists.first.id)
+    end
+    return artist
   end
   
   def album_url(size = 'large')
@@ -56,4 +73,20 @@ class Release < ActiveRecord::Base
     end
     self.destroy
   end
+  
+  def download_remote_image
+    if self.large_image_url
+      self.cover_image = do_download_remote_image
+      self.save
+    end
+  end
+  
+  private
+  
+    def do_download_remote_image
+      io = open(URI.parse(large_image_url))
+      def io.original_filename; base_uri.path.split('/').last; end
+      io.original_filename.blank? ? nil : io
+    rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
+    end
 end

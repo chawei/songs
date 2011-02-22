@@ -10,8 +10,8 @@ gem 'rails', '3.0.3'
 
 # Bundle the extra gems:
 # gem 'bj'
-# gem 'aws-s3', :require => 'aws/s3'
 
+gem 'aws-s3', :require => 'aws/s3'
 gem 'simple-navigation'
 gem 'friendly_id', '~> 3.1'
 gem 'authlogic'

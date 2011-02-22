@@ -14,11 +14,28 @@ class BoxImporter
     return lyric_content.content
   end
   
+  def self.get_artist_url(artist_name)
+    doc = Nokogiri::HTML(open("#{BOX_HOST}/search.php?word=#{URI.escape(artist_name)}&search=song&search_lang="))
+    return BOX_HOST+doc.css('table tr')[1].children[2].children[0].attributes['href'].value
+  end
+  
+  def self.import_artist(artist_name)
+    if artist_link = get_artist_url(artist_name)
+      import_artist_albums(artist_link, artist_name)
+    end
+  end
+  
   def self.import_artist_albums(artist_link, artist_name = nil)
     doc = Nokogiri::HTML(open(artist_link))
+    artist_name = doc.css("#breadcrumbs li a")[1].content if artist_name.blank?
+    artist_image_url = doc.css('#info .left-column img')[0]['src']
+    artist = Artist.find_or_create_by_name(artist_name)
+    artist.image_small_url = artist_image_url
+    artist.image_large_url = artist_image_url
+    artist.save
     
     doc.css("#all-albums li .item a.url").each do |link|
-      import_album("#{BOX_HOST}#{link['href']}", artist_name)
+      import_album("#{BOX_HOST}#{link['href']}", artist)
       
       sleep_time = rand(10)+10
       puts "\n===== sleep #{sleep_time} secs ====="
@@ -26,15 +43,27 @@ class BoxImporter
     end
   end
   
-  def self.import_album(album_link, artist_name = nil)
+  def self.import_album(album_link, artist)
     doc = Nokogiri::HTML(open(album_link))
     
+    artist_name = artist.name
     cover_url = doc.css('#info .left-column img.cover')[0]['src']
-    if artist_name.blank?
-      artist_name = doc.css("#breadcrumbs li a")[1].content
+    album_name = doc.css('#info .right-column h3')[0].content.strip
+    album_year = doc.css('#info .right-column dl dd').children[1].content.strip
+    
+    release = nil
+    releases = artist.releases.where(:title => album_name)
+    if releases.size > 0
+      release = releases.first
+    else
+      release = Release.create(:title => album_name, 
+                               :release_date => Date.strptime(album_year, "%Y-%m"),
+                               :release_type => 'album', 
+                               :small_image_url => cover_url, 
+                               :medium_image_url => cover_url,
+                               :large_image_url => cover_url)
+      artist.releases << release
     end
-    album_name = doc.css('#info .right-column h3')[0].content
-    album_year = doc.css('#info .right-column dl dd').children[1].content
     
     puts "=== begin importing album: #{album_name} ====="
     doc.css('.song-name a').each do |link|
@@ -56,6 +85,11 @@ class BoxImporter
       end
       
       if song.save
+        begin
+          release.songs << song
+        rescue
+          puts "Duplicated Song"
+        end
         print('.')
       else
         puts "Error] link: #{link}"

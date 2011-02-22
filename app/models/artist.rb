@@ -1,8 +1,21 @@
+require 'open-uri'
+
 class Artist < ActiveRecord::Base
   define_index do
     indexes name
   end
-  
+    
+  has_attached_file :profile_image, :styles => { :large => "300x300>", 
+                                                 :thumb => "100x100>" },
+                                    :storage => :s3, 
+                                    :s3_credentials => {
+                                     :access_key_id => S3[:key],
+                                     :secret_access_key => S3[:secret]
+                                    },
+                                    :bucket => S3[:bucket],
+                                    :path => "artists/profile_image/:id/:style_:basename.:extension",
+                                    :default_url => "/images/s3/artist_image/default_:style.png"
+                           
   has_many :participations, :dependent => :destroy
   has_many :songs, :through => :participations
   has_many :events, :dependent => :destroy
@@ -22,6 +35,8 @@ class Artist < ActiveRecord::Base
   
   before_validation :set_full_name
   before_create :set_default_values
+  after_create  :add_queue_link
+  after_create  :download_remote_image
   
   #def performed_songs
   #  return participations.performer.collect {|p| p.song}
@@ -95,6 +110,13 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def download_remote_image
+    if self.image_large_url
+      self.profile_image = do_download_remote_image
+      self.save
+    end
+  end
+  
   protected
   
     def set_full_name
@@ -107,5 +129,17 @@ class Artist < ActiveRecord::Base
       self.artist_type ||= 'individual'
       self.primary_position ||= 'performer'
       self.secondary_position ||= 'writer'
+      self.lang = 'zh-TW' if LanguageDetector.asian_language?(self.name)
+    end
+    
+    def do_download_remote_image
+      io = open(URI.parse(image_large_url))
+      def io.original_filename; base_uri.path.split('/').last; end
+      io.original_filename.blank? ? nil : io
+    rescue # catch url errors with validations instead of exceptions (Errno::ENOENT, OpenURI::HTTPError, etc...)
+    end
+    
+    def add_queue_link
+      QueueLink.create(:artist_name => self.name)
     end
 end

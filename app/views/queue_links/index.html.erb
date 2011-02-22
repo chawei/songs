@@ -11,7 +11,7 @@
 
   <table class="index">
     <tr>
-      <th>Artist url</th>
+      <th>Artist URL</th>
       <th>Artist name</th>
       <th>Imported</th>
       <th></th>
@@ -19,7 +19,7 @@
 
   <% @queue_links.each do |queue_link| %>
     <tr>
-      <td><%= queue_link.artist_url %></td>
+      <td><%= link_to truncate(queue_link.artist_url, :length => 50), queue_link.artist_url, :target => '_blank' %></td>
       <td><%= queue_link.artist_name %></td>
       <td><%= queue_link.imported %></td>
       <td class="actions">

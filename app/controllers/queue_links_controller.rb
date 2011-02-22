@@ -44,7 +44,7 @@ class QueueLinksController < ApplicationController
 
     respond_to do |format|
       if @queue_link.save
-        format.html { redirect_to(@queue_link, :notice => 'Queue link was successfully created.') }
+        format.html { redirect_to(queue_links_url, :notice => 'Queue link was successfully created.') }
         format.xml  { render :xml => @queue_link, :status => :created, :location => @queue_link }
       else
         format.html { render :action => "new" }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110221001706) do
+ActiveRecord::Schema.define(:version => 20110222171649) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,10 @@ ActiveRecord::Schema.define(:version => 20110221001706) do
     t.datetime "updated_at"
     t.string   "mbid"
     t.string   "lang"
+    t.string   "profile_image_file_name"
+    t.integer  "profile_image_file_size"
+    t.string   "profile_image_content_type"
+    t.datetime "profile_image_updated_at"
   end
 
   create_table "authorizations", :force => true do |t|
@@ -103,6 +107,10 @@ ActiveRecord::Schema.define(:version => 20110221001706) do
     t.string   "mbid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cover_image_file_name"
+    t.integer  "cover_image_file_size"
+    t.string   "cover_image_content_type"
+    t.datetime "cover_image_updated_at"
   end
 
   create_table "slugs", :force => true do |t|
