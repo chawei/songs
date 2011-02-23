@@ -62,7 +62,7 @@ class Song < ActiveRecord::Base
   end
   
   def main_release
-    releases.first
+    releases.where(:release_type => 'album').first
   end
   
   def refresh_lyrics
