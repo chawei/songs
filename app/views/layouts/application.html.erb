@@ -28,15 +28,14 @@
               hello <span class="name"><%= link_to current_user.username, account_url %></span>
             </div>
             <%- end -%>
-            <div id="actions">
-              <div class="action_1">
-                <%- if current_user -%>
-                <%= link_to 'logout', logout_path  %>
-                <%- else -%>
-                <%= link_to 'sign up', signup_path, :class => 'signup' %>
-                <%= link_to 'log in', login_path %>
-                <%- end -%>
-              </div>
+            <div class="actions">
+              <%- if current_user -%>
+              <%= link_to 'setting', account_edit_path  %>
+              <%= link_to 'logout', logout_path  %>
+              <%- else -%>
+              <%= link_to 'sign up', signup_path, :class => 'signup' %>
+              <%= link_to 'log in', login_path %>
+              <%- end -%>
             </div>
           </div> <!-- END login_box -->
         </div> <!-- END header -->

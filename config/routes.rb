@@ -34,6 +34,7 @@ Songs::Application.routes.draw do
   match '/logout', :to => 'user_sessions#destroy'
   match '/signup', :to => 'users#new'
   match '/account', :to => "users#account"
+  match '/account/edit', :to => "users#edit"
   
   match "/auth/:provider/callback", :to => "authorizations#create"
   match "/auth/failure", :to => "authorizations#failure"
@@ -44,7 +45,7 @@ Songs::Application.routes.draw do
   post "toggle_follow", :to => "follows#toggle_follow"
 
   resource :user_session
-  resources :users, :constraints => { :id => /.*/ }
+  resources :users, :constraints => { :id => /.*/ }, :only => [:show]
   resources :songs do
     resources :background_stories
     resources :notes
