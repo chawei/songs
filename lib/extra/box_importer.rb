@@ -43,7 +43,7 @@ class BoxImporter
     artist.image_large_url = artist_image_url
     artist.save
     
-    doc.css("#all-albums li .item a.url").each do |link|
+    doc.css("#all-albums li .item a.url").reverse.each do |link|
       import_album("#{BOX_HOST}#{link['href']}", artist)
       
       sleep_time = rand(10)+10

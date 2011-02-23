@@ -24,7 +24,7 @@
       </div>
       <%- if current_user -%>
       <div class="actions">
-        <%= link_to 'Edit', edit_song_path(song) if current_user.own_song?(song) or current_user.admin? %>
+        <%= link_to 'Edit', edit_song_path(song) if current_user.admin? %>
         <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete if current_user.admin? %>
       </div>
       <%- end -%>
