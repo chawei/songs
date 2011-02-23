@@ -1,3 +1,16 @@
+/* Dashboard
+---------------------- */
+.activity {
+  margin: 0 0 10px 0;
+}
+  .activity a {
+    color: #0084B4;
+  }
+  .activity span {
+    margin: 0 3px 0 0;
+    color: #888;
+  }
+
 /* Flash Message 
 ---------------------- */
 #flash_msgs_container {
@@ -438,3 +451,9 @@ form.section_form .input .error {
   .note .content {
     font-size: 16px;
   }
+  
+/* Follow Block
+--------------- */
+.follow_block_container {
+  margin: 0 0 10px 0;
+}

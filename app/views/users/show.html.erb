@@ -1,10 +1,16 @@
 <% title "#{@user.username}'s profile" %>
 
+<% unless current_user == @user %>
+<div class="follow_block_container">
+<%= render :partial => 'shared/follow_block', :locals => { :resource => @user } %>
+</div>
+<% end %>
+
 <div class="index_container">
   <div class="description">
   </div>
   
-  <div id="profile_tabs">
+  <div id="profile_tabs" class="js_hidden">
     <ul>
   	  <li><a href="#profile_tabs-like">Like</a></li>
   	  <li><a href="#profile_tabs-note">Notes</a></li>

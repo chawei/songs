@@ -40,6 +40,8 @@ Songs::Application.routes.draw do
   
   post "votes/thumbs_up"
   post "votes/thumbs_down"
+  
+  post "toggle_follow", :to => "follows#toggle_follow"
 
   resource :user_session
   resources :users, :constraints => { :id => /.*/ }

@@ -1,0 +1,14 @@
+<% if current_user %>
+<div class="follow_block">
+  <% follow_class = (current_user.following?(resource) ? "follow_true" : "") %>
+  <% follow_text = (current_user.following?(resource) ? "Unfollow" : "Follow") %>
+  <span class="action follow_btn <%= follow_class %>" title="<%= follow_text %>">
+    <%= form_tag toggle_follow_path, :method => :post, :remote => true, :class => 'follow_form' do %>
+      <%= hidden_field_tag :follower_id, current_user.try(:id) %>
+      <%= hidden_field_tag :followable_id, resource.id %>
+      <%= hidden_field_tag :followable_class, resource.class.to_s %>
+      <%= submit_tag follow_text, :class => 'submit_btn rounded_btn' %>
+    <% end %>
+  </span>
+</div>
+<% end %>

@@ -14,7 +14,7 @@
       <th>Release type</th>
       <th>Title</th>
       <th>Release date</th>
-      <th>Small image url</th>
+      <th>Artist</th>
       <th></th>
     </tr>
 
@@ -23,7 +23,7 @@
       <td><%= release.release_type %></td>
       <td><%= release.title %></td>
       <td><%= release.release_date %></td>
-      <td><%= release.small_image_url %></td>
+      <td><%= link_to release.primary_artist.name, artist_path(release.primary_artist) %></td>
       <td class="actions">
         <%= link_to 'View', release %> |
         <%= link_to 'Edit', edit_release_path(release) %> |

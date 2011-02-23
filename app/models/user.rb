@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   has_friendly_id :username, :use_slug => true
   
+  acts_as_followable
+  acts_as_follower
+  
   attr_accessor :password_confirmation
   has_many :authorizations, :dependent => :destroy
   

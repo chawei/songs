@@ -1,0 +1,27 @@
+<% title "Welcome", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class="index">
+    <div class="section">
+      <h2>Things you follow</h2>
+      <% @votes.each do |vote| %>
+        <div class="activity">
+          <span class="following_user"><%= link_to vote.voter.username, user_path(vote.voter) %></span>
+          <span><%= vote.vote? ? "likes" : "doesn't like" %></span>
+          <span class="followable"><%= link_to vote.voteable.title, song_path(vote.voteable) %></span>
+          <% if vote.voteable.performer %>
+          <span>by</span>
+          <span class="followable"><%= link_to vote.voteable.performer.name, artist_path(vote.voteable.performer) %></span>
+          <span><%= time_ago_in_words(vote.created_at) %> ago</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+  
+
+</div>
