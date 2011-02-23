@@ -15,6 +15,9 @@ $(function() {
   $('[rel=top-tipsy]').tipsy({gravity: 's'});
   //$('.vote_block .action').tipTip();
 
+  /* Search */
+  $('#search').watermark('Artist name or Song title');
+  
   /* Vote Block */
   $('.vote_block .action').click(function(){
     var btn = $(this);

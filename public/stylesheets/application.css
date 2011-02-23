@@ -11,6 +11,22 @@
     color: #888;
   }
 
+input#search {
+  width: 200px;
+  height: 20px;
+  padding: 3px 3px 0;
+  color: #666;
+}
+
+/* Search page
+---------------------- */
+#search_page h2 {
+  margin: 0 0 15px 0;
+}
+#search_page .section {
+  margin-bottom: 10px;
+}
+
 /* Flash Message 
 ---------------------- */
 #flash_msgs_container {
