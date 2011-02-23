@@ -397,14 +397,16 @@ form.section_form .input .error {
   margin: 0;
   z-index: 100;
   width: 890px;
-  padding: 5px;
+  height: 85px;
+  padding: 5px 5px 0 5px;
+  overflow: auto;
 } 
 #releases {
-  
 }
   #releases .release {
     display: inline-block;
-    margin: 0 5px 0 0;
+    float: left;
+    margin: 0 5px 5px 0;
     border: 1px solid #ddd;
     background-color: #fff;
     text-align: center;
@@ -418,6 +420,7 @@ form.section_form .input .error {
 
 #artist_page #release_songs {
   float: left;
+  padding: 0 0 50px 0;
 }
   #artist_page .songs .song_item {
     width: 400px;
