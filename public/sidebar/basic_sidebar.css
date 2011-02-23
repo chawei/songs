@@ -77,6 +77,7 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 	clear: both;
 	float: left; width: 100%;
 	background: #fff;
+	min-height: 250px;
 }
 .tab_content {
 	padding: 20px;

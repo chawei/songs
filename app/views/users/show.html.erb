@@ -10,7 +10,7 @@
   <div class="description">
   </div>
   
-  <div id="profile_tabs" class="js_hidden">
+  <div id="profile_tabs" class="js_hidden clear_fix">
     <ul>
   	  <li><a href="#profile_tabs-like">Like</a></li>
   	  <li><a href="#profile_tabs-note">Notes</a></li>
@@ -18,7 +18,8 @@
 
     <div class="tab_container">
       <div id="profile_tabs-like" class="tab_content">
-        <div class="index">    
+        <div class="index">
+          <% if @songs.size > 0 %>
           <%- @songs.each do |song| -%>
           <div class="song_item clear_fix">
             <div class="detail">
@@ -35,19 +36,27 @@
             <%- end -%>
           </div>
           <%- end -%>
-    
           <%= will_paginate @songs %>
+          
+          <% else %>
+          Start liking a song at the right sidebar of the song page!
+          <% end %>
         </div>
       </div>
   
       <div id="profile_tabs-note" class="tab_content">
         <div class="index"> 
-        <% @notes.each do |note| %>
-        <div class="song_item clear_fix">
-          <div class="left"><%= note.title %></div>
-          <div class="right"><%= link_to note.song.title, song_path(note.song) %></div>
+          <% if @notes.size > 0 %>
+          <% @notes.each do |note| %>
+          <div class="song_item clear_fix">
+            <div class="left"><%= note.title %></div>
+            <div class="right"><%= link_to note.song.title, song_path(note.song) %></div>
+          </div>
+          <% end %>
+          <% else %>
+          Start writing some notes at the right sidebar of the song page!
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
   </div>
