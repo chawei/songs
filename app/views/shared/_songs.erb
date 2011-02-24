@@ -1,0 +1,20 @@
+<div class="section">
+  <%- songs.each do |song| -%>
+  <div class="song_item clear_fix">
+    <div class="detail">
+      <%= link_to song.title, song_path(song), :class => 'title' %>
+      <% if song.performer %>
+      <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
+      <% end %>
+    </div>
+    <%- if current_user and current_user.admin? -%>
+    <div class="actions">
+      <%= link_to 'Edit', edit_song_path(song) %>
+      <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete %>
+    </div>
+    <%- end -%>
+  </div>
+  <%- end -%>
+  
+</div>
+<%= will_paginate songs %>
