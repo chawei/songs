@@ -22,35 +22,46 @@
       <div id="header_wrap">
         <div id="header" class="clear_fix">
           <div id="logo"><%= link_to "songBERG".html_safe, root_path %></div>
-          <div id="login_box">
-            <%- if current_user -%>
-            <div id="greeting">
-              hello <span class="name"><%= link_to current_user.username, account_url %></span>
-            </div>
-            <%- end -%>
-            <div class="actions">
+          
+          <div id="searchfield_container" class="left">
+            <%= form_tag search_path, :method => :get do %>
+            <%= text_field_tag :search, nil, :class => 'text' %>
+            <%= submit_tag "Search", :class => 'rounded_btn', :id => "search_btn" %>
+            <% end %>
+          </div>
+          
+          <div id="navigation" class="left">
+            <div class="left"><%= render_navigation %></div>
+          </div>
+          
+          <div id="login_box_container">
+            <div id="login_box">
+              <div id="greeting">
+                <%- if current_user -%>
+                <%= link_to current_user.username, account_url, :id => 'account_btn' %>
+                <%- else -%>
+                <%= link_to 'sign up', signup_path, :class => 'signup' %>
+                <%= link_to 'log in', login_path %>
+                <%- end -%>
+              </div>
               <%- if current_user -%>
-              <%= link_to 'setting', account_edit_path  %>
-              <%= link_to 'logout', logout_path  %>
-              <%- else -%>
-              <%= link_to 'sign up', signup_path, :class => 'signup' %>
-              <%= link_to 'log in', login_path %>
+              <div class="actions hidden">
+                <%- if current_user -%>
+                <%= link_to 'setting', account_edit_path  %>
+                <%= link_to 'logout', logout_path  %>
+                <%- else -%>
+                <%= link_to 'sign up', signup_path, :class => 'signup' %>
+                <%= link_to 'log in', login_path %>
+                <%- end -%>
+              </div>
               <%- end -%>
-            </div>
-          </div> <!-- END login_box -->
+            </div> <!-- END login_box -->
+          </div>
         </div> <!-- END header -->
       </div>
 
       <div id="navigation_wrap" class="clear_fix">
-        <div id="navigation" class="clear_fix">
-          <div class="left"><%= render_navigation %></div>
-          <div id="searchfield_container" class="right">
-            <%= form_tag search_path, :method => :get do %>
-            <%= text_field_tag :search, nil, :class => 'text' %>
-            <%= submit_tag "Search", :class => 'rounded_btn' %>
-            <% end %>
-          </div>
-        </div>
+
       </div>
       
       <div id="main_wrap">

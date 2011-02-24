@@ -36,6 +36,7 @@
 	border-left: 1px solid #999;
 	width: 100%;
 }
+
 .ui-tabs ul li {
 	float: left;
 	margin: 0;
@@ -68,7 +69,10 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 
 
 .tab_container {
+  -moz-box-shadow: rgba(0, 0, 0, 0.417969) 0 2px 9px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.417969) 0 2px 9px;
+  box-shadow: rgba(0, 0, 0, 0.417969) 0 2px 9px;
+  
   border-bottom-left-radius: 3px 3px;
   border-bottom-right-radius: 3px 3px;
 	border: 1px solid #999;
@@ -81,6 +85,33 @@ html .ui-tabs ul li.ui-tabs-selected, html .ui-tabs ul li.ui-tabs-selected a:hov
 }
 .tab_content {
 	padding: 20px;
+}
+
+ .ui-tabs ul,  .ui-tabs ul li {
+  border: none;
+  z-index: 1;
+  position: relative;
+}
+ .tab_container {
+  border: none;
+  position: relative;
+  z-index: 10;
+}
+
+html .ui-tabs ul li.ui-tabs-selected { /*--Makes sure that the active tab does not listen to the hover properties--*/
+	background: #f2f2f2;
+	border-bottom: 1px solid #fff; /*--Makes the active tab look like it's connected with its content--*/
+}
+html .ui-tabs ul li.ui-tabs-selected a:hover {
+  background: #f2f2f2;
+	border-bottom: 1px solid #fff; /*--Makes the active tab look like it's connected with its content--*/
+}
+ .ui-tabs ul li {
+  background-color: #fff;
+}
+ .ui-tabs ul li a {
+  color: #29ABE2;
+  font-weight: bold;
 }
 
 /* Lyric */

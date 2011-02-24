@@ -11,15 +11,31 @@
     color: #888;
   }
 
-input#search {
-  width: 200px;
-  height: 20px;
-  padding: 3px 3px 0;
-  color: #666;
-}
-
 /* Search page
 ---------------------- */
+#searchfield_container {
+  
+}
+#searchfield_container form {
+  position: relative;
+  width: 250px;
+  height: 23px;
+}
+input#search {
+  width: 240px;
+  height: 22px;
+  line-height: 22px;
+  padding: 3px 5px;
+  color: #666;
+  position: absolute;
+}
+#search_btn {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  width: 56px;
+} 
+
 #search_page h2 {
   margin: 0 0 15px 0;
 }
@@ -332,7 +348,7 @@ form.section_form .input .error {
       width: 120px;
     }
   .video_item .info {
-    width: 275px;
+    width: 270px;
   }
   .video_item .title {
     margin: 0 0 5px 0;

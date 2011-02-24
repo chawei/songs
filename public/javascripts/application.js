@@ -42,4 +42,23 @@ $(function() {
     }
   });
   
+  /* Login */
+  $('a#account_btn').click(function(e){
+    e.preventDefault();
+    if ($('#login_box .actions').hasClass('hidden')) {
+      $('a#account_btn').addClass('selected');
+      $('#login_box .actions').removeClass('hidden');
+    } else {
+      $('a#account_btn').removeClass('selected');
+      $('#login_box .actions').addClass('hidden');
+    }
+  });
+  
+  $('body').click(function(e){
+    if (e.target.id != "account_btn") {
+      $('a#account_btn').removeClass('selected');
+      $('#login_box .actions').addClass('hidden');
+    }
+  });
+  
 });

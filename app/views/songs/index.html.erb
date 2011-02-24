@@ -5,7 +5,7 @@
   </div>
 
   <div class='index_header'>
-    <%= link_to 'add a new song', new_song_path, :class => 'rounded_btn' %>
+    <%= link_to 'add a new song', new_song_path, :class => 'rounded_btn' if current_user.try(:admin?) %>
   </div>
 
   <div class="index">
