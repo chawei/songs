@@ -42,9 +42,13 @@ class Video < ActiveRecord::Base
     
     def set_title
       if self.source == 'youtube'
-        client = YouTubeG::Client.new
-        result = client.video_by(self.uid)
-        self.title = result.title
+        begin
+          client = YouTubeG::Client.new
+          result = client.video_by(self.uid)
+          self.title = result.title
+        rescue
+          puts "Error"
+        end
       end
     end
 end
