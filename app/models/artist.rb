@@ -145,6 +145,7 @@ class Artist < ActiveRecord::Base
     end
     
     def add_queue_link
-      QueueLink.create(:artist_name => self.name)
+      queue = QueueLink.create(:artist_name => self.name)
+      queue.save
     end
 end
