@@ -26,6 +26,7 @@ gem 'thumbs_up'
 gem 'hoptoad_notifier', '~> 2.4.6'
 gem 'nokogiri'
 gem 'youtube-g'
+gem 'youtube_it'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
   :branch  => 'rails3',

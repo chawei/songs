@@ -9,7 +9,7 @@ namespace :update do
   
   desc "update video title"
   task :video_title => :environment do
-    client = YouTubeG::Client.new
+    client = YouTubeIt::Client.new
     Video.all.each do |video|
       puts "== ID: #{video.id}, URL: #{video.url}"
       next if video.uid.blank?

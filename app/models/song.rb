@@ -93,7 +93,7 @@ class Song < ActiveRecord::Base
   
   def get_youtube_video
     begin
-      client = YouTubeG::Client.new
+      client = YouTubeIt::Client.new
       query = "#{self.performer_name} #{self.title}"
       result = client.videos_by(:query => query)
       
@@ -149,7 +149,7 @@ class Song < ActiveRecord::Base
         end
       end  
     rescue => e
-      message =  "[YouTubeG] Error when getting video with query##{query}"
+      message =  "[YouTubeIt] Error when getting video with query##{query}"
       if defined?(HoptoadNotifier) == "constant"
         HoptoadNotifier.notify(:error_class => e.class.name, :error_message => "#{e.message} | #{message}")
       end

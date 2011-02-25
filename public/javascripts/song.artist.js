@@ -1,4 +1,7 @@
 $(function(){
+  $('.songs:first').removeClass('hidden');
+  $('#releases .release:first').addClass('selected_release');
+  
   $('#releases .release').click(function(e){
     e.preventDefault();
     

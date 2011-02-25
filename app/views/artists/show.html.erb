@@ -1,6 +1,6 @@
 <div class="nav_links">
-  <%= link_to 'Edit', edit_artist_path(@artist) if current_user && current_user.admin? %>
-  <%= link_to 'Back to List', artists_path %>
+  <%= link_to 'back', :back, :class => 'rounded_btn' %>
+  <%= link_to 'edit', edit_artist_path(@artist), :class => 'rounded_btn' if current_user && current_user.admin? %>
 </div>
 
 <div id="artist_page" class="show_container clear_fix">
