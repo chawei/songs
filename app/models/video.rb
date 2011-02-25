@@ -5,6 +5,7 @@ class Video < ActiveRecord::Base
   validates_presence_of :uid, :url, :song_id
   validates_uniqueness_of :uid, :scope => [:source, :song_id]
   before_validation :parse_url
+  before_create :set_title
   
   scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
   
@@ -36,6 +37,14 @@ class Video < ActiveRecord::Base
       rescue => e
         puts "=== URL: #{self.url}"
         puts e.message
+      end
+    end
+    
+    def set_title
+      if self.source == 'youtube'
+        client = YouTubeG::Client.new
+        result = client.videos_by(self.uid)
+        self.title = result.title
       end
     end
 end
