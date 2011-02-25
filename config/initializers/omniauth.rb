@@ -3,7 +3,8 @@ require 'openid/store/filesystem'
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :twitter,  'w4wX3GoEZTUpKLNZBfHXw', 'PNr3uhnXzT9sczvvEs129dCDf5z6lSQIqmSre4sL88'
-  provider :facebook, '119902858073845', '7e3cf5151047100e0df9dd923fa42b5e'
+  provider :facebook, '119902858073845', '7e3cf5151047100e0df9dd923fa42b5e' #songs
+  #provider :facebook, '161415880575187', 'c31c677a3335ff2f91b773b6c1f40ed7' #songBERG
   provider :linked_in, 'KEY', 'SECRET'
   provider :open_id,  OpenID::Store::Filesystem.new('/tmp')
 end

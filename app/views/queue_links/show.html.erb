@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <div class="nav_links">
-  <%= link_to 'Edit', edit_queue_link_path(@queue_link) %> |
-  <%= link_to 'Back', queue_links_path %>
+  <%= link_to 'back', queue_links_path, :class => 'rounded_btn' %>
+  <%= link_to 'edit', edit_queue_link_path(@queue_link), :class => 'rounded_btn' %>
 </div>
 
 <div class="show_container">

@@ -14,6 +14,16 @@ class LastFm
     return res
   end
   
+  def self.from_taiwan?(artist_name)
+    res = self.get("#{API_PATH}?method=artist.gettoptags&artist=#{URI.escape(artist_name)}&api_key=#{API_KEY}")
+    res['lfm']['toptags']['tag'].each do |tag|
+      if tag['name'] =~ /taiwan/
+        return true
+      end
+    end
+    return false
+  end
+  
   def self.get_tracks_by_url(album_link)
     track_names = []
     doc = Nokogiri::HTML(open(album_link))

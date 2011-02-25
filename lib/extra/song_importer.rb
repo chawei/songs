@@ -13,20 +13,8 @@ class SongImporter
   SECRET_KEY = 'djdxWoO/tLtsylePT3Px6jCSkhBRqTIuom+BFDqf'
   Amazon::Ecs.options = { :aWS_access_key_id => ACCESS_KEY, :aWS_secret_key => SECRET_KEY }
   
-  def self.import_song(options)
-    return if options[:query].blank?
-    video_url = options[:video_url]
-    if song = Video.find_song_by_url(video_url)
-      return song
-    end
-    
-    query = normalize_query(options[:query])
-    q_lang = LanguageDetector.get_lang(query)
-    puts "===== LanguageDetector ====="
-    puts "Language: #{q_lang}"
-    need_verify = !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
-    
-    
+  
+  def self.get_title_and_artist_name(query)
     res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
     if trackmatches = res['lfm']['results']['trackmatches']
       tracks = trackmatches['track']
@@ -37,7 +25,30 @@ class SongImporter
       puts "===== Last.fm ====="
       puts "Artist: #{artist}"
       puts "Title : #{title}"
-        
+      return { :title => title, :artist_name => artist }
+    else
+      return nil
+    end
+  end
+  
+  def self.need_verify?(query)
+    q_lang = LanguageDetector.get_lang(query)
+    puts "===== LanguageDetector ====="
+    puts "Language: #{q_lang}"
+    return !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
+  end
+  
+  def self.import_song(options)
+    return if options[:query].blank?
+    video_url = options[:video_url]
+    if song = Video.find_song_by_url(video_url)
+      return song
+    end
+    
+    query = normalize_query(options[:query])
+    need_verify = need_verify?(query)
+    
+    if res = get_title_and_artist_name
       if song = Song.find_by_performer_name_and_title(artist, title)
         song.update_videos(options[:video_url], options[:current_user_id])
         puts "*** Found Data in DB"

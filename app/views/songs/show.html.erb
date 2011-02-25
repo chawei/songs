@@ -3,10 +3,14 @@
     <div class="left">
       <%= link_to 'back', :back, :class => 'rounded_btn' %>
     </div>
-    
     <div class="left">
       <%= link_to "next song", song_path(@song.next), :class => 'rounded_btn', 
           :rel => 'tipsy', :title => "#{@song.next.title} by #{@song.next.performer_name}" if @song.next %>
+    </div>
+    <div class="left">
+      <%- if current_user and current_user.admin? -%>
+      <%= link_to 'edit', edit_song_path(@song) %>
+      <%- end -%>
     </div>
   </div>
 
@@ -41,12 +45,6 @@
             </div>
             <%- end -%>
           </div>
-        </div>
-        
-        <div class="right">
-          <%- if current_user and current_user.own_song?(@song) -%>
-          <%= link_to 'Edit this song', edit_song_path(@song) %>
-          <%- end -%>
         </div>
       </div>
 
