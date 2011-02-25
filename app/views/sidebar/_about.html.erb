@@ -3,11 +3,6 @@
 <% @image = @song.performer.profile_image(:thumb) %>
 <% end %>
 
-<div class="vote_block_container clear_fix">
-  <div class="left">Like this song?</div>
-  <div class="left"><%= render :partial => 'shared/vote_block', :locals => { :resource => @song } %></div>
-</div>
-
 <div class="section">
   <h3>Bio</h3>
   <div class="artist_image"><%= image_tag @image if @image && @image == String %></div>

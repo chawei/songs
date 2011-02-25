@@ -1,4 +1,15 @@
 <div id="tabs" class="js_hidden">
+  <div class="vote_block_container">
+    <%= render :partial => 'shared/vote_block', :locals => { :resource => @song } %>
+  </div>
+  
+  <% if @is_sidebar && @song %>
+  <div class="song_info">
+    <div class="title"><%= @song.title %></div>
+    <div class="performer">performer/ <%= @song.performer_name %></div>
+    <div class="writer">writer/ <%= @song.writer_name %></div>
+  </div>
+  <% end %>
 	<ul>
 	  <% if @song && @song.content.blank? %>
 	  <li><a href="#tabs-about">about</a></li>

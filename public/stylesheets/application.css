@@ -50,6 +50,7 @@ input#search {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
 #flash_msgs {
   width: 900px;
@@ -61,7 +62,7 @@ input#search {
   margin: 0 0 20px 0;
 }
   .index .section h2 {
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
   }
 
 h2#headline, h2.headline {
@@ -71,6 +72,9 @@ h2#headline, h2.headline {
 .nav_links {
   margin: 0 0 20px 0;
 }
+  .nav_links .left {
+    margin-right: 10px;
+  }
 
 textarea.lyric {
   width: 400px;

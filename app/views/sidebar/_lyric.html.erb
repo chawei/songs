@@ -1,11 +1,3 @@
-<% if @is_sidebar %>
-<div class="song_info">
-  <div class="title"><%= @song.title %></div>
-  <div class="performer">performer/ <%= @song.performer_name %></div>
-  <div class="writer">writer/ <%= @song.writer_name %></div>
-</div>
-<% end %>
-
 <div class="action_bar">
 <% if current_user && (@song.content.blank? || current_user.own_song?(@song)) %>
   <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' %>

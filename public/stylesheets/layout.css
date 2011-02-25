@@ -1,3 +1,21 @@
+html, body {    
+  height: 100%; 
+}
+
+#container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -100px;
+}
+
+#footer_wrap {
+  height: 100px;
+}
+
+.push {
+  height: 100px;
+}
 /* Header
  *
  *
@@ -184,19 +202,23 @@
 
 #footer_wrap {
   text-align: center;
-  margin: 10px 0 0;
-
 }
   #footer {
     text-align: left;
-    margin: 10px auto 50px;
+    margin: 0 auto 0;
     position: relative;
     width: 900px;
+  }
+  
+  #footer .copyright {
+    text-align: right;
+    color: #999;
   }
   
   #bookmarklet_container {
     padding: 10px;
     background-color: #f2f2f2;
+    margin: 0 0 10px 0;
   }
     #bookmarklet_container .explanation {
       color: #666;
