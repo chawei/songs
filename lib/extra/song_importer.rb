@@ -15,7 +15,6 @@ class SongImporter
   
   
   def self.get_title_and_artist_name(query)
-    artist, title = nil, nil
     res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
     if trackmatches = res['lfm']['results']['trackmatches']
       tracks = trackmatches['track']
