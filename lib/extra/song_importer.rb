@@ -49,6 +49,8 @@ class SongImporter
     need_verify = need_verify?(query)
     
     if res = get_title_and_artist_name(query)
+      artist = res[:artist_name]
+      title  = res[:title]
       if song = Song.find_by_performer_name_and_title(artist, title)
         song.update_videos(options[:video_url], options[:current_user_id])
         puts "*** Found Data in DB"
