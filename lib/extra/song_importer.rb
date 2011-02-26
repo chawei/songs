@@ -48,7 +48,7 @@ class SongImporter
     query = normalize_query(options[:query])
     need_verify = need_verify?(query)
     
-    
+    artist, title = nil, nil
     if res = get_title_and_artist_name(query)
       artist = res[:artist_name]
       title  = res[:title]
