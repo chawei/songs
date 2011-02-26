@@ -168,9 +168,13 @@ class Song < ActiveRecord::Base
     raw_title.gsub(/[[:punct:]＠＃＄％！︿～＆＊－＝＋，、。「」（）；：＼｜]/, '')
   end
   
-  def self.normalize_title(title)
-    title = title.gsub(/(\(.*\))|(\[.*\])/, '')
-    title = title.gsub(/[-_\/\\]/, ' ')
-    return title.strip
+  def self.normalize_title(raw_title)
+    title = raw_title.gsub(/(\(.*\))|(\[.*\])/, '')
+    title = title.gsub(/[-_\/\\]/, ' ').strip
+    if title.blank?
+      return raw_title
+    else
+      return title
+    end
   end
 end
