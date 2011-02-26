@@ -126,4 +126,17 @@ namespace :update do
     end
   end
   
+  desc "update release images"
+  task :release_image => :environment do 
+    Release.find_in_batches do |releases|
+      releases.each do |release|
+        puts "== ID: #{release.id}, Title: #{release.title}"
+        unless release.cover_image.nil?
+          release.download_remote_image
+          puts "downloaded"
+        end
+      end
+    end
+  end
+  
 end
