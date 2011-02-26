@@ -33,6 +33,7 @@ namespace :update do
     end
   end
   
+  desc "update artists"
   task :artist => :environment do
     Song.all.each do |song|
       puts "== ID: #{song.id}, Performer: #{song.performer_name}"
@@ -108,6 +109,18 @@ namespace :update do
           artist.lang = "zh-TW"
           artist.save
           puts "zh-TW"
+        end
+      end
+    end
+  end
+  
+  desc "update artists' images"
+  task :artist_image => :environment do 
+    Artist.find_in_batches do |artists|
+      artists.each do |artist|
+        puts "== ID: #{artist.id}, Name: #{artist.name}"
+        unless artist.profile_image.nil?
+          artist.download_remote_image
         end
       end
     end

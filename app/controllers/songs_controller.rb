@@ -33,6 +33,12 @@ class SongsController < ApplicationController
     
     @song.get_youtube_video if @song.videos.blank?
     @song.reload
+    
+    if params['video_id'].blank?
+      @video = @song.videos.first
+    else
+      @video = Video.find(params[:video_id])
+    end
 
     session[:current_song_id] = @song.id
     respond_to do |format|

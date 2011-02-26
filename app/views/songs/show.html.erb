@@ -9,7 +9,7 @@
     </div>
     <div class="left">
       <%- if current_user and current_user.admin? -%>
-      <%= link_to 'edit', edit_song_path(@song) %>
+      <%= link_to 'edit', edit_song_path(@song), :class => 'rounded_btn' %>
       <%- end -%>
     </div>
   </div>
@@ -72,3 +72,7 @@
     -->
   </div>
 </div>
+
+<% content_for :foot do %>
+  
+<% end %>

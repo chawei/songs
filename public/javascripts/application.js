@@ -3,23 +3,24 @@
 $(function() {
   $('#container').removeClass('no_js').addClass('js');
   $('#tabs, #profile_tabs').removeClass('js_hidden');
+  
+  $('[rel=tipsy]').tipsy({gravity: 'n'});
+  $('[rel=left-tipsy]').tipsy({gravity: 'e'});
+  $('[rel=top-tipsy]').tipsy({gravity: 's'});
+  //$('.vote_block .action').tipTip();
 
+  /* Video */
   $('.ajax_video').click(function() {
     var video_item = $(this).parents('.video_item')
     $('.video_item').removeClass('selected_video_item');
     video_item.addClass('selected_video_item');
   });
 
-  $('[rel=tipsy]').tipsy({gravity: 'n'});
-  $('[rel=left-tipsy]').tipsy({gravity: 'e'});
-  $('[rel=top-tipsy]').tipsy({gravity: 's'});
-  //$('.vote_block .action').tipTip();
-
   /* Search */
   $('#search').watermark('Artist name or Song title');
   
   /* Vote Block */
-  $('.vote_block .action').click(function(){
+  $('.vote_block .action').live('click', function(){
     var btn = $(this);
     if (btn.hasClass('thumbs_true')) {
       btn.removeClass('thumbs_true');

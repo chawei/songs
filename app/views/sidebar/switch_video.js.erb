@@ -1,5 +1,4 @@
 ytplayer = document.getElementById("ytplayer");
 ytplayer.clearVideo();
 ytplayer.loadVideoById("<%= escape_javascript(@video.uid) %>");
-//alert('srop');
-//$('#current_video_player').html("<%= escape_javascript(embedded_player(@video.uid)) %>");
+$('#current_video_player .vote_block_container').html("<%= escape_javascript(refresh_vote_block(@video)) %>");

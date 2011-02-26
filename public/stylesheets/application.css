@@ -342,7 +342,13 @@ form.section_form .input .error {
   margin: 0 0 5px 0;
   background-color: #f2f2f2;
 }
-.video_item:hover, .selected_video_item {
+.video_item .image img:hover {
+  opacity: 1.0;
+}
+.video_item:hover {
+  
+}
+.selected_video_item {
   background-color: #e6e6e6;
 }
   .video_item .image {
@@ -350,6 +356,7 @@ form.section_form .input .error {
   }
     .video_item .image img {
       width: 120px;
+      opacity: 0.8;
     }
   .video_item .info {
     width: 270px;
@@ -360,6 +367,19 @@ form.section_form .input .error {
   .video_item .notice {
     color: #f66;
   }
+
+#current_video_player .actions {
+  margin: 0 0 10px 0;
+  padding: 5px;
+  border-bottom: 1px solid #999;
+  color: #666;
+}
+#current_video_player .actions .desc {
+  margin: 0 10px 0 0;
+}
+#current_video_player .vote_block_container {
+  display: inline-block;
+}
 
 /* Artist
 --------------- */
@@ -493,3 +513,4 @@ form.section_form .input .error {
 .follow_block_container {
   margin: 0 0 10px 0;
 }
+

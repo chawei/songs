@@ -1,9 +1,14 @@
-<%- if @song && !@song.videos.blank? -%>
+<%- if @song && @video -%>
   <div id="current_video_player" class="video">
-    <%= embedded_player(@song.videos.first.uid) %>
+    <%= embedded_player(@video.uid) %>
+    
+    <div class="actions">
+      <span class="desc">Like this video?</span>
+      <div class="vote_block_container"><%= refresh_vote_block(@video) %></div>
+    </div>
   </div>
   <div id="video_items">
-  <% @song.videos.each do |video| %>
+  <% @song.videos.exact.each do |video| %>
     <% if video.source == 'youtube' %>
     <div class="video_item clear_fix">
       <div class="image left">
@@ -28,7 +33,7 @@
   <script type="text/javascript" charset="utf-8">
     var params = { allowScriptAccess: "always" };
     var atts = { id: "ytplayer" };
-    swfobject.embedSWF("http://www.youtube.com/e/<%= @song.videos.first.uid %>?enablejsapi=1&playerapiid=ytplayer",
+    swfobject.embedSWF("http://www.youtube.com/e/<%= @video.uid %>?enablejsapi=1&playerapiid=ytplayer",
                            "ytplayer", "425", "356", "8", null, null, params, atts);
 
     function onYouTubePlayerReady(playerId) {

@@ -8,6 +8,7 @@ class Video < ActiveRecord::Base
   before_create :set_title
   
   scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
+  scope :exact, where("similarity = 'exact'") 
   
   def self.find_song_by_url(url)
     uri = URI(url)

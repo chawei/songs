@@ -13,4 +13,8 @@ module VideosHelper
       </object>"
     return player_code.html_safe
   end
+  
+  def refresh_vote_block(video)
+    render :partial => 'shared/vote_block', :locals => { :resource => video }
+  end
 end

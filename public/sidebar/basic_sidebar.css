@@ -227,6 +227,14 @@ html .ui-tabs ul li.ui-tabs-selected a:hover {
   right: 0px;
   z-index: 10;
 }
+  #tabs .vote_block_container .vote_block {
+    display: inline-block;
+  }
+  #tabs .vote_block_container .desc {
+    margin: 0 10px 0 0;
+    color: #666;
+    font-size: 13px;
+  }
 
 #sidebar #tabs .vote_block_container {
   position: absolute;
