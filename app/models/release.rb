@@ -1,8 +1,8 @@
-class Release < ActiveRecord::Base
+class Release < ActiveRecord::Base  
   # 4 types: album, single, compilation, live
   default_scope :order => 'release_date DESC'
   
-  has_friendly_id :title, :use_slug => true
+  has_friendly_id :title, :use_slug => true, :ascii_approximation_options => :punc
   
   has_attached_file :cover_image, :styles => { :large  => "300x300>", 
                                                :medium => "150x150>",
@@ -26,6 +26,10 @@ class Release < ActiveRecord::Base
   
   Paperclip.interpolates('release_title') do |attachment, style|
     attachment.instance.friendly_id
+  end
+  
+  def normalize_friendly_id(string)
+    string.normalize!(:transliterations => :punc)
   end
   
   def primary_artist

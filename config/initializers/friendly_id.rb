@@ -1,3 +1,9 @@
+Babosa::Characters.add_approximations(:punc, {
+  "." => "dot",
+  "(" => "lparens",
+  ")" => "rparens"
+})
+
 module FriendlyId
   class TaskRunner
     def refresh_slugs

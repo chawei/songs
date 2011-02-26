@@ -52,7 +52,7 @@ GEM
       builder
       mime-types
       xml-simple
-    babosa (0.2.0)
+    babosa (0.2.2)
     builder (2.1.2)
     capybara (0.4.0)
       celerity (>= 0.7.9)
@@ -92,8 +92,8 @@ GEM
       rack (>= 1.1.0, < 2)
     ffi (0.6.3)
       rake (>= 0.8.7)
-    friendly_id (3.1.8)
-      babosa (~> 0.2.0)
+    friendly_id (3.2.1)
+      babosa (~> 0.2.1)
     gherkin (2.2.9)
       json (~> 1.4.6)
       term-ansicolor (~> 1.0.5)
@@ -253,7 +253,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   factory_girl_rails
-  friendly_id (~> 3.1)
+  friendly_id (~> 3.2.1)
   hoptoad_notifier (~> 2.4.6)
   httparty
   launchy
