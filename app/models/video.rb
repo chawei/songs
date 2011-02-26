@@ -8,7 +8,7 @@ class Video < ActiveRecord::Base
   before_create :set_title
   
   scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
-  scope :exact, where("similarity = 'exact'") 
+  scope :exact, where(:similarity => 'exact')
   
   def self.find_song_by_url(url)
     uri = URI(url)
@@ -16,7 +16,7 @@ class Video < ActiveRecord::Base
       uid = url.match(/[\?|\&]v=([\w_-]*)/)[1]
       source = 'youtube'
     end
-    videos = self.where(:uid => uid, :source => source).possible
+    videos = self.where(:uid => uid, :source => source, :similarity => 'exact')
     if videos.blank?
       return nil
     else

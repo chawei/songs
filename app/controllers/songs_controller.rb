@@ -34,8 +34,14 @@ class SongsController < ApplicationController
     @song.get_youtube_video if @song.videos.blank?
     @song.reload
     
+    if current_user.admin?
+      @videos = @song.videos
+    else
+      @videos = @song.videos.exact
+    end
+    
     if params['video_id'].blank?
-      @video = @song.videos.first
+      @video = @videos.first
     else
       @video = Video.find(params[:video_id])
     end

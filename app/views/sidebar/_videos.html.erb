@@ -8,7 +8,7 @@
     </div>
   </div>
   <div id="video_items">
-  <% @song.videos.exact.each do |video| %>
+  <% @videos.each do |video| %>
     <% if video.source == 'youtube' %>
     <div class="video_item clear_fix">
       <div class="image left">
