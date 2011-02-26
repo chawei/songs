@@ -119,7 +119,7 @@ namespace :update do
     Artist.find_in_batches do |artists|
       artists.each do |artist|
         puts "== ID: #{artist.id}, Name: #{artist.name}"
-        if artist.profile_image.nil?
+        unless artist.profile_image?
           artist.download_remote_image
         end
       end
@@ -131,7 +131,7 @@ namespace :update do
     Release.find_in_batches do |releases|
       releases.each do |release|
         puts "== ID: #{release.id}, Title: #{release.title}"
-        if release.cover_image.nil?
+        unless release.cover_image?
           release.download_remote_image
           puts "downloaded"
         end
