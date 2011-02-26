@@ -70,7 +70,7 @@ $(function() {
   
   /* Stories */
   $('#story_section form .title').watermark('Title (Optional)');
-  $('#story_section form .content').watermark('Start writing your story here...');
+  $('#story_section form .content').watermark('Write your note here...');
 });
 
 $.fn.clearForm = function() {

@@ -1,6 +1,6 @@
 <div id="story_section" class="section">
   <h3 class="clear_fix">
-    <%= link_to "add a new story", new_song_background_story_path(@song), :class => 'add_btn' if current_user %>
+    <%= link_to "add a note", new_song_background_story_path(@song), :class => 'add_btn' if current_user %>
   </h3>
   
   <div id="add_new_form_container">
@@ -10,7 +10,7 @@
   <div class="items">
     <% @song.background_stories.delete(@background_story) %>
     <% if @song.background_stories.size == 0 %>
-      <div class="notification">Do you know any story about this song?<br>Write it down and share!</div>
+      <div class="notification">Do you have any note about this song?<br>Write it down and share!</div>
     <% else %>
       <%- for background_story in @song.background_stories.order('created_at DESC') -%>
       <%= render background_story %>

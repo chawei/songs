@@ -10,5 +10,13 @@
       <%= submit_tag ':)', :class => 'rounded_btn' %>
     <% end %>
   </span>
+  <span class="action thumbs_down <%= thumbs_down_class %>" title="not cool" rel="top-tipsy">
+    <%= form_tag votes_thumbs_down_path, :method => :post, :remote => true, :class => 'vote_form' do %>
+      <%= hidden_field_tag :voter_id, current_user.try(:id) %>
+      <%= hidden_field_tag :voteable_id, resource.id %>
+      <%= hidden_field_tag :voteable_class, resource.class.to_s %>
+      <%= submit_tag ':(', :class => 'rounded_btn' %>
+    <% end %>
+  </span>
 </div>
 <% end %>
