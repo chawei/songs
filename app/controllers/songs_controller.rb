@@ -34,7 +34,7 @@ class SongsController < ApplicationController
     @song.get_youtube_video if @song.videos.blank?
     @song.reload
     
-    if current_user.admin?
+    if current_user && current_user.admin?
       @videos = @song.videos
     else
       @videos = @song.videos.exact
