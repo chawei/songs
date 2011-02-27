@@ -82,7 +82,7 @@ class Song < ActiveRecord::Base
   end
   
   def video_url=(url)
-    self.update_videos(url) unless url.blank?
+    self.update_videos(url, nil, 'exact') unless url.blank?
   end
   
   def update_videos(new_video_url, video_title = nil, similarity_type = nil, viewer_id = nil)

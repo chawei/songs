@@ -53,7 +53,7 @@ class SongImporter
       artist = res[:artist_name]
       title  = res[:title]
       if song = Song.find_by_performer_name_and_title(artist, title)
-        song.update_videos(options[:video_url], options[:current_user_id])
+        song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
         puts "*** Found Data in DB"
         return song
       elsif song = LyricsFinder.get_song(:artist => artist, :title => title, :video_url => video_url, 
