@@ -22,6 +22,8 @@ class LastFm
       end
     end
     return false
+  rescue
+    return false
   end
   
   def self.get_tracks_by_url(album_link)
