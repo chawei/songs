@@ -20,6 +20,9 @@
 	  <li><a href="#tabs-about">about</a></li>
 	  <% end %>
 	  <li><a href="#tabs-stories">notes</a></li>
+	  <% if current_user %>
+	  <li><a href="#tabs-dashboard">dashboard</a></li>
+	  <% end %>
 		<!--
 		<li><a href="#tabs-videos">videos</a></li>
 		<li><a href="#tabs-3">thoughts</a></li>
@@ -37,6 +40,9 @@
   	</div>
   	<div id="tabs-about" class="tab_content">
   	  <%= render :partial => 'sidebar/about' %>
+  	</div>
+  	<div id="tabs-dashboard" class="tab_content">
+  	  <%= render :partial => 'sidebar/dashboard', :locals => { :votes => @votes } %>
   	</div>
   	<!--
   	<div id="tabs-videos" class="tab_content">

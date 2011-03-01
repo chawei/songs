@@ -1,0 +1,28 @@
+<% if votes %>
+<% votes.each do |vote| %>
+  <div class="activity">
+    <% voteable = vote.voteable %>
+    <% voteable_class = voteable.class.name.underscore %>
+    
+    <% if voteable_class == "song" %>
+      <div>
+        <span class="followable"><%= link_to truncate(voteable.title, :length => 50), eval("#{voteable_class}_path(voteable)") %></span>
+        <% if voteable.performer %>
+        <span>by</span>
+        <span class="followable"><%= link_to voteable.performer.name, artist_path(voteable.performer) %></span>
+      </div>
+      <% end %>
+    <% elsif voteable_class == "video" %>
+      <span class="followable">
+        <%= link_to truncate(voteable.title, :length => 50), eval("song_path(voteable.song, :video_id => voteable.id)") %>
+      </span>
+    <% end %>
+    
+    <div class="minor">
+    <span class="following_user"><%= link_to vote.voter.username, user_path(vote.voter) %></span>
+    <span>likes the song</span>
+    <span class="time"><%= time_ago_in_words(vote.created_at) %> ago</span>
+    </div>
+  </div>
+<% end %>
+<% end %>

@@ -68,6 +68,11 @@ class User < ActiveRecord::Base
     Vote.where(:voter_id => id, :voteable_type => "Song", :vote => true).map(&:voteable)
   end
   
+  def following_feeds
+    voter_ids = self.following_users.collect { |u| u.id }
+    return Vote.following_feeds(voter_ids)
+  end
+  
   def self.create_from_hash(hash)
     #if hash['provider']
     #debugger

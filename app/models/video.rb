@@ -5,10 +5,11 @@ class Video < ActiveRecord::Base
   validates_presence_of :uid, :url, :song_id
   validates_uniqueness_of :uid, :scope => [:source, :song_id]
   before_validation :parse_url
-  before_create :set_title
+  before_create :set_values
   
   scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
   scope :exact, where(:similarity => 'exact')
+  scope :embeddable, where(:embeddable => true)
   
   def self.find_song_by_url(url)
     uri = URI(url)
@@ -41,11 +42,12 @@ class Video < ActiveRecord::Base
       end
     end
     
-    def set_title
+    def set_values
       if self.source == 'youtube'
         client = YouTubeIt::Client.new
         result = client.video_by(self.uid)
         self.title = result.title
+        self.embeddable = result.embeddable?
       end
     end
 end

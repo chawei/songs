@@ -8,7 +8,23 @@
   }
   .activity span {
     margin: 0 3px 0 0;
+    color: #666;
+  }
+  .activity .minor {
+    font-size: 11px;
+    background-color: #eee;
+    margin-top: 2px;
+    padding: 1px 3px;
+    text-align: right;
+  }
+  .activity .minor a {
+    color: #29ABE2;
+  }
+  .activity .minor span {
     color: #888;
+  }
+  .activity .time {
+    text-align: right;
   }
 
 /* Search page
@@ -107,10 +123,10 @@ form.section_form .input textarea {
 }
 
 #sidebar form.section_form .input .text {
-  width: 290px;
+  width: 277px;
 }
 #sidebar form.section_form .input textarea {
-  width: 286px;
+  width: 273px;
 }
 
 form.section_form a.cancel_btn {
@@ -458,7 +474,10 @@ form.section_form .input .error {
     #artist_info .basic_info .image img {
       width: 100px;
     }
-
+  #artist_info .bio {
+    margin: 0 0 10px 0;
+  }
+/*
 #releases_container {
   background-color: #ddd;
   position: fixed;;
@@ -469,7 +488,11 @@ form.section_form .input .error {
   height: 85px;
   padding: 5px 5px 0 5px;
   overflow: auto;
-} 
+}
+*/
+#releases_container {
+  
+}
 #releases {
 }
   #releases .release {
@@ -491,6 +514,9 @@ form.section_form .input .error {
   float: left;
   padding: 0 0 50px 0;
 }
+  #release_songs h2 {
+    margin: 0 0 5px 0;
+  }
   #artist_page .songs .song_item {
     width: 400px;
   }

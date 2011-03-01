@@ -13,11 +13,25 @@
       <div class="image"><%= image_tag @artist.profile_image(:large) %></div>
     </div>
     <div class="bio"><%= @artist.bio_summary %></div>
+    
+    <div id="releases_container">
+      <div id="releases" class="clear_fix">
+        <% @artist.releases.each do |release| %>
+        <a class="release" rel="release_<%= release.id %>" href="#<%= release.id %>">
+          <%= image_tag release.cover_image(:medium), :title => release.title, :rel => 'top-tipsy' %>
+        </a>
+        <% end %>
+      </div>
+    </div>
   </div>
   
   <div id="release_songs">
     <% @artist.releases.each do |release| %>
     <div id="release_<%= release.id %>" class="songs hidden">
+      <h2>
+        <%= release.title %>
+        <%= link_to 'edit', edit_release_path(release), :class => 'srounded_btn' if current_user && current_user.admin? %>
+      </h2>
       <% release.songs.each do |song| %>
       <div class="song_item clear_fix">
         <div class="detail">
@@ -27,15 +41,5 @@
       <% end %>
     </div>
     <% end %>
-  </div>
-  
-  <div id="releases_container">
-    <div id="releases" class="clear_fix">
-      <% @artist.releases.each do |release| %>
-      <a class="release" rel="release_<%= release.id %>" href="#<%= release.id %>">
-        <%= image_tag release.cover_image(:medium), :title => release.title, :rel => 'top-tipsy' %>
-      </a>
-      <% end %>
-    </div>
   </div>
 </div>

@@ -1,6 +1,8 @@
 class SidebarController < ApplicationController
   def show
-    unless current_user
+    if current_user
+      @votes = current_user.following_feeds
+    else
       @user_session = UserSession.new
     end 
     

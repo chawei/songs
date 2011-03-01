@@ -31,13 +31,15 @@ class SongsController < ApplicationController
     @note = @song.notes.build
     @is_supported = true
     
-    @song.get_youtube_video if @song.videos.blank?
+    @song.get_youtube_video if @song.videos.embeddable.blank?
     @song.reload
     
+    @votes = current_user.following_feeds if current_user
+    
     if current_user && current_user.admin?
-      @videos = @song.videos
+      @videos = @song.videos.embeddable
     else
-      @videos = @song.videos.exact
+      @videos = @song.videos.embeddable.exact
     end
     
     if params['video_id'].blank?

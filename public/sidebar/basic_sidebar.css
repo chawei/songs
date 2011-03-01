@@ -186,6 +186,11 @@ html .ui-tabs ul li.ui-tabs-selected a:hover {
   .similar_artist .name {
    float: left;
   }
+
+#album_section .album_name {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
  
 #album_section .cover_image {
   margin: 0 10px 0 0 ;
