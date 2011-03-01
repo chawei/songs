@@ -45,7 +45,7 @@ Songs::Application.routes.draw do
   post "toggle_follow", :to => "follows#toggle_follow"
 
   resource :user_session
-  resources :users, :constraints => { :id => /.*/ }, :only => [:show]
+  resources :users, :constraints => { :id => /.*/ }, :except => [:edit]
   resources :songs do
     resources :background_stories
     resources :notes
