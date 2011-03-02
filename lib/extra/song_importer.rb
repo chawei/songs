@@ -61,7 +61,7 @@ class SongImporter
         puts "*** Found Data by LyricsFinder"
         return song
       else
-        # save as request
+        Request.create(:query_url => video_url, :request_type => 'song', :user_id => options[:current_user_id])
         return nil
       end
     end

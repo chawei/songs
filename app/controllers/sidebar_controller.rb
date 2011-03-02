@@ -1,14 +1,14 @@
 class SidebarController < ApplicationController
   def show
+    @is_sidebar = true
+    
     if current_user
       @votes = current_user.following_feeds
     else
       @user_session = UserSession.new
     end 
     
-    @is_sidebar = true
-    params[:h] == "www.youtube.com" ? @is_supported = true : @is_supported = false
-    if @is_supported
+    if @is_supported = supported?(params[:h])
       @song = SongImporter.import_song(:query => params[:q], :video_url => params[:u], :current_user_id => current_user.try(:id))
       @song.performer.grab_info if @song && @song.performer.bio_summary.blank?
       if @song.class == Song
@@ -24,5 +24,11 @@ class SidebarController < ApplicationController
       format.js  { render :layout => false }
     end
   end
+  
+  private
+  
+    def supported?(hostname)
+      hostname == "www.youtube.com" ? return true : return false
+    end
   
 end

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   
   attr_accessor :password_confirmation
   has_many :authorizations, :dependent => :destroy
+  has_many :requests
   
   acts_as_authentic do |c|
     # c.merge_validates_length_of_login_field_options({:minimum => 4})

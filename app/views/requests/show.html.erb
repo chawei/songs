@@ -1,0 +1,23 @@
+<div class="nav_links">
+  <%= link_to 'Edit', edit_request_path(@request) %> |
+  <%= link_to 'Back', requests_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">User</div>
+    <div class="data"><%= @request.user_id %></div>
+  </div>
+  <div class="row">
+    <div class="label">Query url</div>
+    <div class="data"><%= @request.query_url %></div>
+  </div>
+  <div class="row">
+    <div class="label">Request type</div>
+    <div class="data"><%= @request.request_type %></div>
+  </div>
+  <div class="row">
+    <div class="label">Resolved</div>
+    <div class="data"><%= @request.resolved %></div>
+  </div>
+</div>

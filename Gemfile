@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.5'
 
 # Use unicorn as the web server
 # gem 'unicorn'

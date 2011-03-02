@@ -40,6 +40,10 @@ class SongsController < ApplicationController
       @videos = @song.videos.embeddable
     else
       @videos = @song.videos.embeddable.exact
+      if @videos.empty?
+        Request.create(:query_url => "/songs/#{@song.id}", 
+                       :request_type => 'video', :user_id => current_user.try(:id))
+      end
     end
     
     if params['video_id'].blank?

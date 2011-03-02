@@ -1,0 +1,37 @@
+<% title "Requests", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <span class='title'>List of requests</span>
+    (<%= link_to 'add a new request', new_request_path %>)
+  </div>
+
+  <table class="index">
+    <tr>
+      <th>User</th>
+      <th>Query url</th>
+      <th>Request type</th>
+      <th>Resolved</th>
+      <th>Created at</th>
+      <th></th>
+    </tr>
+
+  <% @requests.each do |request| %>
+    <tr>
+      <td><%= link_to request.requester.username, user_path(request.requester) if request.requester %></td>
+      <td><%= link_to request.query_url, request.query_url %></td>
+      <td><%= request.request_type %></td>
+      <td><%= request.resolved %></td>
+      <td><%= request.created_at.to_s(:short) %></td>
+      <td class="actions">
+        <%= link_to 'View', request %> |
+        <%= link_to 'Edit', edit_request_path(request) %> |
+        <%= link_to 'Delete', request, :method => :delete, :confirm => 'Are you sure?' %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

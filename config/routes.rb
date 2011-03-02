@@ -1,6 +1,8 @@
 Songs::Application.routes.draw do
   
 
+  resources :requests
+
   resources :releases
 
   resources :queue_links

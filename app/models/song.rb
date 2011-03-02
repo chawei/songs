@@ -131,8 +131,6 @@ class Song < ActiveRecord::Base
         index_hash['exact'] = exact_video_index[0..3]
       elsif possible_video_index.length > 1
         index_hash['possible'] = possible_video_index[0..3]
-      else
-        index_hash['first_result'] = [0]
       end
 
       index_hash.each do |similarity_type, video_index|
