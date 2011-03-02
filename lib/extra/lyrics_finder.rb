@@ -32,6 +32,11 @@ class LyricsFinder
           song.cover_url = cover_url
           song.save
         end
+        
+        if lyric.blank?
+          Request.create(:query_url => "/songs/#{song.id}", 
+                         :request_type => 'lyrics', :user_id => options[:current_user_id])
+        end
       end
     rescue
       puts "error - please try later."
