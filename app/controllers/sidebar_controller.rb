@@ -28,7 +28,7 @@ class SidebarController < ApplicationController
   private
   
     def supported?(hostname)
-      hostname == "www.youtube.com" ? return true : return false
+      hostname == "www.youtube.com" ? true : false
     end
   
 end
