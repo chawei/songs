@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   before_filter :require_user, :only => [:edit, :update]
   
+  def index
+    if current_user && current_user.admin?
+      @users = User.all
+    else
+      redirect_to root_path
+    end
+  end
+  
   def new
     @user = User.new
   end

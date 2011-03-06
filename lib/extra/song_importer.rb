@@ -13,31 +13,6 @@ class SongImporter
   SECRET_KEY = 'djdxWoO/tLtsylePT3Px6jCSkhBRqTIuom+BFDqf'
   Amazon::Ecs.options = { :aWS_access_key_id => ACCESS_KEY, :aWS_secret_key => SECRET_KEY }
   
-  
-  def self.get_title_and_artist_name(query)
-    res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
-    if trackmatches = res['lfm']['results']['trackmatches']
-      tracks = trackmatches['track']
-      track = (tracks.is_a?(Hash) ? tracks : tracks[0])
-      artist = track["artist"]
-      title  = track["name"]
-      
-      puts "===== Last.fm ====="
-      puts "Artist: #{artist}"
-      puts "Title : #{title}"
-      return { :title => title, :artist_name => artist }
-    else
-      return nil
-    end
-  end
-  
-  def self.need_verify?(query)
-    q_lang = LanguageDetector.get_lang(query)
-    puts "===== LanguageDetector ====="
-    puts "Language: #{q_lang}"
-    return !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
-  end
-  
   def self.import_song(options)
     return if options[:query].blank?
     video_url = options[:video_url]
@@ -67,6 +42,30 @@ class SongImporter
     end
     
     return nil
+  end
+  
+  def self.get_title_and_artist_name(query)
+    res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
+    if trackmatches = res['lfm']['results']['trackmatches']
+      tracks = trackmatches['track']
+      track = (tracks.is_a?(Hash) ? tracks : tracks[0])
+      artist = track["artist"]
+      title  = track["name"]
+      
+      puts "===== Last.fm ====="
+      puts "Artist: #{artist}"
+      puts "Title : #{title}"
+      return { :title => title, :artist_name => artist }
+    else
+      return nil
+    end
+  end
+  
+  def self.need_verify?(query)
+    q_lang = LanguageDetector.get_lang(query)
+    puts "===== LanguageDetector ====="
+    puts "Language: #{q_lang}"
+    return !["zh-TW", "zh-CN", 'ja'].include?(q_lang)
   end
   
   def self.normalize_query(query)

@@ -11,6 +11,10 @@ module VideosHelper
         <param name='allowScriptAccess' value='always'>
         <embed src='http://www.youtube.com/e/#{video_id}?enablejsapi=1&version=3' type='application/x-shockwave-flash' allowfullscreen='true' allowScriptAccess='always' width='#{width}' height='#{height}'>
       </object>"
+    html5_player_code = "
+      <iframe class='youtube-player' type='text/html' width='#{width}' height='#{height}' 
+              src='http://www.youtube.com/embed/#{video_id}' frameborder='0'>
+      </iframe>"
     return player_code.html_safe
   end
   

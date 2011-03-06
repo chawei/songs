@@ -25,7 +25,6 @@ gem 'mysql2'
 gem 'thumbs_up'
 gem 'hoptoad_notifier', '~> 2.4.6'
 gem 'nokogiri'
-gem 'youtube-g'
 gem 'youtube_it'
 gem 'thinking-sphinx',
   :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
@@ -35,6 +34,9 @@ gem 'thinking-sphinx',
 # For Song Impoter
 gem 'rbrainz'
 gem 'amazon-ecs'
+
+# Monitor
+gem 'newrelic_rpm'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

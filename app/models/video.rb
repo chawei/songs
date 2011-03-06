@@ -18,11 +18,7 @@ class Video < ActiveRecord::Base
       source = 'youtube'
     end
     videos = self.where(:uid => uid, :source => source, :similarity => 'exact')
-    if videos.blank?
-      return nil
-    else
-      return videos[0].song
-    end
+    return videos[0].try(:song)
   end
   
   protected
