@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306164712) do
+ActiveRecord::Schema.define(:version => 20110306183337) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20110306164712) do
   end
 
   add_index "relationships", ["source_type", "source_id", "relationship_type"], :name => "rel_source_type_index"
+  add_index "relationships", ["target_id", "source_type", "relationship_type", "target_type"], :name => "rel_participant"
   add_index "relationships", ["target_id", "target_type", "relationship_type"], :name => "rel_target_type_index"
 
   create_table "releases", :force => true do |t|

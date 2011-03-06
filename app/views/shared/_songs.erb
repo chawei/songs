@@ -7,7 +7,7 @@
       <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
       <% end %>
     </div>
-    <%- if current_user and current_user.admin? -%>
+    <%- if current_user && current_user.admin? -%>
     <div class="actions">
       <%= link_to 'Edit', edit_song_path(song) %>
       <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete %>
