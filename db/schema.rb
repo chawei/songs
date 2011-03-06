@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301232913) do
+ActiveRecord::Schema.define(:version => 20110306164712) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(:version => 20110301232913) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "authorizations", ["user_id"], :name => "index_authorizations_on_user_id"
 
   create_table "background_stories", :force => true do |t|
     t.integer  "song_id"
@@ -84,6 +86,9 @@ ActiveRecord::Schema.define(:version => 20110301232913) do
     t.datetime "updated_at"
   end
 
+  add_index "notes", ["created_by_id"], :name => "index_notes_on_created_by_id"
+  add_index "notes", ["song_id"], :name => "index_notes_on_song_id"
+
   create_table "participations", :force => true do |t|
     t.integer  "artist_id"
     t.integer  "song_id"
@@ -109,6 +114,9 @@ ActiveRecord::Schema.define(:version => 20110301232913) do
     t.datetime "updated_at"
     t.string   "relationship_type"
   end
+
+  add_index "relationships", ["source_type", "source_id", "relationship_type"], :name => "rel_source_type_index"
+  add_index "relationships", ["target_id", "target_type", "relationship_type"], :name => "rel_target_type_index"
 
   create_table "releases", :force => true do |t|
     t.string   "release_type"
@@ -199,6 +207,8 @@ ActiveRecord::Schema.define(:version => 20110301232913) do
     t.string   "title"
     t.boolean  "embeddable"
   end
+
+  add_index "videos", ["song_id"], :name => "index_videos_on_song_id"
 
   create_table "votes", :force => true do |t|
     t.boolean  "vote",          :default => false
