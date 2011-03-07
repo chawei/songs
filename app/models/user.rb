@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
     # c.merge_validates_length_of_login_field_options({:minimum => 4})
     c.ignore_blank_passwords = true #ignoring passwords
     c.validate_password_field = false #ignoring validations for password fields
+    c.perishable_token_valid_for = 2.hours
   end
   
   #here we add required validations for a new record and pre-existing record

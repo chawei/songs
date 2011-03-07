@@ -12,8 +12,7 @@ class SongsController < ApplicationController
   # GET /songs
   # GET /songs.xml
   def index
-    @songs = Song.select('id, title').order('songs.created_at DESC').paginate(:per_page => 10, :page => params[:page])
-
+    @songs = Song.select('id, title').order('songs.created_at DESC').includes(:performers).paginate(:per_page => 10, :page => params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @songs }

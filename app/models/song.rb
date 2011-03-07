@@ -19,10 +19,12 @@ class Song < ActiveRecord::Base
   has_many :releases, :through => :relationships, :source => :source, :source_type => 'Release'
   
   has_many :artists, :through => :relationships, :source => :source, :source_type => 'Artist'
-  has_many :performers, :through => :relationships, :source => :source, :source_type => 'Artist', 
-                        :conditions => { 'relationships.relationship_type' => 'perform' }
-  has_many :writers, :through => :relationships, :source => :source, :source_type => 'Artist', 
-                        :conditions => { 'relationships.relationship_type' => 'write' }
+  has_many :perform_relationships, :class_name => 'Relationship', :as => :target, :dependent => :destroy,
+                                   :conditions => { 'relationships.relationship_type' => 'perform' }
+  has_many :write_relationships,   :class_name => 'Relationship', :as => :target, :dependent => :destroy,
+                                   :conditions => { 'relationships.relationship_type' => 'write' }
+  has_many :performers, :through => :perform_relationships, :source => :source, :source_type => 'Artist'
+  has_many :writers, :through => :write_relationships, :source => :source, :source_type => 'Artist'
   
   validates_presence_of :title, :performer_name
   validates_uniqueness_of :title, :scope => [:performer_name]
@@ -45,7 +47,7 @@ class Song < ActiveRecord::Base
   end
   
   def performer
-    participant('perform')
+    performers.last
   end
   
   def set_writer
@@ -56,12 +58,7 @@ class Song < ActiveRecord::Base
   end
   
   def writer
-    participant('write')
-  end
-  
-  def participant(role)
-    Relationship.includes(:source).where(:source_type => 'Artist', :target_type => 'Song', :target_id => self.id, 
-                                         :relationship_type => role).last.try(:source)
+    writers.last
   end
   
   def performer_name_and_title
