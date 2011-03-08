@@ -75,6 +75,12 @@ class User < ActiveRecord::Base
     return Vote.following_feeds(voter_ids)
   end
   
+  def suggested_users_to_follow
+    user_ids = following_users.map { |f| f.id }
+    user_ids << id
+    User.where("id NOT IN (?)", user_ids).limit(10)
+  end
+  
   def self.create_from_hash(hash)
     #if hash['provider']
     #debugger

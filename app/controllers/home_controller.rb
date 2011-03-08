@@ -22,4 +22,8 @@ class HomeController < ApplicationController
       :page => (params[:page] || 1)
     )
   end
+  
+  def who_to_follow
+    @suggestions = current_user.try(:suggested_users_to_follow)
+  end
 end

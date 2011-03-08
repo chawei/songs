@@ -1,0 +1,6 @@
+<% follows.each do |follow| %>
+<div class="song_item clear_fix">
+  <div class="left"><%= link_to follow.username, user_path(follow) %></div>
+  <div class="right"><%= render :partial => 'shared/follow_block', :locals => { :resource => follow } %></div>
+</div>
+<% end %>

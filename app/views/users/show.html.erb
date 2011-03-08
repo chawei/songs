@@ -12,8 +12,10 @@
   
   <div id="profile_tabs" class="js_hidden clear_fix">
     <ul>
-  	  <li><a href="#profile_tabs-like">songs you like</a></li>
-  	  <li><a href="#profile_tabs-note">your notes</a></li>
+  	  <li><a href="#profile_tabs-like">likes</a></li>
+  	  <li><a href="#profile_tabs-note">notes</a></li>
+  	  <li><a href="#profile_tabs-following">following</a></li>
+  	  <li><a href="#profile_tabs-followers">followers</a></li>
   	</ul>
 
     <div class="tab_container">
@@ -38,6 +40,26 @@
           <% end %>
           <% else %>
           Start writing some notes at the right sidebar of the song page!
+          <% end %>
+        </div>
+      </div>
+      
+      <div id="profile_tabs-following" class="tab_content">
+        <div class="index">
+          <% if @followings.size > 0 %>
+            <%= render :partial => 'shared/follows', :locals => { :follows => @followings } %>
+          <% else %>
+            Start following your friends!
+          <% end %>
+        </div>
+      </div>
+      
+      <div id="profile_tabs-followers" class="tab_content">
+        <div class="index">
+          <% if @followers.size > 0 %>
+            <%= render :partial => 'shared/follows', :locals => { :follows => @followers } %>
+          <% else %>
+            No followers yet.
           <% end %>
         </div>
       </div>
