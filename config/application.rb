@@ -38,5 +38,8 @@ module Songs
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    config.action_mailer.delivery_method   = :postmark
+    config.action_mailer.postmark_settings = { :api_key => "a69d8c7c-cbdc-4e20-b71c-0d3af6a58542" }
   end
 end
