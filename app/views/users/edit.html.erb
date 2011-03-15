@@ -1,6 +1,6 @@
 <h1>Edit Your Profile</h1>
 
-<%= form_for @user, :url => account_path, :class => 'hline_form' do |f| %>
+<%= form_for @user, :class => 'hline_form' do |f| %>
   <%= render :partial => "form", :object => f %>
   <div class="actions">
     <div class="submit"><%= f.submit "Update" %></div>

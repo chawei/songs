@@ -2,15 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.5'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# Bundle the extra gems:
-# gem 'bj'
-
 gem 'aws-s3', :require => 'aws/s3'
 gem 'simple-navigation'
 gem 'friendly_id', '~> 3.2.1'
