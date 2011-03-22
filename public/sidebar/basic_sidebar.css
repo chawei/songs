@@ -1,5 +1,5 @@
 #sidebar #container {
-  margin-top: 20px;
+  /*margin-top: 20px;*/
 }
 
 #container { 
@@ -226,24 +226,30 @@ html .ui-tabs ul li.ui-tabs-selected a:hover {
   position: relative;
 }
 
+
 #tabs .vote_block_container {
+  /*
   position: absolute;
   top: 5px;
   right: 0px;
+  */
+  padding: 0px 0px 2px 0;
+  margin: 0px 0px 10px;
+  border-bottom: 1px solid #CCC;
   z-index: 10;
 }
   #tabs .vote_block_container .vote_block {
     display: inline-block;
   }
   #tabs .vote_block_container .desc {
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 0;
     color: #666;
-    font-size: 13px;
+    font-size: 11px;
+  }
+  #tabs .vote_block_container .rounded_btn {
+    font-size: 9px;
   }
 
 #sidebar #tabs .vote_block_container {
-  position: absolute;
-  top: 2px;
-  right: 20px;
   z-index: 10;
 }

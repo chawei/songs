@@ -269,9 +269,16 @@ form.section_form .input .error {
 
 .song_container .vote_block_container {
   margin: 0 0 5px 0;
-  text-align: right;
+  text-align: left;
 }
-
+  .song_container .vote_block_container span {
+    color: #999;
+    margin: 0 5px 0 0;
+  }
+  .song_container .vote_block_container .vote_block {
+    display: inline-block;
+  }
+  
 .song_detail {
   margin: 0 0 20px 0;
 }

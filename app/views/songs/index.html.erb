@@ -1,11 +1,7 @@
-<% title "Songs", false %>
+<% title "Featured Songs", true %>
 
 <div class="index_container">
   <div class="description">
-  </div>
-
-  <div class='index_header'>
-    <%= link_to 'add a new song', new_song_path, :class => 'rounded_btn' if current_user.try(:admin?) %>
   </div>
 
   <div class="index">

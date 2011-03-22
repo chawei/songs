@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   end
   
   def voted_for_songs
-    Vote.where(:voter_id => id, :voteable_type => "Song", :vote => true).map(&:voteable)
+    Vote.where(:voter_id => id, :voteable_type => "Song", :vote => true).order('created_at DESC').map(&:voteable)
   end
   
   def following_feeds

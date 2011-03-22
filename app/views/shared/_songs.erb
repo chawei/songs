@@ -17,4 +17,6 @@
   <%- end -%>
   
 </div>
+<% if songs.respond_to? :total_pages %>
 <%= will_paginate songs %>
+<% end %>
