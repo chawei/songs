@@ -133,7 +133,6 @@ class Artist < ActiveRecord::Base
   end
   
   def self.perform(id, method, *args)
-    ActiveRecord::Base.verify_active_connections!
     find(id).send(method, *args)
   end
   
