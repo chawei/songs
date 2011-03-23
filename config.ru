@@ -2,7 +2,7 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 
-require 'resque/server'
+#require 'resque/server'
 
 run Songs::Application
 
