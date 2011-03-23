@@ -2,8 +2,8 @@
   <% if @is_sidebar && @song %>
   <div class="song_info">
     <div class="title"><%= link_to @song.title, song_url(@song) %></div>
-    <div class="performer">performer/ <%= @song.performer_name %></div>
-    <div class="writer">writer/ <%= @song.writer_name %></div>
+    <div class="performer">performer/ <%= link_to @song.performer_name, artist_url(@song.performer) %></div>
+    <div class="writer">writer/ <%= link_to @song.writer_name, artist_url(@song.writer) %></div>
   </div>
   
   <div class="vote_block_container">

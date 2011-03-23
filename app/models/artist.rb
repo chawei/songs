@@ -1,6 +1,8 @@
 require 'open-uri'
 
 class Artist < ActiveRecord::Base
+  @queue = :artist
+  
   define_index do
     indexes name
   end
@@ -37,7 +39,7 @@ class Artist < ActiveRecord::Base
   before_validation :set_full_name
   before_create :set_default_values
   after_create  :add_queue_link
-  after_create  :download_remote_image
+  after_create  :async_download_remote_image
   
   #def performed_songs
   #  return participations.performer.collect {|p| p.song}
@@ -120,6 +122,18 @@ class Artist < ActiveRecord::Base
       self.profile_image = do_download_remote_image
       self.save
     end
+  end
+    
+  def async_download_remote_image
+    async(:download_remote_image)
+  end
+  
+  def async(method, *args)
+    Resque.enqueue(Artist, id, method, *args)
+  end
+  
+  def self.perform(id, method, *args)
+    find(id).send(method, *args)
   end
   
   protected

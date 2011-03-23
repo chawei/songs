@@ -40,6 +40,7 @@
       ytplayer = document.getElementById("ytplayer");
       ytplayer.playVideo();
       ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+      ytplayer.addEventListener("onError", "onPlayerError");
     }
 
     function onytplayerStateChange(newState) {
@@ -48,6 +49,16 @@
           url = "http://" + window.location.host + "/songs/" + data.song.id
           window.location = url;
         });
+      }
+    }
+    
+    function onPlayerError(error) {
+      var video_url = ytplayer.getVideoUrl();
+      var reg = /\?v=(.{11})/;
+      var match = video_url.match(reg);
+      
+      if (match != null) {
+        //alert(match[1]);
       }
     }
   </script>
