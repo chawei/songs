@@ -32,8 +32,10 @@ gem 'newrelic_rpm'
 # Postmark
 gem 'postmark-rails'
 
+# Resque
 gem 'resque'
 gem 'SystemTimer'
+gem 'sinatra'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators

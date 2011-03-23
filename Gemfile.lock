@@ -293,6 +293,7 @@ DEPENDENCIES
   rspec-rails
   ruby-debug
   simple-navigation
+  sinatra
   spork
   thinking-sphinx!
   thumbs_up
