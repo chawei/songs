@@ -42,6 +42,6 @@ module Songs
     config.action_mailer.delivery_method   = :postmark
     config.action_mailer.postmark_settings = { :api_key => "a69d8c7c-cbdc-4e20-b71c-0d3af6a58542" }
     
-    config.middleware.use 'ResqueWeb'
+    #config.middleware.use 'ResqueWeb'
   end
 end
