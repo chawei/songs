@@ -1,4 +1,4 @@
-app = "song"
+app = "songs"
 
 if %x[ps axo command|grep resque[-]|grep -c Forked].to_i > 0 
   raise "Resque Workers Working!!"
