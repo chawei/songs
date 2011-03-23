@@ -33,7 +33,7 @@ gem 'newrelic_rpm'
 gem 'postmark-rails'
 
 # Resque
-gem 'resque'
+gem 'resque', :require => "resque/server"
 gem 'SystemTimer'
 gem 'sinatra'
 
