@@ -4,8 +4,8 @@ require ::File.expand_path('../config/environment',  __FILE__)
 
 require 'resque/server'
 
-run Songs::Application
+#run Songs::Application
 
-#run Rack::URLMap.new \
-#  "/"       => Songs::Application,
-#  "/resque" => Resque::Server.new 
+run Rack::URLMap.new \
+  "/"       => Songs::Application,
+  "/resque" => Resque::Server.new 
