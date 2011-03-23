@@ -2,11 +2,8 @@ Songs::Application.routes.draw do
   mount Resque::Server.new, :at => "/resque"
   
   resources :requests
-
   resources :releases
-
   resources :queue_links
-
   resources :events, :except => [:new, :show]
   
   resources :artists do
