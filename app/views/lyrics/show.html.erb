@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<div class="nav_links">
+  <%= link_to 'Edit', edit_lyric_path(@lyric) %> |
+  <%= link_to 'Back', lyrics_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Song title</div>
+    <div class="data"><%= @lyric.song_title %></div>
+  </div>
+  <div class="row">
+    <div class="label">Song performer name</div>
+    <div class="data"><%= @lyric.song_performer_name %></div>
+  </div>
+  <div class="row">
+    <div class="label">Content</div>
+    <div class="data"><%= @lyric.content %></div>
+  </div>
+  <div class="row">
+    <div class="label">Song</div>
+    <div class="data"><%= @lyric.song_id %></div>
+  </div>
+  <div class="row">
+    <div class="label">Created by</div>
+    <div class="data"><%= @lyric.created_by_id %></div>
+  </div>
+  <div class="row">
+    <div class="label">Updated by</div>
+    <div class="data"><%= @lyric.updated_by_id %></div>
+  </div>
+</div>

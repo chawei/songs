@@ -1,0 +1,33 @@
+<%= form_for(@beta_request) do |f| %>
+  <% if @beta_request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@beta_request.errors.count, "error") %> prohibited this beta_request from being saved:</h2>
+
+      <ul>
+      <% @beta_request.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <div class="label"><%= f.label :email %></div>
+    <div class="input"><%= f.text_field :email %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :is_sent %></div>
+    <div class="input"><%= f.check_box :is_sent %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :sent_at %></div>
+    <div class="input"><%= f.datetime_select :sent_at %></div>
+  </div>
+  <div class="field">
+    <div class="label"><%= f.label :is_user %></div>
+    <div class="input"><%= f.check_box :is_user %></div>
+  </div>
+  <div class="actions">
+    <div class="submit"><%= f.submit %></div>
+  </div>
+<% end %>

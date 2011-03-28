@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306183337) do
+ActiveRecord::Schema.define(:version => 20110327231957) do
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -52,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20110306183337) do
     t.datetime "updated_at"
   end
 
+  create_table "beta_requests", :force => true do |t|
+    t.string   "email"
+    t.boolean  "is_sent"
+    t.datetime "sent_at"
+    t.boolean  "is_user"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", :force => true do |t|
     t.string   "title"
     t.string   "url"
@@ -77,6 +86,17 @@ ActiveRecord::Schema.define(:version => 20110306183337) do
 
   add_index "follows", ["followable_id", "followable_type"], :name => "fk_followables"
   add_index "follows", ["follower_id", "follower_type"], :name => "fk_follows"
+
+  create_table "lyrics", :force => true do |t|
+    t.string   "song_title"
+    t.string   "song_performer_name"
+    t.text     "content"
+    t.integer  "song_id"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "notes", :force => true do |t|
     t.integer  "song_id"

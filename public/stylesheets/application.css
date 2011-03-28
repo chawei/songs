@@ -27,6 +27,60 @@
     text-align: right;
   }
 
+/* Visitor home page
+---------------------- */
+#visitor_block {
+  margin: 50px 0 0;
+}
+  #visitor_block h1 {
+    font-size: 36px;
+  }
+  #visitor_block .desc {
+    font-size: 15px;
+    color: #666;
+  }
+  #visitor_block .text {
+    height: 20px;
+    width: 250px;
+    color: #555;
+    font-size: 16px;
+    padding-left: 5px;
+  }
+  #visitor_block .msg {
+    margin: 5px 0 0 0;
+    color: #29ABE2;
+    font-size: 13px;
+  }
+  #visitor_block .error_msg {
+    color: #f77;
+  }
+
+#site_sidebar {
+  width: 300px;
+}
+
+.list_item {
+  margin: 0 0 10px 0;
+  padding: 0 0 0px 0;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  height: 25px;
+  line-height: 25px;
+}
+  .list_item .detail {
+    width: 100%;
+  }
+    .list_item .detail a.title {
+      font-size: 15px;
+      margin: 0 5px 0 0;
+    }
+    .list_item .detail .performer {
+      float: right;
+      font-size: 13px;
+      color: #666;
+      display: block;
+    }
+
 /* Search page
 ---------------------- */
 #searchfield_container {

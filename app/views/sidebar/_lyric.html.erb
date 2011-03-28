@@ -1,6 +1,7 @@
 <div class="action_bar">
-<% if current_user && (@song.content.blank? || current_user.admin?) %>
-  <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' %>
+  <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' if current_user && current_user.admin? %>
+  
+<% if current_user && @song.content.blank? %>
   <%= form_for(@song, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
     <% if @song.errors.any? %>
       <div id="error_explanation">
@@ -17,7 +18,8 @@
     <%= f.text_area :content %>
 
     <div class="actions">
-      <div class="submit"><%= f.submit %></div>
+      <%= f.submit 'Save', :class => 'rounded_btn' %>
+      <%= link_to "cancel", "#", :class => 'cancel_btn' %>
     </div>
   <% end %>
 <% end %>
@@ -25,8 +27,9 @@
 
 <div id="lyric">
   <% if @song.content.blank? %>
-    <p>Sorry, there is no matched lyrics.<br>Wanna be the first to submit the lyrics?</p>
-    <%= link_to "Search online", "http://www.google.com/search?q=#{URI.escape(@song.title)}+#{URI.escape(@song.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank' %> and 
+    <p>Oops, there is no lyrics yet.<br>Wanna be the first one to submit the lyrics?</p>
+    <%= link_to "Search on google", "http://www.google.com/search?q=#{URI.escape(@song.title)}+#{URI.escape(@song.performer_name)}+lyrics&ie=UTF-8&oe=UTF-8", :target => '_blank', :class => 'popup_search_lyrics' %>
+    and <%= link_to "add it here", "#", :class => 'edit_lyric_btn click_to_edit' %>
   <% else %>
     <%= simple_format @song.content  %>
   <% end %>

@@ -4,28 +4,22 @@
   <div class="description">
   </div>
 
-  <div class="index">
-    <%- if @recent_songs -%>
+  <div class="index clear_fix">
     <div class="section">
-      <h2>Recent Update</h2>
-      <%- @recent_songs.each do |song| -%>
-      <div class="song_item clear_fix">
-        <div class="detail">
-          <%= link_to song.title, song_path(song), :class => 'title' %>
-          <% if song.performer %>
-          <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
-          <% end %>
-        </div>
-        <%- if current_user and current_user.own_song?(song) -%>
-        <div class="actions">
-          <%= link_to 'Edit', edit_song_path(song) %>
-          <%= link_to 'Delete', song, :confirm => 'Are you sure?', :method => :delete %>
-        </div>
-        <%- end -%>
+      <div id="visitor_block">
+        <h1>Coming soon</h1>
+        <p class="desc">
+          interested in trying our beta version?<br>
+          send us your email address and we will notice you when it's ready. thanks!
+        </p>
+        
+        <%= form_for BetaRequest.new, :remote => true do |f| %>
+          <%= f.text_field :email, :class => 'text' %>
+          <%= f.submit 'Send', :class => 'rounded_btn' %>
+          <div class="msg"></div>
+        <% end %>
+        
       </div>
-      <%- end -%>
     </div>
-    <%- end -%>
-    
   </div>
 </div>

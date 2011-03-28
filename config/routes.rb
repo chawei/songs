@@ -1,4 +1,8 @@
 Songs::Application.routes.draw do
+  resources :beta_requests
+
+  resources :lyrics
+
   mount Resque::Server.new, :at => "/resque"
   
   resources :requests

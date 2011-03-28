@@ -62,4 +62,27 @@ $(function() {
     }
   });
   
+  
+  $('a.popup_search_lyrics').click(function() {
+      var href = $(this).attr("href");
+      window.open(href, '_blank', 'location=yes,menubar=yes,resizable=yes,scrollbars=yes,width=800,height=500');
+      
+      return false;
+  });
+  
+  
+  /* Beta Request */
+  $('#beta_request_email').watermark('Enter your email here');
+  
+  $('form#new_beta_request').bind("ajax:success", function(e, data, status, xhr) {
+    var msg_elem = $('form#new_beta_request .msg');
+    var results = jQuery.parseJSON(data);
+    if (results.errors) {
+      msg_elem.addClass('error_msg').html(results.errors[0]);
+    } else {
+      msg_elem.removeClass('error_msg').html('thanks for your request and we\'ll see you soon!');
+      $('#beta_request_email').val('');
+    }
+  });
+  
 });

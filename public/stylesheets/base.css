@@ -90,11 +90,11 @@ p {
 ------------------- */
 #errorExplanation, #error_explanation {
   width: 400px;
-  border: 2px solid #CF0000;
+  border: 2px solid #f33;
   padding: 0px;
   padding-bottom: 12px;
   margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #f6f6f6;
 }
 
 #errorExplanation h2, #error_explanation h2 {
@@ -103,7 +103,7 @@ p {
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: 0;
-  background-color: #c00;
+  background-color: #f33;
   color: #fff;
 }
 
@@ -114,7 +114,7 @@ p {
 }
 
 #errorExplanation ul, #error_explanation ul {
-  margin: 2px 24px;
+  margin: 9px 24px 0px;
 }
 
 #errorExplanation ul li, #error_explanation ul li {

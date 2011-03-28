@@ -6,8 +6,8 @@ class HomeController < ApplicationController
       
       render 'home/user'
     else
-      @recent_songs = Song.recent_updated.order('created_at DESC').limited(5)
-      render 'home/visitor'
+      #@recent_songs = Song.recent_updated.order('created_at DESC').limited(5)
+      render 'home/visitor', :layout => 'visitor'
     end
   end
   

@@ -1,0 +1,39 @@
+<% title "Lyrics", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <span class='title'>List of lyrics</span>
+    (<%= link_to 'add a new lyric', new_lyric_path %>)
+  </div>
+
+  <table class="index">
+    <tr>
+      <th>Song title</th>
+      <th>Song performer name</th>
+      <th>Content</th>
+      <th>Song</th>
+      <th>Created by</th>
+      <th>Updated by</th>
+      <th></th>
+    </tr>
+
+  <% @lyrics.each do |lyric| %>
+    <tr>
+      <td><%= lyric.song_title %></td>
+      <td><%= lyric.song_performer_name %></td>
+      <td><%= lyric.content %></td>
+      <td><%= lyric.song_id %></td>
+      <td><%= lyric.created_by_id %></td>
+      <td><%= lyric.updated_by_id %></td>
+      <td class="actions">
+        <%= link_to 'View', lyric %> |
+        <%= link_to 'Edit', edit_lyric_path(lyric) %> |
+        <%= link_to 'Delete', lyric, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

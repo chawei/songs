@@ -3,6 +3,6 @@
 <%= form_for @user, :class => 'hline_form' do |f| %>
   <%= render :partial => "form", :object => f %>
   <div class="actions">
-    <div class="submit"><%= f.submit "Update" %></div>
+    <div class="submit"><%= f.submit "Save", :class => 'rounded_btn' %></div>
   </div>
 <% end %>

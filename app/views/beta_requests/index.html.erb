@@ -1,0 +1,35 @@
+<% title "Beta_requests", false %>
+
+<div class="index_container">
+  <div class="description">
+  </div>
+
+  <div class='index_header'>
+    <span class='title'>List of beta_requests</span>
+    (<%= link_to 'add a new beta request', new_beta_request_path %>)
+  </div>
+
+  <table class="index">
+    <tr>
+      <th>Email</th>
+      <th>Is sent</th>
+      <th>Sent at</th>
+      <th>Is user</th>
+      <th></th>
+    </tr>
+
+  <% @beta_requests.each do |beta_request| %>
+    <tr>
+      <td><%= beta_request.email %></td>
+      <td><%= beta_request.is_sent %></td>
+      <td><%= beta_request.sent_at %></td>
+      <td><%= beta_request.is_user %></td>
+      <td class="actions">
+        <%= link_to 'View', beta_request %> |
+        <%= link_to 'Edit', edit_beta_request_path(beta_request) %> |
+        <%= link_to 'Delete', beta_request, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

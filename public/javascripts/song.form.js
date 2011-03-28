@@ -52,18 +52,31 @@ $(function() {
   });
   
   $('.edit_lyric_btn').live('click', function() {
+    $('#lyric').hide();
+    $('#lyric_form').removeClass('js_hidden').hide().fadeIn();
+    $('.edit_lyric_btn').hide();
+    
+    /*
     if($(this).hasClass('click_to_edit')) {
       $(this).removeClass('click_to_edit').addClass('click_to_hide');
       $('#lyric').hide();
       $('#lyric_form').removeClass('js_hidden').hide().fadeIn();
-      $(this).text('cancel');
+      $(this).hide();
     } else if ($(this).hasClass('click_to_hide')) {
       $(this).removeClass('click_to_hide').addClass('click_to_edit');
       $('#lyric').fadeIn();
       $('#lyric_form').addClass('js_hidden').hide();
-      $(this).text('edit the lyrics');
+      //$(this).text('edit the lyrics');
     }
+    */
     return false;
+  });
+  
+  $('#lyric_form .cancel_btn').click(function(e){
+    e.preventDefault();
+    $('#lyric').fadeIn();
+    $('#lyric_form').addClass('js_hidden').hide();
+    $('.edit_lyric_btn').show();
   });
   
   $('.autogrow').autogrow();

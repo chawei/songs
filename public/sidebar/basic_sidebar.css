@@ -1,5 +1,5 @@
-#sidebar #container {
-  /*margin-top: 20px;*/
+body#sidebar {    
+  height: auto; 
 }
 
 #container { 
@@ -9,7 +9,15 @@
 }
 
 #sidebar #container {
-  padding: 10px; 
+  min-height: 90%;
+  height: auto !important;
+  height: 90%;
+  margin-bottom: 0;
+  padding: 0 10px; 
+}
+
+#sidebar #main {
+  margin-top: 10px;
 }
 
 .song_info {
@@ -133,6 +141,10 @@ html .ui-tabs ul li.ui-tabs-selected a:hover {
 
 #tabs-lyric form {
   margin: 10px 0 0;
+}
+
+#lyric_form .actions .cancel_btn {
+  margin: 0 0 0 5px;
 }
 
 /* Notes */

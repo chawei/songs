@@ -1,0 +1,23 @@
+<div class="nav_links">
+  <%= link_to 'Edit', edit_beta_request_path(@beta_request) %> |
+  <%= link_to 'Back', beta_requests_path %>
+</div>
+
+<div class="show_container">
+  <div class="row">
+    <div class="label">Email</div>
+    <div class="data"><%= @beta_request.email %></div>
+  </div>
+  <div class="row">
+    <div class="label">Is sent</div>
+    <div class="data"><%= @beta_request.is_sent %></div>
+  </div>
+  <div class="row">
+    <div class="label">Sent at</div>
+    <div class="data"><%= @beta_request.sent_at %></div>
+  </div>
+  <div class="row">
+    <div class="label">Is user</div>
+    <div class="data"><%= @beta_request.is_user %></div>
+  </div>
+</div>

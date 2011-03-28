@@ -1,0 +1,17 @@
+<%- if @recent_songs -%>
+<div id="site_sidebar" class="right">
+  <h2>Recent Update</h2>
+  <div class="list_items">
+    <%- @recent_songs.each do |song| -%>
+    <div class="list_item clear_fix">
+      <div class="detail">
+        <%= link_to song.title, song_path(song), :class => 'title' %>
+        <% if song.performer %>
+        <span class="performer"><%= link_to song.performer.name, artist_path(song.performer) %></span>
+        <% end %>
+      </div>
+    </div>
+    <%- end -%>
+  </div>
+</div>
+<%- end -%>
