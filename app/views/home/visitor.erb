@@ -13,7 +13,7 @@
           send us your email address and we will notice you when it's ready. thanks!
         </p>
         
-        <%= form_for BetaRequest.new, :remote => true do |f| %>
+        <%= form_for BetaRequest.new, :remote => true, :html => { "data-type" => "json" } do |f| %>
           <%= f.text_field :email, :class => 'text' %>
           <%= f.submit 'Send', :class => 'rounded_btn' %>
           <div class="msg"></div>

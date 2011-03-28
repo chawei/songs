@@ -77,9 +77,8 @@ $(function() {
   
   $('form#new_beta_request').bind("ajax:success", function(e, data, status, xhr) {
     var msg_elem = $('form#new_beta_request .msg');
-    var results = jQuery.parseJSON(data);
-    if (results.errors) {
-      msg_elem.addClass('error_msg').html(results.errors[0]);
+    if (data.errors) {
+      msg_elem.addClass('error_msg').html(data.errors[0]);
     } else {
       msg_elem.removeClass('error_msg').html('thanks for your request and we\'ll see you soon!');
       $('#beta_request_email').val('');
