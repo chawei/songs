@@ -1,7 +1,7 @@
 <div class="action_bar">
   <%= link_to "edit the lyrics", "#", :class => 'edit_lyric_btn click_to_edit' if current_user && current_user.admin? %>
   
-<% if current_user && @song.content.blank? %>
+<% if current_user && (@song.content.blank? || current_user.admin?) %>
   <%= form_for(@song, :html => { :class => 'hline_form js_hidden', :id => 'lyric_form' }, :remote => true) do |f| %>
     <% if @song.errors.any? %>
       <div id="error_explanation">
