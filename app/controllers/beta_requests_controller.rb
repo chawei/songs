@@ -48,7 +48,7 @@ class BetaRequestsController < ApplicationController
       if @beta_request.save
         format.html { redirect_to(root_url, :notice => 'Beta request was successfully created.') }
         format.xml  { render :xml => @beta_request, :status => :created, :location => @beta_request }
-        format.js   { render :json => @beta_request, :status => :created, :location => @beta_request }
+        format.js   { render :json => { :message => 'ok' } }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @beta_request.errors, :status => :unprocessable_entity }
