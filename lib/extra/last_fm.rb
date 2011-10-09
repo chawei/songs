@@ -9,6 +9,23 @@ class LastFm
   API_PATH = "http://ws.audioscrobbler.com/2.0/"
   API_KEY = "e7edb890eedd0933d438dd90f1cde8e1"
   
+  def self.get_title_and_artist_name(query)
+    res = self.get("#{API_PATH}?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
+    if trackmatches = res['lfm']['results']['trackmatches']
+      tracks = trackmatches['track']
+      track = (tracks.is_a?(Hash) ? tracks : tracks[0])
+      artist = track["artist"]
+      title  = track["name"]
+      
+      puts "===== Last.fm ====="
+      puts "Artist: #{artist}"
+      puts "Title : #{title}"
+      return { :title => title, :artist_name => artist }
+    else
+      return nil
+    end
+  end
+  
   def self.get_artist_info(artist_name)
     res = self.get("#{API_PATH}?method=artist.getinfo&artist=#{URI.escape(artist_name)}&api_key=#{API_KEY}")
     return res

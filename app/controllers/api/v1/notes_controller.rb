@@ -1,4 +1,4 @@
-class NotesController < ApplicationController
+class Api::V1::NotesController < ApplicationController
   before_filter :require_user, :except => [:index, :show]
   before_filter :find_song, :only => [:new, :show, :edit]
   

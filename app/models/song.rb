@@ -11,6 +11,7 @@ class Song < ActiveRecord::Base
   has_many :background_stories, :dependent => :destroy
   has_many :notes, :dependent => :destroy
   has_many :videos, :dependent => :destroy
+  has_one  :lyric, :dependent => :destroy
   
   has_many :participations, :dependent => :destroy
   #has_many :artists, :through => :participations
@@ -177,6 +178,32 @@ class Song < ActiveRecord::Base
       return raw_title
     else
       return title
+    end
+  end
+  
+  def self.find_via_artist_name_and_song_title(artist_name, song_title, options)
+    return nil if artist_name.blank? || song_title.blank?
+    
+    begin
+      if @song = self.find_by_performer_name_and_title(artist_name, song_title)
+        @song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
+        puts "*** Found Data in DB"
+      else
+        @song = Song.create(:performer_name => artist_name, 
+                            :writer_name => artist_name, 
+                            :title => song_title, 
+                            :video_url => options[:video_url], 
+                            :created_by_id => options[:current_user_id])
+        puts "*** Created song"
+        lyrics = LyricsFinder.find_lyrics artist_name, song_title
+        if lyrics.present?
+          @song.content = lyrics
+          @song.save
+        end
+      end
+      return @song
+    rescue
+      return nil
     end
   end
 end

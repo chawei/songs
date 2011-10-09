@@ -8,7 +8,7 @@ class SongImporter
   include MusicBrainz
   format :xml
 
-  API_KEY = "b25b959554ed76058ac220b7b2e0a026"
+  API_KEY    = "b25b959554ed76058ac220b7b2e0a026"
   ACCESS_KEY = 'AKIAJ6PXZ7USNNIKTG6Q'
   SECRET_KEY = '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'
   Amazon::Ecs.options = { :aWS_access_key_id => ACCESS_KEY, :aWS_secret_key => SECRET_KEY }
@@ -24,39 +24,22 @@ class SongImporter
     need_verify = need_verify?(query)
     
     artist, title = nil, nil
-    if res = get_title_and_artist_name(query)
-      artist = res[:artist_name]
-      title  = res[:title]
-      if song = Song.find_by_performer_name_and_title(artist, title)
-        song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
-        puts "*** Found Data in DB"
-        return song
-      elsif song = LyricsFinder.get_song(:artist => artist, :title => title, :video_url => video_url, 
-                                           :current_user_id => options[:current_user_id], :need_verify => need_verify)
-        puts "*** Found Data by LyricsFinder"
-        return song
-      else
-        Request.create(:query_url => video_url, :request_type => 'song', :user_id => options[:current_user_id])
-        return nil
-      end
-    end
-    
-    return nil
-  end
-  
-  def self.get_title_and_artist_name(query)
-    res = self.get("http://ws.audioscrobbler.com/2.0/?method=track.search&track=#{URI.escape(query)}&api_key=#{API_KEY}")
-    if trackmatches = res['lfm']['results']['trackmatches']
-      tracks = trackmatches['track']
-      track = (tracks.is_a?(Hash) ? tracks : tracks[0])
-      artist = track["artist"]
-      title  = track["name"]
+    res = LastFm.get_title_and_artist_name(query)
       
-      puts "===== Last.fm ====="
-      puts "Artist: #{artist}"
-      puts "Title : #{title}"
-      return { :title => title, :artist_name => artist }
+    return nil if res.nil?
+    
+    artist = res[:artist_name]
+    title  = res[:title]
+    if song = Song.find_by_performer_name_and_title(artist, title)
+      song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
+      puts "*** Found Data in DB"
+      return song
+    elsif song = LyricsFinder.get_song(:artist => artist, :title => title, :video_url => video_url, 
+                                         :current_user_id => options[:current_user_id], :need_verify => need_verify)
+      puts "*** Found Data by LyricsFinder"
+      return song
     else
+      Request.create(:query_url => video_url, :request_type => 'song', :user_id => options[:current_user_id])
       return nil
     end
   end

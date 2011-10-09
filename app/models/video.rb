@@ -2,13 +2,13 @@ class Video < ActiveRecord::Base
   belongs_to :created_by, :class_name => "User", :foreign_key => 'created_by_id'
   belongs_to :song
   
-  validates_presence_of :uid, :url, :song_id
+  validates_presence_of   :uid, :url, :song_id
   validates_uniqueness_of :uid, :scope => [:source, :song_id]
   before_validation :parse_url
-  before_create :set_values
+  before_create     :set_values
   
-  scope :possible, where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
-  scope :exact, where(:similarity => 'exact')
+  scope :possible,   where("similarity IS NULL OR similarity = 'exact' OR similarity = 'possible'") 
+  scope :exact,      where(:similarity => 'exact')
   scope :embeddable, where(:embeddable => true)
   
   def self.find_song_by_url(url)

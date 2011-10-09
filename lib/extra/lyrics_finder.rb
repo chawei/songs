@@ -4,6 +4,9 @@ class LyricsFinder
   include HTTParty
   format :xml
   
+  MUSIXMATCH_ROOT_URL = "http://api.musixmatch.com/ws/1.1/"
+  MUSIXMATCH_API_KEY  = "7f27fb14d4d9bd1197cfc3a1613d6113"
+  
   def self.get_song(options)
     result, raw_result, song = nil, nil, nil
     unless song = Song.find_by_performer_name_and_title(options[:artist], options[:title])
@@ -44,19 +47,28 @@ class LyricsFinder
     return song
   end
   
+  def self.find_lyrics(artist_name, song_title)
+    result = musixmatch_search(:artist => artist_name, :title => song_title)
+    if result && result[:artist] == artist_name && result[:title] == song_title
+      return result[:lyric]
+    else
+      return nil
+    end
+  end
+  
   def self.musixmatch_search(options)
     begin
       output = nil
       query_artist = options[:artist]
       
-      res = self.get("http://api.musixmatch.com/ws/1.1/track.search?apikey=7f27fb14d4d9bd1197cfc3a1613d6113&q_artist=#{URI.escape(query_artist)}&q_track=#{URI.escape(options[:title])}&format=xml&page_size=1&f_has_lyrics=1")
+      res = self.get("#{MUSIXMATCH_ROOT_URL}track.search?apikey=#{MUSIXMATCH_API_KEY}&q_artist=#{URI.escape(query_artist)}&q_track=#{URI.escape(options[:title])}&format=xml&page_size=1&f_has_lyrics=1")
             
       if res['message']['body']
         artist     = res['message']['body']['track_list']['track']['artist_name']
         title      = res['message']['body']['track_list']['track']['track_name']
         track_id   = res['message']['body']['track_list']['track']['track_id']
         
-        lyrics_res = self.get("http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=#{track_id}&format=xml&apikey=7f27fb14d4d9bd1197cfc3a1613d6113")
+        lyrics_res = self.get("#{MUSIXMATCH_ROOT_URL}track.lyrics.get?track_id=#{track_id}&format=xml&apikey=#{MUSIXMATCH_API_KEY}")
         lyric      = lyrics_res['message']['body']['lyrics']['lyrics_body']
         
         output = {:artist => artist, :title => title, :lyric => lyric, :cover_url => nil}
