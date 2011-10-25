@@ -191,12 +191,12 @@ class Song < ActiveRecord::Base
       else
         @song = Song.create(:performer_name => artist_name, 
                             :writer_name => artist_name, 
-                            :title => song_title, 
-                            :video_url => options[:video_url], 
+                            :title => song_title,  
                             :created_by_id => options[:current_user_id])
         puts "*** Created song"
         lyrics = LyricsFinder.find_lyrics artist_name, song_title
         if lyrics.present?
+          puts "*** Lyrics Found"
           @song.content = lyrics
           @song.save
         end

@@ -10,8 +10,11 @@ class LyricsFinder
   def self.get_song(options)
     result, raw_result, song = nil, nil, nil
     unless song = Song.find_by_performer_name_and_title(options[:artist], options[:title])
-      song = Song.create(:performer_name => options[:artist], :writer_name => options[:artist], :title => options[:title], 
-                          :video_url => options[:video_url], :created_by_id => options[:current_user_id])
+      song = Song.create(:performer_name => options[:artist], 
+                         :writer_name => options[:artist], 
+                         :title => options[:title], 
+                         :video_url => options[:video_url], 
+                         :created_by_id => options[:current_user_id])
     end
     
     begin
@@ -48,11 +51,20 @@ class LyricsFinder
   end
   
   def self.find_lyrics(artist_name, song_title)
-    result = musixmatch_search(:artist => artist_name, :title => song_title)
-    if result && result[:artist] == artist_name && result[:title] == song_title
-      return result[:lyric]
+    is_asian_song = SongFinder.is_asian_song?("#{artist_name} #{song_title}")
+    
+    if is_asian_song
+      puts "Find from KKBox"
+      return BoxImporter.search_lyrics artist_name, song_title
     else
-      return nil
+      result = musixmatch_search(:artist => artist_name, :title => song_title)
+      if result && 
+        result[:artist].downcase == artist_name.downcase && 
+        result[:title].downcase == song_title.downcase
+        return result[:lyric]
+      else
+        return nil
+      end
     end
   end
   

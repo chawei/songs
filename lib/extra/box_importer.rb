@@ -5,12 +5,33 @@ class BoxImporter
   
   BOX_HOST = "http://tw.kkbox.com"
   
+  def self.search_lyrics(artist_name, song_title)
+    doc = Nokogiri::HTML(open("#{BOX_HOST}/search.php?word=#{URI.escape(artist_name+' '+song_title)}&search=song&search_lang="))
+    
+    rows   = doc.css('table tbody tr')
+    lyrics = nil
+    rows.each do |row|
+      tdatas = row.css('td')
+      if song_title =~ /#{tdatas[0].text}/ && artist_name =~ /#{tdatas[1].text}/
+        begin
+          lyrics = get_lyrics "#{BOX_HOST}/#{tdatas[6].children[0].attributes['href'].value}"
+          break
+        rescue
+          next
+        end
+      end
+    end
+    
+    return lyrics
+  end
+  
   def self.get_lyrics(link)
     doc = Nokogiri::HTML(open(link))
     lyric_content = doc.css('#lyrics p')[0]
     lyric_content.search('br').each do |br|
       br.replace(Nokogiri::XML::Text.new("\n", lyric_content.document))
     end
+    # TODO: fix 目前尚無歌詞
     return lyric_content.content
   end
   

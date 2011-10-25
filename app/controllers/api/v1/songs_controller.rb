@@ -9,6 +9,14 @@ class Api::V1::SongsController < ApplicationController
     end
   end
   
+  def create
+    if current_user.is_trusted_user?
+      # create the song
+    else
+      # create the song but need to be moderated by author or trusted users
+    end
+  end
+  
   def show
     @song = Song.find(params[:id])
     @song.refresh_lyrics if @song.content.blank?

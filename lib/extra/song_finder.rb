@@ -13,7 +13,6 @@ class SongFinder
     
     @finder.set_artist_name_and_song_title(options[:query])
     return nil if @finder.artist_name.nil? && @finder.song_title.nil?
-    
     return Song.find_via_artist_name_and_song_title(@finder.artist_name, @finder.song_title, options)
   end
   
@@ -21,6 +20,13 @@ class SongFinder
     query = query.gsub(/(\(.*\))|(\[.*\])|([mM][vV])|(完整版)|([wW]ith [lL]yrics)|([lL]yrics)/, '')
     query = query.gsub(/[-_\/\\]/, ' ')
     return query
+  end
+  
+  def self.is_asian_song?(query)
+    q_lang = LanguageDetector.get_lang(query)
+    puts "===== LanguageDetector ====="
+    puts "Language: #{q_lang}"
+    return ["zh-TW", "zh-CN", 'ja'].include?(q_lang)
   end
   
   def set_artist_name_and_song_title(query)
