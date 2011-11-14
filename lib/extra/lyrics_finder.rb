@@ -54,8 +54,11 @@ class LyricsFinder
     is_asian_song = SongFinder.is_asian_song?("#{artist_name} #{song_title}")
     
     if is_asian_song
-      puts "Find from KKBox"
-      return BoxImporter.search_lyrics artist_name, song_title
+      if lyrics = Mojim.find(:artist_name => artist_name, :song_title => song_title)
+        return lyrics
+      else
+        return lyrics = BoxImporter.search_lyrics(artist_name, song_title)
+      end
     else
       result = musixmatch_search(:artist => artist_name, :title => song_title)
       if result && 

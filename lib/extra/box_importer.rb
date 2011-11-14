@@ -6,13 +6,16 @@ class BoxImporter
   BOX_HOST = "http://tw.kkbox.com"
   
   def self.search_lyrics(artist_name, song_title)
+    puts "Find from KKBox"
     doc = Nokogiri::HTML(open("#{BOX_HOST}/search.php?word=#{URI.escape(artist_name+' '+song_title)}&search=song&search_lang="))
     
     rows   = doc.css('table tbody tr')
     lyrics = nil
     rows.each do |row|
       tdatas = row.css('td')
-      if song_title =~ /#{tdatas[0].text}/ && artist_name =~ /#{tdatas[1].text}/
+      song_title_from_kkbox  = tdatas[0].text
+      artist_name_from_kkbox = tdatas[1].text
+      if matching?(song_title, song_title_from_kkbox, artist_name, artist_name_from_kkbox)
         begin
           lyrics = get_lyrics "#{BOX_HOST}/#{tdatas[6].children[0].attributes['href'].value}"
           break
@@ -23,6 +26,10 @@ class BoxImporter
     end
     
     return lyrics
+  end
+
+  def self.matching?(song_title, song_title_from_kkbox, artist_name, artist_name_from_kkbox)
+    (song_title =~ /#{song_title_from_kkbox}/ || song_title_from_kkbox =~ /#{song_title}/) #&& (artist_name =~ /#{artist_name_from_kkbox}/ || artist_name_from_kkbox =~ /#{artist_name}/)
   end
   
   def self.get_lyrics(link)

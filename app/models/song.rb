@@ -185,7 +185,7 @@ class Song < ActiveRecord::Base
     return nil if artist_name.blank? || song_title.blank?
     
     begin
-      if @song = self.find_by_performer_name_and_title(artist_name, song_title)
+      if @song = find_by_performer_name_and_title(artist_name, song_title)
         @song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
         puts "*** Found Data in DB"
       else

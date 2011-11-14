@@ -5,10 +5,13 @@ class SongFinder
     @finder = self.new
     return if options[:query].blank?
     
-    begin  
-      return @song if options[:video_url].present? && @song = Video.find_song_by_url(options[:video_url])
+    begin
+      puts "Video URL: #{options[:video_url]}"
+      if options[:video_url].present? && @song = Video.find_song_by_url(options[:video_url])
+        return @song
+      end
     rescue => e
-      puts e
+      puts "[Video Not Found] #{e}"
     end
     
     @finder.set_artist_name_and_song_title(options[:query])
