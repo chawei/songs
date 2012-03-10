@@ -1,9 +1,8 @@
 Songs::Application.routes.draw do
-  resources :beta_requests
-
-  resources :lyrics
-
   mount Resque::Server.new, :at => "/resque"
+  
+  resources :beta_requests
+  resources :lyrics
   
   resources :requests
   resources :releases
@@ -41,15 +40,15 @@ Songs::Application.routes.draw do
   match '/search', :to => "home#search"
   match '/who_to_follow', :to => "home#who_to_follow"
   
-  match '/sidebar/show', :to => "sidebar#show"
-  match '/sidebar/switch_video', :to => "sidebar#switch_video"
-  match '/sidebar/load.:format', :to => "sidebar#load"
+  match '/sidebar/show',            :to => "sidebar#show"
+  match '/sidebar/switch_video',    :to => "sidebar#switch_video"
+  match '/sidebar/load.:format',    :to => "sidebar#load"
   match '/sidebar/sidebar.:format', :to => "sidebar#sidebar"
   
-  match '/login', :to => 'user_sessions#new'
-  match '/logout', :to => 'user_sessions#destroy'
-  match '/signup', :to => 'users#new'
-  match '/account', :to => "users#account"
+  match '/login',        :to => 'user_sessions#new'
+  match '/logout',       :to => 'user_sessions#destroy'
+  match '/signup',       :to => 'users#new'
+  match '/account',      :to => "users#account"
   match '/account/edit', :to => "users#edit"
   
   match "/auth/:provider/callback", :to => "authorizations#create"
@@ -60,7 +59,7 @@ Songs::Application.routes.draw do
   
   post "toggle_follow", :to => "follows#toggle_follow"
 
-  resource :user_session
+  resource  :user_session
   resources :users, :constraints => { :id => /.*/ }, :except => [:edit]
   resources :songs do
     resources :background_stories

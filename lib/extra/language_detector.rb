@@ -4,9 +4,11 @@ class LanguageDetector
   include HTTParty
   format :json
   
+  API_KEY = "AIzaSyCYzgmA5cRyXe_6bPeOdZOQgho-srGMEBw"
+  
   def self.get_lang(text)
-    res = self.get("https://ajax.googleapis.com/ajax/services/language/detect?v=1.0&q=#{URI.escape(text)}")
-    return res["responseData"]["language"]
+    res = self.get("https://www.googleapis.com/language/translate/v2/detect?key=#{API_KEY}&q=#{URI.escape(text)}")
+    return res #["responseData"]["language"]
   end
   
   def self.asian_language?(text)

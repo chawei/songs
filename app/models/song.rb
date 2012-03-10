@@ -186,7 +186,6 @@ class Song < ActiveRecord::Base
     
     begin
       if @song = find_by_performer_name_and_title(artist_name, song_title)
-        @song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
         puts "*** Found Data in DB"
       else
         @song = Song.create(:performer_name => artist_name, 
@@ -201,6 +200,7 @@ class Song < ActiveRecord::Base
           @song.save
         end
       end
+      @song.update_videos(options[:video_url], nil, 'exact', options[:current_user_id])
       return @song
     rescue
       return nil

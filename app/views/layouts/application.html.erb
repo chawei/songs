@@ -21,18 +21,7 @@
       
       <div id="header_wrap">
         <div id="header" class="clear_fix">
-          <div id="logo"><%= link_to "songBERG".html_safe, root_path %></div>
-          
-          <div id="searchfield_container" class="left">
-            <%= form_tag search_path, :method => :get do %>
-            <%= text_field_tag :search, nil, :class => 'text' %>
-            <%= submit_tag "Search", :class => 'rounded_btn', :id => "search_btn" %>
-            <% end %>
-          </div>
-          
-          <div id="navigation" class="left">
-            <div class="left"><%= render_navigation %></div>
-          </div>
+          <div id="logo"><%= link_to "song I/O".html_safe, root_path %></div>
           
           <div id="login_box_container">
             <div id="login_box">
@@ -78,12 +67,7 @@
     </div>
     <div id="footer_wrap">
       <div id="footer">
-        <div id="bookmarklet_container">
-          <span class="explanation">start using our app by dragging this button</span>
-          <a id="bookmarklet" href="javascript:var e=document.createElement('script');e.setAttribute('language','javascript');e.setAttribute('src','http://<%= HOST %>/sidebar/load.js');document.body.appendChild(e);void(0);">show more</a>
-          <span class="explanation">to your toolbar</span>
-        </div>
-        <div class="copyright">© 2011 songBERG</div>
+        <div class="copyright">© 2012 song I/O</div>
       </div>
     </div>
     

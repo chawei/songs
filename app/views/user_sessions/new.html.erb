@@ -1,7 +1,7 @@
 <% title "Log In" %>
 
 <div class="edit_container">
-  <%= form_for @user_session, :html => { :class => 'hline_form' } do |f| %>
+  <%= form_for @user_session, :url => user_session_path, :html => { :class => 'hline_form' } do |f| %>
     <% if @user_session.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user_session.errors.count, "error") %> prohibited this article from being saved:</h2>

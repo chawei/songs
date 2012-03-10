@@ -1,8 +1,8 @@
-Babosa::Characters.add_approximations(:punc, {
-  "." => "dot",
-  "(" => "lparens",
-  ")" => "rparens"
-})
+#Babosa::Characters.add_approximations(:punc, {
+#  "." => "dot",
+#  "(" => "lparens",
+#  ")" => "rparens"
+#})
 
 module FriendlyId
   class TaskRunner

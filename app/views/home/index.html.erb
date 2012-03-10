@@ -11,15 +11,6 @@
       <%= render :partial => 'shared/songs', :locals => { :songs => @recent_songs } %>
     </div>
     <%- end -%>
-    
   </div>
-  
-  <% @votes.each do |vote| %>
-    <div>
-      <%= link_to vote.voter.name, user_path(vote.voter) %> 
-      <%= vote.vote? ? "likes" : "doesn't like" %>
-      <%= link_to vote.voteable.title, song_path(vote.voteable) %>
-    </div>
-  <% end %>
   
 </div>

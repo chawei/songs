@@ -1,13 +1,15 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.5'
+gem 'rails', '3.2'
 
 gem 'aws-s3', :require => 'aws/s3'
 gem 'simple-navigation'
 gem 'friendly_id', '~> 3.2.1'
 gem 'authlogic'
 gem 'omniauth'
-gem 'will_paginate', '~> 3.0.pre2'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'will_paginate', '~> 3.0'
 gem 'paperclip'
 gem 'acts_as_list'
 gem 'httparty'
@@ -17,10 +19,8 @@ gem 'thumbs_up'
 gem 'hoptoad_notifier', '~> 2.4.6'
 gem 'nokogiri'
 gem 'youtube_it'
-gem 'thinking-sphinx',
-  :git     => 'git://github.com/freelancing-god/thinking-sphinx.git',
-  :branch  => 'rails3',
-  :require => 'thinking_sphinx'
+gem 'thinking-sphinx'
+gem 'acts_as_follower'
 
 # For Song Impoter
 gem 'rbrainz'
